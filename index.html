@@ -2090,21 +2090,26 @@
             2. 把影片封面放在 assets/images/hero-cover.jpg
             3. 檔名大小寫要完全一樣，GitHub Pages 會區分大小寫
           -->
-         <div class="hero-poster" aria-hidden="true"></div>
+         <div class="hero-media" aria-hidden="true">
+  <div class="hero-poster"></div>
 
-<video
-  class="hero-video"
-  id="heroVideo"
-  autoplay
-  muted
-  loop
-  playsinline
-  webkit-playsinline
-  preload="metadata"
-  poster="assets/images/hero-cover.jpg"
->
-  <source src="./assets/video/hero.mp4" type="video/mp4" />
-</video>
+  <video
+    class="hero-video"
+    id="heroVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+    preload="auto"
+    poster="assets/images/hero-cover.jpg"
+  >
+    <source
+      src="https://你的影片網址.mp4"
+      type="video/mp4"
+    />
+  </video>
+</div>
 
 <div class="hero-overlay" aria-hidden="true"></div>
 
