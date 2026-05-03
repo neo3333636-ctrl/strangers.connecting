@@ -2400,7 +2400,10 @@
 
                 <div>
                   <h3>不急著表現自己</h3>
-                  <p>你不需要很會說話，也不用把自己介紹得很厲害。真實比精彩更重要。</p>
+                  <p>
+  目前活動時間與地點還在確認中，這份表單只是先收集報名資料，讓我更了解想參加的人，也方便之後安排適合的場次。
+  不用把答案寫得很完美，我會一份一份看。比起你多會表達，我更在意你是不是願意真實參與，也尊重這個空間裡的其他人。
+</p>
                 </div>
               </article>
 
@@ -2494,7 +2497,39 @@
 
   <div class="field-error" id="error-gender">請選擇你的性別</div>
 </div>
+<div class="field">
+  <label for="locationArea">你目前主要生活在哪個地區？ <span class="hint">必填</span></label>
+  <p class="field-note">
+    只是方便之後安排活動地點與場次，不會公開給其他參加者。
+  </p>
 
+  <select id="locationArea" name="location_area">
+    <option value="">請選擇地區</option>
+    <option value="台北">台北</option>
+    <option value="新北">新北</option>
+    <option value="基隆">基隆</option>
+    <option value="桃園">桃園</option>
+    <option value="新竹">新竹</option>
+    <option value="苗栗">苗栗</option>
+    <option value="台中">台中</option>
+    <option value="彰化">彰化</option>
+    <option value="南投">南投</option>
+    <option value="雲林">雲林</option>
+    <option value="嘉義">嘉義</option>
+    <option value="台南">台南</option>
+    <option value="高雄">高雄</option>
+    <option value="屏東">屏東</option>
+    <option value="宜蘭">宜蘭</option>
+    <option value="花蓮">花蓮</option>
+    <option value="台東">台東</option>
+    <option value="澎湖">澎湖</option>
+    <option value="金門 / 馬祖">金門 / 馬祖</option>
+    <option value="海外">海外</option>
+    <option value="其他">其他</option>
+  </select>
+
+  <div class="field-error" id="error-locationArea">請選擇你目前主要生活的地區</div>
+</div>
                   <div class="field">
                     <label for="email">你的 Email <span class="hint">必填</span></label>
                     <p class="field-note">
@@ -2780,9 +2815,10 @@
                   送出時好像出了點問題，可以再試一次，或直接 IG DM 我。
                 </div>
 
-                <p class="submit-note">
-                  送出後，你會收到一封確認信。正式錄取或候補通知，會再由我們另外寄出。
-                </p>
+               <p class="submit-note">
+  提交表單不代表錄取，也不代表活動時間與地點已確定。<br>
+  我們只是先收集報名資料，後續會再依照人數、地區與活動安排寄出通知。
+</p>
 </form>
             </div>
           </div>
@@ -2795,11 +2831,11 @@
 
       <h2 class="success-title">已收到你的入場申請</h2>
 
-      <p class="success-msg">
-        感謝你願意走進陌生的房間。<br>
-        活動前我會透過你留下的聯絡方式確認細節。<br>
-        期待在現場與你相遇。
-      </p>
+     <p class="success-msg">
+  感謝你願意走進陌生的房間。<br>
+  目前活動時間與地點尚未確定，這次只是先收到你的報名資料。<br>
+  後續若有錄取、候補或場次通知，我會再透過你留下的聯絡方式聯繫你。
+</p>
 
       <button class="back-btn" type="button" onclick="resetForm()">← 返回</button>
     </section>
@@ -2840,6 +2876,7 @@
     const requiredFields = [
       { id: "realName", error: "error-realName" },
       { id: "displayName", error: "error-displayName" },
+      { id: "locationArea", error: "error-locationArea" },
       { id: "email", error: "error-email" },
       { id: "phone", error: "error-phone" },
       { id: "bringStory", error: "error-bringStory" },
@@ -3017,6 +3054,7 @@
         real_name: document.getElementById("realName").value.trim(),
         display_name: document.getElementById("displayName").value.trim(),
         gender: getRadioValue("gender"),
+        location_area: document.getElementById("locationArea").value,
         email: document.getElementById("email").value.trim(),
         phone: document.getElementById("phone").value.trim(),
         social_contact: document.getElementById("socialContact").value.trim(),
