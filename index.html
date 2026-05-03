@@ -2781,7 +2781,7 @@
                 </div>
 
                 <p class="submit-note">
-                  目前是 GitHub Pages 可用版本。正式收表單前，請把 Formspree endpoint 換成你的表單網址。
+                  送出後，你會收到一封確認信。正式錄取或候補通知，會再由我們另外寄出。
                 </p>
 </form>
             </div>
@@ -3051,20 +3051,16 @@
           return;
         }
 
-        const res = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify(payload)
-        });
+       await fetch(FORM_ENDPOINT, {
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "text/plain;charset=utf-8"
+  },
+  body: JSON.stringify(payload)
+});
 
-        if (!res.ok) {
-          throw new Error("Form submit failed");
-        }
-
-        showSuccess();
+showSuccess();
 
       } catch (error) {
         submitMessage.style.display = "block";
