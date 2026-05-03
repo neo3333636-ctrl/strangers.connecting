@@ -2847,6 +2847,7 @@
     ];
 
     const requiredRadios = [
+      { name: "gender", error: "error-gender" },
       { name: "bring_type", error: "error-bring_type" },
       { name: "intro_acceptance", error: "error-intro_acceptance" },
       { name: "confirm_24h", error: "error-confirm_24h" }
@@ -3015,6 +3016,7 @@
       const payload = {
         real_name: document.getElementById("realName").value.trim(),
         display_name: document.getElementById("displayName").value.trim(),
+        gender: getRadioValue("gender"),
         email: document.getElementById("email").value.trim(),
         phone: document.getElementById("phone").value.trim(),
         social_contact: document.getElementById("socialContact").value.trim(),
