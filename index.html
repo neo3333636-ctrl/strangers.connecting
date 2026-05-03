@@ -2047,7 +2047,18 @@
         aspect-ratio: 1 / 1.05;
       }
     }
+/* 只調整左上角 logo，不影響其他地方 */
+.topbar .logo-mark {
+  width: 48px;
+  height: 40px;
+  flex: 0 0 48px;
+  overflow: visible;
+}
 
+.topbar .logo-img {
+  transform: scale(1.18);
+  transform-origin: center;
+}
   </style>
 </head>
 
