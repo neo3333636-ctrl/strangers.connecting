@@ -1987,12 +1987,9 @@
     .hero-video {
       z-index: 0;
       display: block;
-      opacity: 0;
-      transition: opacity 0.45s ease;
-    }
-
-    body.hero-video-ready .hero-video {
       opacity: 0.58;
+      transition: opacity 0.45s ease;
+      background: transparent;
     }
 
     .hero-overlay {
@@ -2096,15 +2093,18 @@
           <div class="hero-poster" aria-hidden="true"></div>
           <video
             class="hero-video"
+            id="heroVideo"
             autoplay
             muted
             loop
             playsinline
-            preload="metadata"
+            preload="auto"
             poster="assets/images/hero-cover.jpg"
-            src="assets/video/hero.mp4"
-            oncanplay="document.body.classList.add('hero-video-ready')"
-          ></video>
+          >
+            <source src="assets/video/hero.mp4" type="video/mp4" />
+            <source src="hero.mp4" type="video/mp4" />
+            <source src="assets/video/hero.webm" type="video/webm" />
+          </video>
           <div class="hero-overlay" aria-hidden="true"></div>
 
 <div class="wrap hero-content">
@@ -3104,6 +3104,38 @@
         behavior: "smooth"
       });
     }
+  
+    // Hero video helper:
+    // GitHub Pages 路徑會區分大小寫。請確認影片存在：
+    // assets/video/hero.mp4 或 index.html 同層 hero.mp4
+    window.addEventListener("DOMContentLoaded", () => {
+      const heroVideo = document.getElementById("heroVideo");
+      if (!heroVideo) return;
+
+      heroVideo.muted = true;
+      heroVideo.playsInline = true;
+
+      const tryPlay = () => {
+        const playPromise = heroVideo.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {
+            console.warn("Hero video 無法自動播放。請確認影片路徑、格式、檔案大小，以及是否為 H.264/AAC 的 MP4。");
+          });
+        }
+      };
+
+      heroVideo.addEventListener("loadeddata", () => {
+        heroVideo.style.opacity = "0.58";
+        tryPlay();
+      });
+
+      heroVideo.addEventListener("error", () => {
+        console.warn("Hero video 載入失敗：請確認 assets/video/hero.mp4 是否存在，檔名大小寫是否完全一致。");
+      });
+
+      tryPlay();
+    });
+
   </script>
 </body>
 </html>
