@@ -1978,6 +1978,79 @@
       }
     }
 
+  
+    /* FINAL FIX: Hero video + Past Moments layout */
+    .hero-poster {
+      z-index: 0;
+    }
+
+    .hero-video {
+      z-index: 0;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    body.hero-video-ready .hero-video {
+      opacity: 0.58;
+    }
+
+    .hero-overlay {
+      z-index: 1;
+    }
+
+    .hero-content {
+      z-index: 2;
+    }
+
+    .scroll-cue {
+      z-index: 3;
+    }
+
+    .moments-grid {
+      align-items: stretch;
+    }
+
+    .moment-card {
+      display: block;
+      min-height: 0;
+      aspect-ratio: 3 / 4;
+    }
+
+    .moment-card .moment-placeholder {
+      z-index: 0;
+    }
+
+    .moment-card img {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: cover;
+    }
+
+    .moment-label {
+      z-index: 2;
+    }
+
+    @media (max-width: 640px) {
+      .moment-card {
+        aspect-ratio: 0.78 / 1;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .moments-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .moment-card {
+        aspect-ratio: 1 / 1.05;
+      }
+    }
+
   </style>
 </head>
 
@@ -2016,23 +2089,25 @@
         <section class="hero" id="top">
           <!--
             換 Hero 影片：
-            1. 把你的影片命名成 hero.mp4
-            2. 放在 index.html 同一層
-            3. 把下面 src 改成 src="hero.mp4"
+            1. 把你的影片放在 assets/video/hero.mp4
+            2. 把影片封面放在 assets/images/hero-cover.jpg
+            3. 檔名大小寫要完全一樣，GitHub Pages 會區分大小寫
           -->
           <div class="hero-poster" aria-hidden="true"></div>
-        <video
-  class="hero-video"
-  autoplay
-  muted
-  loop
-  playsinline
-  poster="assets/images/hero-cover.jpg"
-  src="assets/video/hero.mp4"
-></video>
-<div class="hero-poster"></div>
+          <video
+            class="hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="assets/images/hero-cover.jpg"
+            src="assets/video/hero.mp4"
+            oncanplay="document.body.classList.add('hero-video-ready')"
+          ></video>
+          <div class="hero-overlay" aria-hidden="true"></div>
 
-          <div class="wrap hero-content">
+<div class="wrap hero-content">
             <div class="hero-kicker">
               <i></i>
               Invitation Open · Room 01
@@ -2096,38 +2171,52 @@
                 </h2>
 
                 <p class="section-copy">
-                  這裡可以放過去大家參加完之後的活動照片。先用氛圍卡片佔位，等你有實際照片後，把圖片放進 images 資料夾，再把 img 的 src 換掉就可以。
+                  這裡可以放過去大家參加完之後的活動照片。照片請放在 <strong>assets/images/</strong> 裡，檔名維持 moment-01.jpg 到 moment-04.jpg。
                 </p>
               </div>
             </div>
 
             <div class="moments-grid">
               <article class="moment-card">
-                <!-- 換成你的照片：<img src="images/moment-01.jpg" alt="活動照片"> -->
-              <div class="moment-card">
-  <img src="assets/images/moment-02.jpg" alt="陌生連結所活動照片 02" />
-  <div class="moment-label">
-    <span>First conversations</span>
-    <strong>剛開始有點陌生，後來越聊越自然</strong>
-  </div>
-</div>
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="assets/images/moment-01.jpg" alt="陌生連結所活動照片 01" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>Shared table</span>
+                  <strong>一起吃飯，也一起慢慢熟起來</strong>
+                </div>
+              </article>
 
-<div class="moment-card">
-  <img src="assets/images/moment-03.jpg" alt="陌生連結所活動照片 03" />
-  <div class="moment-label">
-    <span>Unexpected connections</span>
-    <strong>原本不認識的人，也能聊出新的火花</strong>
-  </div>
-</div>
+              <article class="moment-card">
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="assets/images/moment-02.jpg" alt="陌生連結所活動照片 02" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>First conversations</span>
+                  <strong>剛開始有點陌生，後來越聊越自然</strong>
+                </div>
+              </article>
 
-<div class="moment-card">
-  <img src="assets/images/moment-04.jpg" alt="陌生連結所活動照片 04" />
-  <div class="moment-label">
-    <span>After the gathering</span>
-    <strong>活動結束後，連結才正要開始</strong>
-  </div>
-</div>
+              <article class="moment-card">
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="assets/images/moment-03.jpg" alt="陌生連結所活動照片 03" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>Unexpected connections</span>
+                  <strong>原本不認識的人，也能聊出新的火花</strong>
+                </div>
+              </article>
+
+              <article class="moment-card">
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="assets/images/moment-04.jpg" alt="陌生連結所活動照片 04" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>After the gathering</span>
+                  <strong>活動結束後，連結才正要開始</strong>
+                </div>
+              </article>
+            </div>
+          </div>
         </section>
+
+        
 
         <section class="section-dark" id="experience">
           <div class="wrap">
