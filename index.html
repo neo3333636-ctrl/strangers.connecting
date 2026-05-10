@@ -2648,6 +2648,13 @@
   <div class="field-error" id="error-gender">請選擇你的性別</div>
 </div>
 <div class="field">
+  <label for="age">你的年齡 <span class="hint">必填</span></label>
+  <p class="field-note">
+    主要用於活動名單安排與現場組合，不會公開給其他參加者。
+  </p>
+  <input type="number" id="age" name="age" min="15" max="90" placeholder="例：25" />
+  <div class="field-error" id="error-age">請填寫你的年齡</div>
+</div>
   <label for="locationArea">你目前主要生活在哪個地區？ <span class="hint">必填</span></label>
   <p class="field-note">
     只是方便之後安排活動地點與場次，不會公開給其他參加者。
@@ -3031,6 +3038,7 @@
       { id: "phone", error: "error-phone" },
       { id: "bringStory", error: "error-bringStory" },
       { id: "motivation", error: "error-motivation" }
+      { id: "age", error: "error-age" },
     ];
 
     const requiredRadios = [
@@ -3221,6 +3229,7 @@
         boundary_agreement: document.getElementById("boundaryAgreement").checked ? "我理解，並願意尊重他人界線" : "",
         id_agreement: document.getElementById("idAgreement").checked ? "我理解，現場會出示證件供工作人員核對本人身分，但證件不會被拍照或留存。" : "",
         timestamp: new Date().toLocaleString("zh-TW")
+        age: document.getElementById("age").value.trim(),
       };
 
       submitBtn.disabled = true;
