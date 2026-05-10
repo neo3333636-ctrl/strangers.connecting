@@ -157,13 +157,13 @@
       gap: 14px;
     }
 
-    . {
-      width: 62px;
+.logo-mark {
+  width: 62px;
   height: 50px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
-    }
+}
 
     .logo-img {
       width: 100%;
@@ -1891,6 +1891,7 @@
       input[type="text"],
       input[type="email"],
       input[type="tel"],
+      input[type="number"],
       textarea,
       select {
         padding: 12px 14px;
@@ -3039,7 +3040,7 @@
       { id: "email", error: "error-email" },
       { id: "phone", error: "error-phone" },
       { id: "bringStory", error: "error-bringStory" },
-      { id: "motivation", error: "error-motivation" }
+      { id: "motivation", error: "error-motivation" },
       { id: "age", error: "error-age" },
     ];
 
@@ -3230,7 +3231,7 @@
         confirm_24h: getRadioValue("confirm_24h"),
         boundary_agreement: document.getElementById("boundaryAgreement").checked ? "我理解，並願意尊重他人界線" : "",
         id_agreement: document.getElementById("idAgreement").checked ? "我理解，現場會出示證件供工作人員核對本人身分，但證件不會被拍照或留存。" : "",
-        timestamp: new Date().toLocaleString("zh-TW")
+        timestamp: new Date().toLocaleString("zh-TW"),
         age: document.getElementById("age").value.trim(),
       };
 
