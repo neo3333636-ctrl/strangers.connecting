@@ -2602,6 +2602,101 @@
     }
   }
 
+  /* ─────────────────────────────────────────────────────────────────
+     Entrance animations — Hero sequential fade-in + scroll reveal
+     ───────────────────────────────────────────────────────────────── */
+  @keyframes heroEnter {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Transform-only float for Hero (避免 softFloatSmall 的 opacity pulse 打架入場 fade-in) */
+  @keyframes softFloatSmallSolid {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* 入場 baseline：先隱形等動畫 */
+  .hero-kicker,
+  .hero-brand-zh,
+  .hero-brand-en,
+  .hero-main-tagline,
+  .hero-title,
+  .hero-desc,
+  .hero-actions {
+    opacity: 0;
+  }
+
+  /* 每個 Hero 元素的入場時序；--enter-end = --enter-delay + 0.7s
+     softFloat 從 --enter-end 開始，與入場結束的最終狀態無縫銜接 */
+  .hero-kicker        { --enter-delay: 0.10s; --enter-end: 0.80s; }
+  .hero-brand-zh      { --enter-delay: 0.25s; --enter-end: 0.95s; }
+  .hero-brand-en      { --enter-delay: 0.40s; --enter-end: 1.10s; }
+  .hero-main-tagline  { --enter-delay: 0.55s; --enter-end: 1.25s; }
+  .hero-title         { --enter-delay: 0.70s; --enter-end: 1.40s; }
+  .hero-desc          { --enter-delay: 0.85s; }
+  .hero-actions       { --enter-delay: 1.00s; }
+
+  /* 大字 Hero：heroEnter 接 softFloat + softGlow */
+  .hero-brand-zh,
+  .hero-title {
+    animation:
+      heroEnter 0.7s cubic-bezier(.2,.65,.3,1) var(--enter-delay) forwards,
+      softFloat 6.8s ease-in-out var(--enter-end) infinite,
+      softGlow  7.2s ease-in-out var(--enter-end) infinite;
+  }
+
+  /* 小字 Hero：heroEnter 接 softFloatSmallSolid（transform-only，不影響 opacity） */
+  .hero-kicker,
+  .hero-brand-en,
+  .hero-main-tagline {
+    animation:
+      heroEnter 0.7s cubic-bezier(.2,.65,.3,1) var(--enter-delay) forwards,
+      softFloatSmallSolid 7.8s ease-in-out var(--enter-end) infinite;
+  }
+
+  /* CTA 與描述只入場、不漂浮 */
+  .hero-desc,
+  .hero-actions {
+    animation: heroEnter 0.7s cubic-bezier(.2,.65,.3,1) var(--enter-delay) forwards;
+  }
+
+  /* Scroll reveal — 加 .reveal 的元素，看到才淡入 */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.75s ease-out,
+      transform 0.75s cubic-bezier(.2,.65,.3,1);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 640px) {
+    .reveal { transform: translateY(12px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-kicker,
+    .hero-brand-zh,
+    .hero-brand-en,
+    .hero-main-tagline,
+    .hero-title,
+    .hero-desc,
+    .hero-actions,
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+
   </style>
 </head>
 
@@ -2710,7 +2805,7 @@
 
         <section class="section-dark" id="moments">
           <div class="wrap">
-            <div class="section-head">
+            <div class="section-head reveal">
               <div class="section-index">
                 01<br>
                 Past Moments
@@ -2727,7 +2822,7 @@
               </div>
             </div>
 
-            <div class="moments-grid">
+            <div class="moments-grid reveal">
               <article class="moment-card">
                 <div class="moment-placeholder" aria-hidden="true"></div>
                 <img src="assets/images/moment-01.jpg" alt="陌生連結所活動照片 01" onerror="this.remove()" />
@@ -2753,7 +2848,7 @@
 
         <section class="section-dark" id="experience">
           <div class="wrap">
-            <div class="section-head">
+            <div class="section-head reveal">
               <div class="section-index">
                 02<br>
                 The Experience
@@ -2771,7 +2866,7 @@
               </div>
             </div>
 
-            <div class="experience-grid">
+            <div class="experience-grid reveal">
               <article class="experience-card" data-big="Meet">
                 <div class="experience-num">01</div>
 
@@ -2810,7 +2905,7 @@
 
         <section class="section-light" id="rooms">
           <div class="wrap">
-            <div class="section-head">
+            <div class="section-head reveal">
               <div class="section-index">
                 03<br>
                 Rooms
@@ -2828,7 +2923,7 @@
               </div>
             </div>
 
-            <div class="rooms-grid">
+            <div class="rooms-grid reveal">
               <article class="room-card">
                 <div class="room-visual" data-room="Room 01"></div>
 
@@ -2870,7 +2965,7 @@
 
         <section class="section-dark" id="rules">
           <div class="wrap">
-            <div class="section-head">
+            <div class="section-head reveal">
               <div class="section-index">
                 04<br>
                 Rules of the Room
@@ -2888,7 +2983,7 @@
               </div>
             </div>
 
-            <div class="rules">
+            <div class="rules reveal">
               <article class="rule">
                 <div class="rule-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none">
@@ -2951,7 +3046,7 @@
 
         <section class="section-light trust-section" id="voices">
           <div class="wrap">
-            <div class="section-head">
+            <div class="section-head reveal">
               <div class="section-index">
                 05<br>
                 Voices &amp; Stats
@@ -2968,7 +3063,7 @@
               </div>
             </div>
 
-            <ul class="stats-row" role="list">
+            <ul class="stats-row reveal" role="list">
               <li class="stat-item">
                 <span class="stat-num">1</span>
                 <span class="stat-label">場已完整舉辦</span>
@@ -2983,7 +3078,7 @@
               </li>
             </ul>
 
-            <div class="quotes-grid">
+            <div class="quotes-grid reveal">
               <blockquote class="quote-card">
                 <p>「我以為自己會很尷尬，結果聊到不想離開。」</p>
                 <cite>— 第一場參加者</cite>
@@ -3002,7 +3097,7 @@
 
         <section class="section-dark faq-section" id="faq">
           <div class="wrap">
-            <div class="section-head">
+            <div class="section-head reveal">
               <div class="section-index">
                 06<br>
                 Before You Apply
@@ -3019,7 +3114,7 @@
               </div>
             </div>
 
-            <div class="faq-list">
+            <div class="faq-list reveal">
               <details class="faq-item">
                 <summary>
                   <span class="faq-q">我不太會聊天，或不算外向的人，也可以來嗎？</span>
@@ -3107,7 +3202,7 @@
 
         <section class="section-light" id="request">
           <div class="narrow">
-            <div class="form-card">
+            <div class="form-card reveal">
               <div class="form-intro">
                 <div class="logo-mark" aria-hidden="true">
                   <img class="logo-img" src="images/logo.png" alt="" />
@@ -3580,6 +3675,30 @@
   </div>
 
   <script>
+    /* ──────────────────────────────────────────────────────────────
+       Scroll reveal — 進入 viewport 才 fade-up，每個元素只觸發一次
+       ────────────────────────────────────────────────────────────── */
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!els.length) return;
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -6% 0px'
+      });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
     /*
       GitHub Pages 是靜態網站，不能自己收表單。
       你可以用 Formspree 收報名。
