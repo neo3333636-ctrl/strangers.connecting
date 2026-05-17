@@ -2697,6 +2697,158 @@
     }
   }
 
+  /* ─────────────────────────────────────────────────────────────────
+     Rules section — responsibility disclaimer (在 4 條 rule 卡片下方)
+     ───────────────────────────────────────────────────────────────── */
+  .rules-disclaimer {
+    margin: 56px auto 0;
+    max-width: 720px;
+    padding: 28px 32px;
+    border: 1px solid rgba(245, 240, 232, 0.14);
+    border-left: 2px solid var(--sand);
+    background: rgba(245, 240, 232, 0.03);
+    border-radius: 2px;
+  }
+
+  .rules-disclaimer-label {
+    font-family: var(--font-en-title);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--sand);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .rules-disclaimer p {
+    margin: 0 0 12px;
+    font-family: var(--font-zh-body);
+    font-size: 14.5px;
+    line-height: 1.95;
+    color: var(--muted-light);
+    font-weight: 300;
+  }
+
+  .rules-disclaimer p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 640px) {
+    .rules-disclaimer {
+      padding: 24px 22px;
+      margin-top: 40px;
+    }
+    .rules-disclaimer p {
+      font-size: 14px;
+    }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     06 — Application timeline（6-step 垂直流程）
+     ───────────────────────────────────────────────────────────────── */
+  .timeline-section .section-lede {
+    color: var(--muted-light);
+    font-size: 15px;
+    line-height: 1.85;
+    max-width: 38em;
+    margin-top: 16px;
+  }
+
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 64px 0 0;
+    max-width: 760px;
+  }
+
+  .timeline-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    column-gap: 28px;
+    padding-bottom: 36px;
+    position: relative;
+  }
+
+  .timeline-step:last-child {
+    padding-bottom: 0;
+  }
+
+  .timeline-marker {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--sand-soft);
+    color: var(--deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-en-title);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 0 4px var(--deep);  /* 用底色描邊讓連接線在後方看起來中斷 */
+  }
+
+  .timeline-step:not(:last-child) .timeline-marker::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 1px;
+    height: calc(100% + 24px);
+    background: rgba(245, 240, 232, 0.16);
+    transform: translateX(-50%);
+  }
+
+  .timeline-body h3 {
+    margin: 8px 0 8px;
+    font-family: var(--font-zh-title);
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--cream);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .timeline-body p {
+    margin: 0;
+    font-family: var(--font-zh-body);
+    font-size: 14.5px;
+    line-height: 1.85;
+    color: var(--muted-light);
+    font-weight: 300;
+  }
+
+  .timeline-body strong {
+    color: var(--sand-soft);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 640px) {
+    .timeline-step {
+      grid-template-columns: 36px 1fr;
+      column-gap: 20px;
+      padding-bottom: 32px;
+    }
+    .timeline-marker {
+      width: 34px;
+      height: 34px;
+      font-size: 12px;
+      box-shadow: 0 0 0 3px var(--deep);
+    }
+    .timeline-body h3 {
+      font-size: 16.5px;
+      margin-top: 4px;
+    }
+    .timeline-body p {
+      font-size: 14px;
+    }
+  }
+
   </style>
 </head>
 
@@ -3041,6 +3193,16 @@
                 </div>
               </article>
             </div>
+
+            <aside class="rules-disclaimer reveal" aria-label="主辦方與參與者的責任">
+              <div class="rules-disclaimer-label">主辦方與參與者，分擔同一張桌</div>
+              <p>
+                陌生連結所會盡力透過報名篩選、活動規則與現場提醒，創造一個相對安心的聚會環境。
+              </p>
+              <p>
+                但每位參與者仍需為自己的言行與人身安全負責。若現場出現讓人不舒服的行為，歡迎即時告知主辦方，我們會協助紀錄與處理，並保留後續不再邀請的權利。
+              </p>
+            </aside>
           </div>
         </section>
 
@@ -3095,11 +3257,82 @@
           </div>
         </section>
 
-        <section class="section-dark faq-section" id="faq">
+        <section class="section-dark timeline-section" id="timeline">
           <div class="wrap">
             <div class="section-head reveal">
               <div class="section-index">
                 06<br>
+                Application Timeline
+              </div>
+
+              <div>
+                <h2 class="section-title">
+                  報名之後，<br>
+                  會發生什麼。
+                </h2>
+                <p class="section-lede">
+                  從遞出表單到走進房間，這是你會經歷的軌跡。每一步我都會用 email 通知你，不用一直擔心被忽略。
+                </p>
+              </div>
+            </div>
+
+            <ol class="timeline reveal" aria-label="報名後流程">
+              <li class="timeline-step">
+                <div class="timeline-marker"><span>01</span></div>
+                <div class="timeline-body">
+                  <h3>填寫入場申請</h3>
+                  <p>四段式表單，10 分鐘可完成。寫得真實比寫得完美重要。</p>
+                </div>
+              </li>
+
+              <li class="timeline-step">
+                <div class="timeline-marker"><span>02</span></div>
+                <div class="timeline-body">
+                  <h3>主辦方閱讀報名資料</h3>
+                  <p>一份一份看，不機械篩選。會結合該場主題、現有名單的組成考量。</p>
+                </div>
+              </li>
+
+              <li class="timeline-step">
+                <div class="timeline-marker"><span>03</span></div>
+                <div class="timeline-body">
+                  <h3>週日中午寄出正取邀請</h3>
+                  <p>Email 通知你是正取或候補，信中附「我會出席 / 這次先不參加」兩個按鈕。寄件人是 <strong>hello@strangersconnecting.com</strong>。</p>
+                </div>
+              </li>
+
+              <li class="timeline-step">
+                <div class="timeline-marker"><span>04</span></div>
+                <div class="timeline-body">
+                  <h3>24 小時內確認是否出席</h3>
+                  <p>點 email 內按鈕回覆即可。若超過時間沒回，名額會自動釋出給候補；候補若有人補上，我會再寄通知給你。</p>
+                </div>
+              </li>
+
+              <li class="timeline-step">
+                <div class="timeline-marker"><span>05</span></div>
+                <div class="timeline-body">
+                  <h3>週三晚上寄出正式活動資訊</h3>
+                  <p>餐廳名稱、地址、訂位資訊、Google Maps 連結、以及一個「我臨時無法出席」備用按鈕。</p>
+                </div>
+              </li>
+
+              <li class="timeline-step">
+                <div class="timeline-marker"><span>06</span></div>
+                <div class="timeline-body">
+                  <h3>當天現場核對身分後入場</h3>
+                  <p>帶你自己就好。會請你出示證件確認本人——只看一眼，不拍照、不留存。然後一起吃飯。</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="section-dark faq-section" id="faq">
+          <div class="wrap">
+            <div class="section-head reveal">
+              <div class="section-index">
+                07<br>
                 Before You Apply
               </div>
 
