@@ -2229,7 +2229,379 @@
     animation: none !important;
   }
 }
-    
+
+  /* ─────────────────────────────────────────────────────────────────
+     05 — Trust section (Voices & Stats)
+     ───────────────────────────────────────────────────────────────── */
+  .trust-section .section-lede {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.85;
+    max-width: 38em;
+    margin-top: 16px;
+  }
+
+  .stats-row {
+    list-style: none;
+    margin: 64px 0 56px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 36px 0;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .stat-num {
+    font-family: var(--font-en-title);
+    font-size: clamp(32px, 4.6vw, 52px);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--deep);
+    letter-spacing: -0.01em;
+  }
+
+  .stat-item:nth-child(3) .stat-num {
+    font-size: clamp(18px, 1.9vw, 22px);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 12px;
+  }
+
+  .quote-card {
+    margin: 0;
+    padding: 26px 28px 24px;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--sand);
+    border-radius: 4px;
+  }
+
+  .quote-card p {
+    margin: 0 0 16px;
+    font-family: var(--font-zh-title);
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--deep);
+    font-style: normal;
+  }
+
+  .quote-card cite {
+    display: block;
+    font-style: normal;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .quotes-note {
+    margin: 32px 0 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted-light);
+  }
+
+  .quotes-note em {
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .stats-row {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 28px 0;
+    }
+    .stat-item {
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 24px;
+    }
+    .stat-item:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     06 — FAQ
+     ───────────────────────────────────────────────────────────────── */
+  .faq-section .section-lede {
+    color: var(--muted-light);
+    font-size: 15px;
+    line-height: 1.85;
+    max-width: 38em;
+    margin-top: 16px;
+  }
+
+  .faq-list {
+    margin-top: 56px;
+    max-width: 760px;
+  }
+
+  .faq-item {
+    border-top: 1px solid var(--border-light);
+    padding: 0;
+  }
+
+  .faq-item:last-child {
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .faq-item > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 22px 8px 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    transition: color 0.2s ease;
+  }
+
+  .faq-item > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-q {
+    font-family: var(--font-zh-title);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.55;
+    color: var(--cream);
+    letter-spacing: 0.01em;
+  }
+
+  .faq-toggle {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    margin-top: 4px;
+  }
+
+  .faq-toggle::before,
+  .faq-toggle::after {
+    content: "";
+    position: absolute;
+    background: var(--muted-light);
+    transition: transform 0.25s ease, background 0.25s ease;
+  }
+
+  .faq-toggle::before {
+    top: 9px;
+    left: 0;
+    width: 20px;
+    height: 1.5px;
+  }
+
+  .faq-toggle::after {
+    top: 0;
+    left: 9px;
+    width: 1.5px;
+    height: 20px;
+  }
+
+  .faq-item[open] > summary {
+    color: var(--cream);
+  }
+
+  .faq-item[open] .faq-toggle::after {
+    transform: scaleY(0);
+  }
+
+  .faq-item[open] .faq-toggle::before {
+    background: var(--sand);
+  }
+
+  .faq-item > summary:hover .faq-q {
+    color: var(--sand-soft);
+  }
+
+  .faq-a {
+    padding: 0 8px 24px 0;
+  }
+
+  .faq-a p {
+    margin: 0 0 12px;
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--muted-light);
+  }
+
+  .faq-a p:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-a a {
+    color: var(--sand-soft);
+    text-decoration: underline;
+    text-decoration-color: rgba(232, 201, 154, 0.35);
+    text-underline-offset: 3px;
+  }
+
+  .faq-a strong {
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  @media (max-width: 768px) {
+    .faq-q {
+      font-size: 16px;
+    }
+    .faq-a p {
+      font-size: 14.5px;
+    }
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     Site footer (replaces minimal .footer)
+     ───────────────────────────────────────────────────────────────── */
+  .site-footer {
+    background: var(--deep);
+    color: var(--muted-light);
+    padding: 72px 0 32px;
+    border-top: 1px solid rgba(245, 240, 232, 0.08);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.6fr 1fr;
+    gap: 48px;
+    align-items: flex-start;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(245, 240, 232, 0.08);
+  }
+
+  .footer-col {
+    min-width: 0;
+  }
+
+  .footer-brand .footer-logo {
+    font-family: var(--font-zh-title);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+
+  .footer-brand .footer-tagline {
+    font-family: var(--font-en-title);
+    font-size: 13px;
+    font-style: italic;
+    color: var(--sand-soft);
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+  }
+
+  .footer-brand .footer-mission {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--muted-light);
+    opacity: 0.85;
+  }
+
+  .footer-heading {
+    font-family: var(--font-en-title);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--sand);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+
+  .footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-list a {
+    color: var(--muted-light);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+    word-break: break-word;
+  }
+
+  .footer-list a:hover {
+    color: var(--sand-soft);
+  }
+
+  .footer-privacy {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted-light);
+    opacity: 0.78;
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 24px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-bottom-dot {
+    color: var(--muted);
+    opacity: 0.5;
+  }
+
+  @media (max-width: 1023px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 32px;
+    }
+    .footer-brand,
+    .footer-col:nth-child(3) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .footer-brand,
+    .footer-col:nth-child(3) {
+      grid-column: auto;
+    }
+    .site-footer {
+      padding: 56px 0 28px;
+    }
+  }
+
   </style>
 </head>
 
@@ -2253,6 +2625,7 @@
             <a href="#experience">Experience</a>
             <a href="#moments">Moments</a>
             <a href="#rooms">Rooms</a>
+            <a href="#faq">FAQ</a>
             <a href="#request">Request</a>
           </nav>
 
@@ -2572,6 +2945,162 @@
                   <p>現場可能會記錄活動氛圍，但會尊重不想露臉的人，也不會強迫你入鏡。</p>
                 </div>
               </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-light trust-section" id="voices">
+          <div class="wrap">
+            <div class="section-head">
+              <div class="section-index">
+                05<br>
+                Voices &amp; Stats
+              </div>
+
+              <div>
+                <h2 class="section-title">
+                  第一場結束後，<br>
+                  剩下的不只是合照。
+                </h2>
+                <p class="section-lede">
+                  陌生連結所還在最開始的階段。下面是目前累積的軌跡，以及第一場走進房間的人留下的句子。
+                </p>
+              </div>
+            </div>
+
+            <ul class="stats-row" role="list">
+              <li class="stat-item">
+                <span class="stat-num">1</span>
+                <span class="stat-label">場已完整舉辦</span>
+              </li>
+              <li class="stat-item">
+                <span class="stat-num">6</span>
+                <span class="stat-label">位陌生人坐到同一張桌</span>
+              </li>
+              <li class="stat-item">
+                <span class="stat-num">@strangers_connecting</span>
+                <span class="stat-label">追蹤最新活動動態</span>
+              </li>
+            </ul>
+
+            <div class="quotes-grid">
+              <blockquote class="quote-card">
+                <p>「我以為自己會很尷尬，結果聊到不想離開。」</p>
+                <cite>— 第一場參加者</cite>
+              </blockquote>
+              <blockquote class="quote-card">
+                <p>「沒有刻意要交朋友，但桌上每個人都很真實，是我那週裡最放鬆的兩個小時。」</p>
+                <cite>— 第一場參加者，台北</cite>
+              </blockquote>
+            </div>
+
+            <p class="quotes-note">
+              <em>更多回饋會陸續整理進這裡。</em>
+            </p>
+          </div>
+        </section>
+
+        <section class="section-dark faq-section" id="faq">
+          <div class="wrap">
+            <div class="section-head">
+              <div class="section-index">
+                06<br>
+                Before You Apply
+              </div>
+
+              <div>
+                <h2 class="section-title">
+                  在報名之前，<br>
+                  你可能會想知道。
+                </h2>
+                <p class="section-lede">
+                  以下是大家最常問到的問題。沒在上面、又想先確認的事，歡迎直接私訊 IG。
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-list">
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q">我不太會聊天，或不算外向的人，也可以來嗎？</span>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-a">
+                  <p>
+                    可以。陌生連結所就是為「不太敢主動、但仍想認識新的人」的人設計的。每一場聚會都有明確的 Rules（見上方 04 區塊），不會逼任何人發言。即使你整場大多在聽，也完全 OK——這是一個放下表現壓力的空間。
+                  </p>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q">如果報名人數不足、無法成團怎麼辦？</span>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-a">
+                  <p>
+                    每一場有最低成團人數。若該場最終未達門檻，會在活動前透過 email 通知你延期或保留到下一場名單，不會臨時要你出門。寧可延後一週，也不開不舒服的場。
+                  </p>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q">怎麼判斷我被錄取？候補又是怎麼運作？</span>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-a">
+                  <p>
+                    每場活動會在週日中午寄出正取邀請信，內含「我會出席 / 這次先不參加」兩個按鈕。若該週你是候補名單，會在週一中午之後收到候補邀請信；補位上正取後我會再寄正式通知。
+                  </p>
+                  <p>
+                    所有 email 都會從 <strong>hello@strangersconnecting.com</strong> 寄出，建議加為聯絡人避免進垃圾信。
+                  </p>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q">確認出席之後臨時不能來，怎麼辦？</span>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-a">
+                  <p>
+                    正式活動通知信（週三晚上寄出）裡有一個「我臨時無法出席」連結，點下去名額會立刻釋出。也歡迎私訊 IG 跟我說一聲。
+                  </p>
+                  <p>
+                    若一再臨時取消、不到場，後續可能會暫停邀請，這是為了保護其他真的會出席的人。
+                  </p>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q">活動有費用嗎？</span>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-a">
+                  <p>
+                    目前活動形式還在試行階段，費用相關細節會在錄取通知中個別告知，確認你接受後才會列入正式名單。我們不會在現場才談錢。
+                  </p>
+                </div>
+              </details>
+
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q">現場或活動後感到不舒服，可以怎麼處理？</span>
+                  <span class="faq-toggle" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-a">
+                  <p>
+                    請隨時私訊陌生連結所 IG 粉專
+                    <a href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">@strangers_connecting</a>，我們會協助紀錄與後續處理。
+                  </p>
+                  <p>
+                    Rules of the Room 條列的「不把禮貌當成邀請、不推銷、拍攝先尊重」也是現場執行的依據——若有人違反，會請對方離場，並且不再邀請。
+                  </p>
+                </div>
+              </details>
             </div>
           </div>
         </section>
@@ -3000,13 +3529,52 @@
       <button class="back-btn" type="button" onclick="resetForm()">← 返回</button>
     </section>
 
-    <footer class="footer">
-      <div class="narrow">
-        <p>
-          <strong>陌生連結所｜STRANGERS CONNECTING</strong><br>
-          MEET • EXPERIENCE • CONNECT<br>
-         在陌生裡，找到新的連結。
-        </p>
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <div class="footer-col footer-brand">
+          <div class="footer-logo">陌生連結所</div>
+          <div class="footer-tagline">Stories bring us closer.</div>
+          <p class="footer-mission">
+            MEET • EXPERIENCE • CONNECT<br>
+            讓原本不會相遇的人，在這裡開始。
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-heading">聯絡</div>
+          <ul class="footer-list">
+            <li>
+              <a href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">
+                Instagram @strangers_connecting
+              </a>
+            </li>
+            <li>
+              <a href="mailto:hello@strangersconnecting.com">hello@strangersconnecting.com</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-heading">隱私與資料</div>
+          <p class="footer-privacy">
+            報名表填寫的資料僅用於：活動名單安排、寄送錄取/候補/活動通知、活動後回饋邀請。資料不會分享給其他參加者或第三方；活動結束三個月後若無持續參與將刪除。若想撤回個資，請透過上方 email 聯絡。
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-heading">場次</div>
+          <ul class="footer-list">
+            <li><a href="#rooms">Rooms</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#request">申請邀請</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="wrap footer-bottom">
+        <span>© 2026 陌生連結所 STRANGERS CONNECTING</span>
+        <span class="footer-bottom-dot" aria-hidden="true">·</span>
+        <span>Taipei</span>
       </div>
     </footer>
   </div>
