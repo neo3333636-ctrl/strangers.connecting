@@ -3313,15 +3313,7 @@
                 <div class="timeline-marker"><span>05</span></div>
                 <div class="timeline-body">
                   <h3>週三晚上寄出正式活動資訊</h3>
-                  <p>餐廳名稱、地址、訂位資訊、Google Maps 連結、以及一個「我臨時無法出席」備用按鈕。</p>
-                </div>
-              </li>
-
-              <li class="timeline-step">
-                <div class="timeline-marker"><span>06</span></div>
-                <div class="timeline-body">
-                  <h3>當天現場核對身分後入場</h3>
-                  <p>帶你自己就好。會請你出示證件確認本人——只看一眼，不拍照、不留存。然後一起吃飯。</p>
+                  <p>餐廳名稱、地址、訂位資訊、Google Maps 連結、以及一個「我臨時無法出席」備用按鈕。準時抵達，一起吃飯。</p>
                 </div>
               </li>
             </ol>
@@ -3458,7 +3450,7 @@
                   <div class="field">
                     <label for="realName">請填寫你的真實姓名 <span class="hint">必填</span></label>
                     <p class="field-note">
-                      為了維持活動安全感，現場會簡單核對身分，確認為本人參加。證件只作現場核對，不會拍照或留存。
+                      用於餐廳訂位、錄取/候補/活動通知與緊急聯絡使用，不會公開給其他參加者。
                     </p>
                     <input type="text" id="realName" name="real_name" placeholder="例：王小明" />
                     <div class="field-error" id="error-realName">請填寫你的真實姓名</div>
@@ -3810,18 +3802,6 @@
 
                     <div class="field-error" id="error-boundaryAgreement">請確認你理解並願意尊重他人界線</div>
                   </div>
-
-                  <div class="field">
-                    <label>我理解活動當天會核對本人身分 <span class="hint">必填</span></label>
-
-                    <label class="check-option agreement">
-                      <input type="checkbox" id="idAgreement" name="id_agreement" value="我理解，現場會出示證件供工作人員核對本人身分，但證件不會被拍照或留存。" />
-                      <span class="check-box"></span>
-                      <span class="check-label">我理解，現場會出示證件供工作人員核對本人身分，但證件不會被拍照或留存。</span>
-                    </label>
-
-                    <div class="field-error" id="error-idAgreement">請確認你理解活動當天會核對本人身分</div>
-                  </div>
                 </section>
 
                 <button type="submit" class="submit-btn" id="submitBtn">
@@ -3976,8 +3956,7 @@
     ];
 
     const requiredSingleCheckboxes = [
-      { id: "boundaryAgreement", error: "error-boundaryAgreement" },
-      { id: "idAgreement", error: "error-idAgreement" }
+      { id: "boundaryAgreement", error: "error-boundaryAgreement" }
     ];
 
     window.addEventListener("scroll", () => {
@@ -4150,7 +4129,6 @@
         camera_scope: getCheckboxValues("camera_scope").join(", "),
         confirm_24h: getRadioValue("confirm_24h"),
         boundary_agreement: document.getElementById("boundaryAgreement").checked ? "我理解，並願意尊重他人界線" : "",
-        id_agreement: document.getElementById("idAgreement").checked ? "我理解，現場會出示證件供工作人員核對本人身分，但證件不會被拍照或留存。" : "",
         timestamp: new Date().toLocaleString("zh-TW"),
         age: document.getElementById("age").value.trim(),
       };
