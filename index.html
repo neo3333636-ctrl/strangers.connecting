@@ -3749,11 +3749,11 @@
                   </div>
 
                   <div class="field">
-                    <label for="collab">你是否有想跟「陌生連結所 / Neo」合作的地方？ <span class="hint">選填</span></label>
+                    <label for="collabIdea">你是否有想跟「陌生連結所 / Neo」合作的地方？ <span class="hint">選填</span></label>
                     <p class="field-note">
                       如果你本身有空間、品牌、活動、內容、攝影、設計、主持、社群、餐飲、工作坊，或其他可能合作的資源，可以簡單介紹。這題不影響本次錄取結果，如果之後有合適機會，我會再另外聯絡你。
                     </p>
-                    <textarea id="collab" name="collab" placeholder="例：我有一個小空間可以辦活動 / 我會拍照 / 我想一起設計工作坊…"></textarea>
+                    <textarea id="collabIdea" name="collab" placeholder="例：我有一個小空間可以辦活動 / 我會拍照 / 我想一起設計工作坊…"></textarea>
                   </div>
                 </section>
 
@@ -4247,7 +4247,7 @@
         bring_type: getRadioValue("bring_type"),
         bring_story: document.getElementById("bringStory").value.trim(),
         motivation: document.getElementById("motivation").value.trim(),
-        collab: document.getElementById("collab").value.trim(),
+        collab: document.getElementById("collabIdea").value.trim(),
         expectation: getRadioValue("expectation") || "未填",
         intro_acceptance: getRadioValue("intro_acceptance"),
         camera_scope: getCheckboxValues("camera_scope").join(", "),
