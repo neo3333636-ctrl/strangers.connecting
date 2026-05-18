@@ -2849,6 +2849,77 @@
     }
   }
 
+  /* COLLAB */
+  .collab-card {
+    max-width: 760px;
+    background: rgba(245, 240, 232, 0.04);
+    border: 1px solid rgba(245, 240, 232, 0.12);
+    border-radius: 20px;
+    padding: 44px 48px;
+    backdrop-filter: blur(4px);
+  }
+
+  .collab-list {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: grid;
+    gap: 18px;
+  }
+
+  .collab-list li {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: baseline;
+    gap: 16px;
+    color: rgba(245, 240, 232, 0.82);
+    font-family: var(--font-zh-body);
+    font-size: 0.97rem;
+    line-height: 1.85;
+    font-weight: 300;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(245, 240, 232, 0.08);
+  }
+
+  .collab-list li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .collab-tag {
+    font-family: var(--font-en);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  .collab-note {
+    color: var(--muted-light);
+    font-family: var(--font-zh-body);
+    font-size: 0.95rem;
+    line-height: 1.85;
+    font-weight: 300;
+    margin: 0 0 28px;
+  }
+
+  .collab-cta {
+    text-decoration: none;
+  }
+
+  @media (max-width: 640px) {
+    .collab-card {
+      padding: 28px 22px;
+      border-radius: 16px;
+    }
+    .collab-list li {
+      grid-template-columns: 1fr;
+      gap: 6px;
+      font-size: 0.94rem;
+    }
+  }
+
   </style>
 </head>
 
@@ -2874,6 +2945,7 @@
             <a href="#rooms">Rooms</a>
             <a href="#faq">FAQ</a>
             <a href="#request">Request</a>
+            <a href="#collab">Collab</a>
           </nav>
 
           <button class="menu-icon" type="button" onclick="scrollToRequest()" aria-label="前往報名">
@@ -3820,6 +3892,57 @@
             </div>
           </div>
         </section>
+
+        <section class="section-dark" id="collab">
+          <div class="wrap">
+            <div class="section-head reveal">
+              <div class="section-index">
+                08<br>
+                Collaborate
+              </div>
+
+              <div>
+                <h2 class="section-title">
+                  想跟我們<br>
+                  一起做點什麼？
+                </h2>
+                <p class="section-lede">
+                  陌生連結所一直在尋找願意一起把這件事做好的夥伴。餐廳、品牌、團體、個人都歡迎——只要你對「讓陌生人因為故事靠近彼此」這件事有共鳴。
+                </p>
+              </div>
+            </div>
+
+            <div class="collab-card reveal">
+              <ul class="collab-list">
+                <li>
+                  <span class="collab-tag">場地</span>
+                  有空間、有故事、適合小型晚餐或聚會的地方。
+                </li>
+                <li>
+                  <span class="collab-tag">品牌</span>
+                  想用更慢、更真實的方式跟受眾相處的品牌。
+                </li>
+                <li>
+                  <span class="collab-tag">內容／影像</span>
+                  願意把一場聚會拍成有溫度的紀錄，而不是廣告。
+                </li>
+                <li>
+                  <span class="collab-tag">社群／個人</span>
+                  有正在做的事，想跟陌生連結所做一點不一樣的串聯。
+                </li>
+              </ul>
+
+              <p class="collab-note">
+                留下方向跟聯絡方式，我會看完每一封。覺得適合的會主動回信，不會把你丟進廣告漏斗。
+              </p>
+
+              <a class="btn btn-light collab-cta" href="https://app.strangersconnecting.com/collab" target="_blank" rel="noopener">
+                填合作意願
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
 
@@ -3875,6 +3998,7 @@
             <li><a href="#rooms">Rooms</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#request">申請邀請</a></li>
+            <li><a href="#collab">想合作</a></li>
           </ul>
         </div>
       </div>
