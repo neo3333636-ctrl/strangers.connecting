@@ -2999,6 +2999,45 @@
     }
   }
 
+
+    .form-cta-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      padding: 32px 0 8px;
+      text-align: center;
+    }
+    .form-cta-intro {
+      max-width: 28em;
+      color: var(--charcoal);
+      line-height: 1.85;
+      font-size: 15px;
+    }
+    .form-cta-primary {
+      background: var(--accent);
+      color: var(--warm-white);
+      font-size: 16px;
+      padding: 16px 28px;
+      box-shadow: 0 18px 42px rgba(193, 127, 74, 0.32);
+    }
+    .form-cta-primary:hover {
+      transform: translateY(-2px);
+      background: var(--rust);
+      box-shadow: 0 22px 50px rgba(193, 127, 74, 0.42);
+    }
+    .form-cta-secondary {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .form-cta-secondary a {
+      color: var(--charcoal);
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 1px;
+    }
+    .form-cta-secondary a:hover {
+      color: var(--accent);
+    }
   </style>
 </head>
 
@@ -3593,381 +3632,18 @@
                 </p>
               </div>
 
-              <form id="signupForm" novalidate>
-                <section class="form-section">
-                  <div class="form-section-num">01 —</div>
-                  <div class="form-section-title">身分與聯絡資料</div>
-
-                  <div class="field">
-                    <label for="realName">請填寫你的真實姓名 <span class="hint">必填</span></label>
-                    <p class="field-note">
-                      用於餐廳訂位、錄取/候補/活動通知與緊急聯絡使用，不會公開給其他參加者。
-                    </p>
-                    <input type="text" id="realName" name="real_name" placeholder="例：王小明" />
-                    <div class="field-error" id="error-realName">請填寫你的真實姓名</div>
-                  </div>
-
-                  <div class="field">
-                    <label for="displayName">你希望現場怎麼稱呼你？ <span class="hint">必填</span></label>
-                    <p class="field-note">
-                      可以填暱稱、英文名，或你希望大家稱呼你的名字。
-                    </p>
-                    <input type="text" id="displayName" name="display_name" placeholder="例：Neo / 小明 / Alex" />
-                    <div class="field-error" id="error-displayName">請填寫你希望現場怎麼稱呼你</div>
-                  </div>
-                  <div class="field">
-  <label>你的性別 <span class="hint">必填</span></label>
-  <p class="field-note">
-    主要用於活動名單安排與現場安全感考量，不會公開給其他參加者。
-  </p>
-
-  <div class="radio-group">
-    <label class="radio-option">
-      <input type="radio" name="gender" value="女性" />
-      <div class="radio-dot"></div>
-      <span class="radio-label">女性</span>
-    </label>
-
-    <label class="radio-option">
-      <input type="radio" name="gender" value="男性" />
-      <div class="radio-dot"></div>
-      <span class="radio-label">男性</span>
-    </label>
-
-    <label class="radio-option">
-      <input type="radio" name="gender" value="非二元 / 其他" />
-      <div class="radio-dot"></div>
-      <span class="radio-label">非二元 / 其他</span>
-    </label>
-
-    <label class="radio-option">
-      <input type="radio" name="gender" value="不方便透露" />
-      <div class="radio-dot"></div>
-      <span class="radio-label">不方便透露</span>
-    </label>
-  </div>
-
-  <div class="field-error" id="error-gender">請選擇你的性別</div>
-</div>
-<div class="field">
-  <label for="age">你的年齡 <span class="hint">必填</span></label>
-  <p class="field-note">
-    主要用於活動名單安排與現場組合，不會公開給其他參加者。
-  </p>
-  <input type="number" id="age" name="age" min="15" max="90" placeholder="例：25" />
-  <div class="field-error" id="error-age">請填寫你的年齡</div>
-</div>
- <div class="field">
-  <label for="locationArea">你目前主要生活在哪個地區？ <span class="hint">必填</span></label>
-  <p class="field-note">
-    只是方便之後安排活動地點與場次，不會公開給其他參加者。
-  </p>
-
-  <select id="locationArea" name="location_area">
-    <option value="">請選擇地區</option>
-    <option value="台北">台北</option>
-    <option value="新北">新北</option>
-    <option value="基隆">基隆</option>
-    <option value="桃園">桃園</option>
-    <option value="新竹">新竹</option>
-    <option value="苗栗">苗栗</option>
-    <option value="台中">台中</option>
-    <option value="彰化">彰化</option>
-    <option value="南投">南投</option>
-    <option value="雲林">雲林</option>
-    <option value="嘉義">嘉義</option>
-    <option value="台南">台南</option>
-    <option value="高雄">高雄</option>
-    <option value="屏東">屏東</option>
-    <option value="宜蘭">宜蘭</option>
-    <option value="花蓮">花蓮</option>
-    <option value="台東">台東</option>
-    <option value="澎湖">澎湖</option>
-    <option value="金門 / 馬祖">金門 / 馬祖</option>
-    <option value="海外">海外</option>
-    <option value="其他">其他</option>
-  </select>
-
-  <div class="field-error" id="error-locationArea">請選擇你目前主要生活的地區</div>
-</div>
-                  <div class="field">
-                    <label for="email">你的 Email <span class="hint">必填</span></label>
-                    <p class="field-note">
-                      用於錄取、候補與活動通知。
-                    </p>
-                    <input type="email" id="email" name="email" placeholder="yourname@email.com" />
-                    <div class="field-error" id="error-email">請填寫你的 Email</div>
-                  </div>
-
-                  <div class="field">
-                    <label for="phone">你的手機號碼 <span class="hint">必填</span></label>
-                    <p class="field-note">
-                      僅作為錄取通知、候補遞補或活動當天緊急聯絡使用，不會公開給其他參加者。
-                    </p>
-                    <input type="tel" id="phone" name="phone" placeholder="09xx xxx xxx" />
-                    <div class="field-error" id="error-phone">請填寫你的手機號碼</div>
-                  </div>
-
-                  <div class="field">
-                    <label for="socialContact">你的 Instagram <span class="hint">選填</span></label>
-                    <p class="field-note">
-                      請填寫Instagram。
-                    </p>
-                    <input type="text" id="socialContact" name="social_contact" placeholder="例：@yourid " />
-                  </div>
-                </section>
-
-                <section class="form-section">
-                  <div class="form-section-num">02 —</div>
-                  <div class="form-section-title">你會帶什麼故事進來？</div>
-
-
-                  <div class="field">
-                    <label>你的興趣是什麼？ <span class="hint">可複選，選填</span></label>
-
-                    <div class="tag-group" id="interests">
-                      <button type="button" class="tag">📸 攝影</button>
-                      <button type="button" class="tag">✍️ 寫作</button>
-                      <button type="button" class="tag">🎵 音樂</button>
-                      <button type="button" class="tag">🎨 設計</button>
-                      <button type="button" class="tag">🌿 生活風格</button>
-                      <button type="button" class="tag">🏕️ 旅行</button>
-                      <button type="button" class="tag">📚 閱讀</button>
-                      <button type="button" class="tag">🍜 飲食</button>
-                      <button type="button" class="tag">💡 創業</button>
-                      <button type="button" class="tag">🧘 身心健康</button>
-                      <button type="button" class="tag">🎭 表演藝術</button>
-                      <button type="button" class="tag">其他</button>
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <label>你在陌生場合比較偏向… <span class="hint">選填</span></label>
-
-                    <div class="radio-group">
-                      <label class="radio-option">
-                        <input type="radio" name="personality" value="慢熱，喜歡深度一對一對話" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">🌙 慢熱，喜歡深度一對一對話</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="personality" value="視情況而定，看現場氛圍" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">⚡ 視情況而定，看現場氛圍</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="personality" value="外向，喜歡主動認識人" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">☀️ 外向，喜歡主動認識人</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <label>如果要你帶一件事來，你會想帶什麼？ <span class="hint">必填</span></label>
-
-                    <div class="radio-group">
-                      <label class="radio-option">
-                        <input type="radio" name="bring_type" value="最近學到的一件事" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">最近學到的一件事</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="bring_type" value="最近正在做的一件事" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">最近正在做的一件事</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="bring_type" value="兩者都可以" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">兩者都可以</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="bring_type" value="其他" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">其他</span>
-                      </label>
-                    </div>
-
-                    <div class="field-error" id="error-bring_type">請選擇你會想帶來的事</div>
-                  </div>
-
-                  <div class="field">
-                    <label for="bringStory">請簡單分享那件事是什麼 <span class="hint">必填，建議 50–150 字</span></label>
-                    <p class="field-note">
-                      不用寫得很厲害，也不用很完整。可以是你最近學到的一個觀念、一個技能、一段經驗，或你最近正在做的一個計畫、一個嘗試、一件還沒完成的事。
-                    </p>
-
-                    <textarea
-                      id="bringStory"
-                      name="bring_story"
-                      maxlength="150"
-                      placeholder="例：最近在練習用短影音記錄生活，想找到比較像自己的說話方式。"
-                    ></textarea>
-
-                    <div class="char-row">
-                      <span>這題是最重要的篩選題，真實比漂亮重要。</span>
-                      <span class="char-count" id="bringStoryCount">0 / 150</span>
-                    </div>
-
-                    <div class="field-error" id="error-bringStory">請簡單分享那件事是什麼</div>
-                  </div>
-
-                  <div class="field">
-                    <label for="motivation">你為什麼想來這場聚會？ <span class="hint">必填，建議 30–100 字</span></label>
-                    <p class="field-note">
-                      不用寫得很正式。你可以寫：想聽見不同人的生活、想走出原本的圈子、想練習跟陌生人交流，或最近剛好想認識一些不一樣的人。
-                    </p>
-                    <textarea id="motivation" name="motivation" maxlength="180" placeholder="例：最近想走出原本的生活圈，也想聽聽不同人正在經歷什麼。"></textarea>
-                    <div class="field-error" id="error-motivation">請簡單分享你為什麼想來</div>
-                  </div>
-
-                  <div class="field">
-                    <label for="collabIdea">你是否有想跟「陌生連結所 / Neo」合作的地方？ <span class="hint">選填</span></label>
-                    <p class="field-note">
-                      如果你本身有空間、品牌、活動、內容、攝影、設計、主持、社群、餐飲、工作坊，或其他可能合作的資源，可以簡單介紹。這題不影響本次錄取結果，如果之後有合適機會，我會再另外聯絡你。
-                    </p>
-                    <textarea id="collabIdea" name="collab" placeholder="例：我有一個小空間可以辦活動 / 我會拍照 / 我想一起設計工作坊…"></textarea>
-                  </div>
-                </section>
-
-                <section class="form-section">
-                  <div class="form-section-num">03 —</div>
-                  <div class="form-section-title">現場節奏與拍攝意願</div>
-
-
-                  <div class="field">
-                    <label>你希望在房間裡遇見什麼？ <span class="hint">選填</span></label>
-
-                    <div class="radio-group">
-                      <label class="radio-option">
-                        <input type="radio" name="expectation" value="認識新朋友，擴展生活圈" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">認識新朋友，擴展生活圈</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="expectation" value="有深度的對話，不只是閒聊" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">有深度的對話，不只是閒聊</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="expectation" value="一起體驗新的活動或生活方式" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">一起體驗新的活動或生活方式</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="expectation" value="被不同的人生故事啟發" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">想認識另一半</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div class="field">
-                    <label>如果現場有簡短自我介紹，你可以接受嗎？ <span class="hint">必填</span></label>
-
-                    <div class="radio-group">
-                      <label class="radio-option">
-                        <input type="radio" name="intro_acceptance" value="可以，我願意簡單分享" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">可以，我願意簡單分享</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="intro_acceptance" value="可以，但我可能會有點緊張" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">可以，但我可能會有點緊張</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="intro_acceptance" value="我比較適合自由聊天" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">我比較適合自由聊天</span>
-                      </label>
-                    </div>
-
-                    <div class="field-error" id="error-intro_acceptance">請選擇你對自我介紹的接受程度</div>
-                  </div>
-
-                  <div class="field">
-                    <label>活動可能會拍攝一些現場畫面，你可以接受的範圍是？ <span class="hint">必填，可複選</span></label>
-
-                    <div class="check-group" id="cameraScopeGroup">
-                      <label class="check-option">
-                        <input type="checkbox" name="camera_scope" value="可以入鏡" />
-                        <span class="check-box"></span>
-                        <span class="check-label">可以入鏡</span>
-                      </label>
-                      
-                      <label class="check-option">
-                        <input type="checkbox" name="camera_scope" value="不希望被拍到可辨識畫面" />
-                        <span class="check-box"></span>
-                        <span class="check-label">不希望被拍到可辨識畫面</span>
-                      </label>
-                    </div>
-
-                    <div class="field-error" id="error-camera_scope">請至少選擇一個拍攝接受範圍</div>
-                  </div>
-
-                  <div class="field">
-                    <label>如果錄取，你可以在收到通知後 24 小時內確認是否參加嗎？ <span class="hint">必填</span></label>
-
-                    <div class="radio-group">
-                      <label class="radio-option">
-                        <input type="radio" name="confirm_24h" value="可以" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">可以</span>
-                      </label>
-
-                      <label class="radio-option">
-                        <input type="radio" name="confirm_24h" value="不確定" />
-                        <div class="radio-dot"></div>
-                        <span class="radio-label">不確定</span>
-                      </label>
-                    </div>
-
-                    <div class="field-error" id="error-confirm_24h">請選擇是否可以在 24 小時內確認</div>
-                  </div>
-                </section>
-
-                <section class="form-section">
-                  <div class="form-section-num">04 —</div>
-                  <div class="form-section-title">活動共識</div>
-
-                  <div class="field">
-                    <label>我理解這場活動不是推銷、業務開發、強迫交換聯絡方式的場合 <span class="hint">必填</span></label>
-
-                    <label class="check-option agreement">
-                      <input type="checkbox" id="boundaryAgreement" name="boundary_agreement" value="我理解，並願意尊重他人界線" />
-                      <span class="check-box"></span>
-                      <span class="check-label">我理解，並願意尊重他人界線</span>
-                    </label>
-
-                    <div class="field-error" id="error-boundaryAgreement">請確認你理解並願意尊重他人界線</div>
-                  </div>
-                </section>
-
-                <button type="submit" class="submit-btn" id="submitBtn">
-                  送出入場申請 →
-                </button>
-
-                <div class="submit-message" id="submitMessage">
-                  送出時好像出了點問題，可以再試一次，或直接 IG DM 我。
-                </div>
-
-               <p class="submit-note">
-  提交表單不代表錄取，也不代表活動時間與地點已確定。<br>
-  我們只是先收集報名資料，後續會再依照人數、地區與活動安排寄出通知。
-</p>
-</form>
+              <div class="form-cta-block">
+                <p class="form-cta-intro">
+                  目前已升級為會員制：建立一次基本資料，之後就可以直接報名不同場次，也能在會員區看到自己的報名狀態。
+                </p>
+                <a class="btn btn-light form-cta-primary" href="https://app.strangersconnecting.com/events">
+                  查看開放中的聚會
+                  <span aria-hidden="true">→</span>
+                </a>
+                <p class="form-cta-secondary">
+                  已經是會員？<a href="https://app.strangersconnecting.com/login">直接登入 →</a>
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -4024,20 +3700,6 @@
         </section>
       </main>
     </div>
-
-    <section class="success-screen" id="successScreen">
-      <img class="success-logo" src="images/logo.png" alt="" aria-hidden="true" />
-
-      <h2 class="success-title">已收到你的入場申請</h2>
-
-     <p class="success-msg">
-  感謝你願意走進陌生的房間。<br>
-  目前活動時間與地點尚未確定，這次只是先收到你的報名資料。<br>
-  後續若有錄取、候補或場次通知，我會再透過你留下的聯絡方式聯繫你。
-</p>
-
-      <button class="back-btn" type="button" onclick="resetForm()">← 返回</button>
-    </section>
 
     <footer class="site-footer">
       <div class="wrap footer-grid">
@@ -4115,319 +3777,14 @@
       els.forEach(function (el) { io.observe(el); });
     })();
 
-    /*
-      GitHub Pages 是靜態網站，不能自己收表單。
-      你可以用 Formspree 收報名。
-
-      Step 1：到 Formspree 建立表單
-      Step 2：把下面這行換成你的 endpoint
-
-      const FORM_ENDPOINT = "https://formspree.io/f/你的表單ID";
-    */
-
-    const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbzHYHAYzCPw__FMBT268KSt33duUZSZXqfKXCdiVCikXcURsYE5b9NAXUELYqiMlF27fw/exec";
-
-    const topbar = document.getElementById("topbar");
-    const form = document.getElementById("signupForm");
-    const mainContent = document.getElementById("mainContent");
-    const successScreen = document.getElementById("successScreen");
-    const submitBtn = document.getElementById("submitBtn");
-    const submitMessage = document.getElementById("submitMessage");
-    const bringStory = document.getElementById("bringStory");
-    const bringStoryCount = document.getElementById("bringStoryCount");
-
-    const requiredFields = [
-      { id: "realName", error: "error-realName" },
-      { id: "displayName", error: "error-displayName" },
-      { id: "locationArea", error: "error-locationArea" },
-      { id: "email", error: "error-email" },
-      { id: "phone", error: "error-phone" },
-      { id: "bringStory", error: "error-bringStory" },
-      { id: "motivation", error: "error-motivation" },
-      { id: "age", error: "error-age" },
-    ];
-
-    const requiredRadios = [
-      { name: "gender", error: "error-gender" },
-      { name: "bring_type", error: "error-bring_type" },
-      { name: "intro_acceptance", error: "error-intro_acceptance" },
-      { name: "confirm_24h", error: "error-confirm_24h" }
-    ];
-
-    const requiredCheckboxGroups = [
-      { name: "camera_scope", error: "error-camera_scope" }
-    ];
-
-    const requiredSingleCheckboxes = [
-      { id: "boundaryAgreement", error: "error-boundaryAgreement" }
-    ];
-
-    window.addEventListener("scroll", () => {
-      topbar.classList.toggle("scrolled", window.scrollY > 30);
-    });
-
+    /* 報名表單已於會員系統上線後移除；保留 scrollToRequest 給 nav 連結使用 */
     function scrollToRequest() {
-      document.getElementById("request").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-
-    document.querySelectorAll(".tag").forEach((tag) => {
-      tag.addEventListener("click", () => {
-        tag.classList.toggle("selected");
-      });
-    });
-
-    document.querySelectorAll(".radio-option").forEach((option) => {
-      option.addEventListener("click", () => {
-        const input = option.querySelector('input[type="radio"]');
-        const name = input.name;
-
-        document.querySelectorAll(`input[name="${name}"]`).forEach((radio) => {
-          radio.closest(".radio-option").classList.remove("selected");
-        });
-
-        option.classList.add("selected");
-        input.checked = true;
-
-        const error = document.getElementById(`error-${name}`);
-        if (error) {
-          error.style.display = "none";
-        }
-      });
-    });
-
-    document.querySelectorAll(".check-option").forEach((option) => {
-      option.addEventListener("click", (event) => {
-        event.preventDefault();
-        const input = option.querySelector('input[type="checkbox"]');
-        input.checked = !input.checked;
-        option.classList.toggle("selected", input.checked);
-
-        const groupError = document.getElementById(`error-${input.name}`);
-        if (groupError) {
-          groupError.style.display = "none";
-        }
-
-        if (input.id) {
-          const singleError = document.getElementById(`error-${input.id}`);
-          if (singleError) {
-            singleError.style.display = "none";
-          }
-        }
-      });
-    });
-
-    bringStory.addEventListener("input", () => {
-      const count = bringStory.value.length;
-      bringStoryCount.textContent = `${count} / 150`;
-      bringStoryCount.classList.toggle("over", count > 150);
-    });
-
-    requiredFields.forEach(({ id, error }) => {
-      const input = document.getElementById(id);
-
-      input.addEventListener("input", () => {
-        input.classList.remove("has-error");
-        document.getElementById(error).style.display = "none";
-      });
-    });
-
-    function getSelectedTags() {
-      return [...document.querySelectorAll("#interests .tag.selected")].map((tag) => {
-        return tag.textContent.trim();
-      });
-    }
-
-    function getRadioValue(name) {
-      return document.querySelector(`input[name="${name}"]:checked`)?.value || "";
-    }
-
-    function getCheckboxValues(name) {
-      return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map((input) => input.value);
-    }
-
-    function showError(inputId, errorId) {
-      const input = document.getElementById(inputId);
-      const error = document.getElementById(errorId);
-
-      if (input) {
-        input.classList.add("has-error");
-      }
-
-      if (error) {
-        error.style.display = "block";
+      const target = document.getElementById("request");
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
 
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      submitMessage.style.display = "none";
-
-      let hasError = false;
-
-      requiredFields.forEach(({ id, error }) => {
-        const input = document.getElementById(id);
-
-        if (!input.value.trim()) {
-          showError(id, error);
-          hasError = true;
-        }
-      });
-
-      requiredRadios.forEach(({ name, error }) => {
-        if (!getRadioValue(name)) {
-          document.getElementById(error).style.display = "block";
-          hasError = true;
-        }
-      });
-
-      requiredCheckboxGroups.forEach(({ name, error }) => {
-        if (!getCheckboxValues(name).length) {
-          document.getElementById(error).style.display = "block";
-          hasError = true;
-        }
-      });
-
-      requiredSingleCheckboxes.forEach(({ id, error }) => {
-        const input = document.getElementById(id);
-        if (!input.checked) {
-          document.getElementById(error).style.display = "block";
-          hasError = true;
-        }
-      });
-
-      if (hasError) {
-        const firstError =
-          document.querySelector(".has-error") ||
-          document.querySelector('.field-error[style*="block"]');
-
-        if (firstError) {
-          firstError.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });
-        }
-
-        return;
-      }
-
-      const payload = {
-        real_name: document.getElementById("realName").value.trim(),
-        display_name: document.getElementById("displayName").value.trim(),
-        gender: getRadioValue("gender"),
-        location_area: document.getElementById("locationArea").value,
-        email: document.getElementById("email").value.trim(),
-        phone: document.getElementById("phone").value.trim(),
-        social_contact: document.getElementById("socialContact").value.trim(),
-        interests: getSelectedTags().join(", "),
-        personality: getRadioValue("personality") || "未填",
-        bring_type: getRadioValue("bring_type"),
-        bring_story: document.getElementById("bringStory").value.trim(),
-        motivation: document.getElementById("motivation").value.trim(),
-        collab: document.getElementById("collabIdea").value.trim(),
-        expectation: getRadioValue("expectation") || "未填",
-        intro_acceptance: getRadioValue("intro_acceptance"),
-        camera_scope: getCheckboxValues("camera_scope").join(", "),
-        confirm_24h: getRadioValue("confirm_24h"),
-        boundary_agreement: document.getElementById("boundaryAgreement").checked ? "我理解，並願意尊重他人界線" : "",
-        timestamp: new Date().toLocaleString("zh-TW"),
-        age: document.getElementById("age").value.trim(),
-      };
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = "送出中…";
-
-      try {
-        /*
-          預覽模式：
-          如果你還沒換 Formspree endpoint，按下送出會直接顯示成功頁。
-          但這個狀態不會真的收到表單資料。
-        */
-
-        if (FORM_ENDPOINT.includes("REPLACE_WITH_YOUR_FORM_ID")) {
-          console.warn("目前是預覽模式：尚未設定 Formspree endpoint，不會真的收到報名資料。");
-          showSuccess();
-          return;
-        }
-
-       await fetch(FORM_ENDPOINT, {
-  method: "POST",
-  mode: "no-cors",
-  headers: {
-    "Content-Type": "text/plain;charset=utf-8"
-  },
-  body: JSON.stringify(payload)
-});
-
-showSuccess();
-
-      } catch (error) {
-        submitMessage.style.display = "block";
-        submitBtn.disabled = false;
-        submitBtn.textContent = "送出入場申請 →";
-      }
-    });
-
-    function showSuccess() {
-      mainContent.style.display = "none";
-      successScreen.classList.add("show");
-
-      const sticky = document.querySelector(".mobile-sticky");
-      if (sticky) {
-        sticky.style.display = "none";
-      }
-
-      submitBtn.disabled = false;
-      submitBtn.textContent = "送出入場申請 →";
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-
-    function resetForm() {
-      form.reset();
-
-      document.querySelectorAll(".tag.selected").forEach((tag) => {
-        tag.classList.remove("selected");
-      });
-
-      document.querySelectorAll(".radio-option.selected").forEach((option) => {
-        option.classList.remove("selected");
-      });
-
-      document.querySelectorAll(".check-option.selected").forEach((option) => {
-        option.classList.remove("selected");
-      });
-
-      document.querySelectorAll(".has-error").forEach((input) => {
-        input.classList.remove("has-error");
-      });
-
-      document.querySelectorAll(".field-error").forEach((error) => {
-        error.style.display = "none";
-      });
-
-      bringStoryCount.textContent = "0 / 150";
-      bringStoryCount.classList.remove("over");
-
-      successScreen.classList.remove("show");
-      mainContent.style.display = "block";
-
-      const sticky = document.querySelector(".mobile-sticky");
-      if (sticky && window.innerWidth <= 640) {
-        sticky.style.display = "flex";
-      }
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-  
     // Hero video helper:
     // GitHub Pages 路徑會區分大小寫。請確認影片存在：
     // assets/video/hero.mp4 或 index.html 同層 hero.mp4
