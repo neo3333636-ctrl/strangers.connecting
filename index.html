@@ -306,27 +306,10 @@
       width: 100%;
     }
 
-    /* User icon + dropdown */
+    /* User icon */
     .nav-user-wrap {
-      position: relative;
       margin-left: 22px;
       display: inline-flex;
-      z-index: 100;
-    }
-    .nav-user-backdrop {
-      position: fixed;
-      inset: 0;
-      border: 0;
-      padding: 0;
-      margin: 0;
-      background: transparent;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 9990;
-    }
-    .nav-user-backdrop.open {
-      opacity: 1;
-      pointer-events: auto;
     }
     .nav-user {
       display: inline-flex;
@@ -354,69 +337,6 @@
     .nav-user:hover {
       opacity: 1;
       background: rgba(255, 255, 255, 0.1);
-    }
-    .nav-user[aria-expanded="true"] {
-      opacity: 1;
-      background: rgba(255, 255, 255, 0.14);
-    }
-    .nav-user-menu {
-      position: absolute;
-      top: calc(100% + 12px);
-      right: 0;
-      min-width: 200px;
-      background: var(--warm-white);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 6px;
-      box-shadow: 0 22px 44px rgba(31, 24, 16, 0.22);
-      z-index: 10000;
-      opacity: 0;
-      transform: translateY(-4px);
-      transition: opacity 0.18s ease, transform 0.18s ease;
-      pointer-events: none;
-    }
-    .nav-user-menu.open {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .nav-user-menu a {
-      display: block;
-      padding: 11px 14px;
-      font-family: var(--font-zh-body);
-      font-size: 13px;
-      color: var(--deep);
-      border-radius: 9px;
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      position: relative;
-      z-index: 1;
-    }
-    .nav-user-menu a:hover {
-      background: var(--paper);
-    }
-    .nav-user-menu-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 4px 6px;
-      opacity: 0.6;
-    }
-    .nav-user-menu .nav-user-menu-cta {
-      background: var(--deep);
-      color: var(--warm-white);
-      margin: 2px 0;
-      font-weight: 600;
-    }
-    .nav-user-menu .nav-user-menu-cta:hover {
-      background: var(--charcoal);
-    }
-    .nav-user-menu .nav-user-menu-signout {
-      color: var(--muted);
-      font-size: 12px;
-    }
-    .nav-user-menu .nav-user-menu-signout:hover {
-      color: var(--rust);
-      background: rgba(156, 74, 44, 0.06);
     }
 
     .menu-icon {
@@ -3388,21 +3308,12 @@
           </nav>
 
           <div class="nav-user-wrap">
-            <button class="nav-user" type="button" id="userMenuToggle" aria-label="會員選單" aria-haspopup="true" aria-expanded="false" aria-controls="userMenu">
+            <a class="nav-user" href="https://app.strangersconnecting.com/me" aria-label="前往會員中心">
               <svg class="nav-user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="12" cy="8" r="4"/>
                 <path d="M4 20.5c0.8-3.6 4.2-6 8-6s7.2 2.4 8 6"/>
               </svg>
-            </button>
-            <button class="nav-user-backdrop" type="button" id="userMenuBackdrop" aria-label="關閉會員選單" tabindex="-1" hidden></button>
-            <div id="userMenu" class="nav-user-menu" role="menu" aria-labelledby="userMenuToggle">
-              <a class="nav-user-menu-cta" role="menuitem" href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入</a>
-              <div class="nav-user-menu-divider" aria-hidden="true"></div>
-              <a role="menuitem" href="https://app.strangersconnecting.com/me">我報名的活動</a>
-              <a role="menuitem" href="https://app.strangersconnecting.com/me/profile">個人資料</a>
-              <div class="nav-user-menu-divider" aria-hidden="true"></div>
-              <a class="nav-user-menu-signout" role="menuitem" href="https://app.strangersconnecting.com/auth/signout?return=https%3A%2F%2Fstrangersconnecting.com%2F">登出</a>
-            </div>
+            </a>
           </div>
 
           <button class="menu-icon" type="button" id="menuToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
@@ -4148,38 +4059,6 @@
         target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
-
-    /* Desktop user dropdown */
-    (function () {
-      const toggle = document.getElementById('userMenuToggle');
-      const menu = document.getElementById('userMenu');
-      const backdrop = document.getElementById('userMenuBackdrop');
-      if (!toggle || !menu || !backdrop) return;
-
-      function close() {
-        menu.classList.remove('open');
-        backdrop.classList.remove('open');
-        backdrop.hidden = true;
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-      function open() {
-        backdrop.hidden = false;
-        backdrop.classList.add('open');
-        menu.classList.add('open');
-        toggle.setAttribute('aria-expanded', 'true');
-      }
-
-      toggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (menu.classList.contains('open')) close(); else open();
-      });
-
-      backdrop.addEventListener('click', close);
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') close();
-      });
-    })();
 
     /* Mobile hamburger menu */
     (function () {
