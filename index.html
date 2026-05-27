@@ -372,12 +372,20 @@
       overflow-y: auto;
       transform: translateY(-12px);
       opacity: 0;
-      transition: transform 0.28s ease, opacity 0.22s ease;
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform 0.28s ease, opacity 0.22s ease, visibility 0s linear 0.22s;
       box-shadow: 0 24px 48px rgba(0,0,0,0.4);
     }
     .mobile-menu.open {
       transform: translateY(0);
       opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition: transform 0.28s ease, opacity 0.22s ease, visibility 0s linear 0s;
+    }
+    .mobile-menu[hidden] {
+      display: none;
     }
     .mobile-menu a {
       color: var(--cream);
