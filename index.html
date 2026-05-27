@@ -311,6 +311,7 @@
       position: relative;
       margin-left: 22px;
       display: inline-flex;
+      z-index: 100;
     }
     .nav-user {
       display: inline-flex;
@@ -344,9 +345,9 @@
       background: rgba(255, 255, 255, 0.14);
     }
     .nav-user-menu {
-      position: fixed;
-      top: 76px;
-      right: 24px;
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
       min-width: 200px;
       background: var(--warm-white);
       border: 1px solid var(--border);
@@ -1710,10 +1711,8 @@
         height: 32px;
       }
       .nav-user-menu {
-        position: fixed;
-        top: 56px;
-        right: 12px;
-        left: auto;
+        top: calc(100% + 10px);
+        right: 0;
         min-width: 200px;
       }
 
