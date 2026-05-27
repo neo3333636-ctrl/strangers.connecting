@@ -3038,6 +3038,110 @@
     .form-cta-secondary a:hover {
       color: var(--accent);
     }
+
+    /* Upcoming events — dynamic block under rooms */
+    .upcoming-events {
+      margin-top: 72px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+    .upcoming-events-head {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .upcoming-events-kicker {
+      font-family: var(--font-en);
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      color: var(--accent);
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .upcoming-events-title {
+      font-family: var(--font-zh-title);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--deep);
+      font-weight: 600;
+      line-height: 1.3;
+      margin: 0;
+    }
+    .upcoming-events-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 10px;
+      line-height: 1.7;
+    }
+    .upcoming-events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .upcoming-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(253, 250, 244, 0.92);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .upcoming-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 28px 60px rgba(31, 24, 16, 0.22);
+    }
+    .upcoming-card-visual {
+      aspect-ratio: 4 / 3;
+      background-color: var(--paper);
+      background-size: cover;
+      background-position: center;
+      background-image:
+        linear-gradient(135deg, rgba(17, 16, 14, 0.5), rgba(17, 16, 14, 0.05)),
+        radial-gradient(circle at 30% 30%, rgba(200, 173, 141, 0.45), transparent 40%),
+        var(--green);
+    }
+    .upcoming-card-body {
+      padding: 22px 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .upcoming-card-date {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .upcoming-card-title {
+      font-family: var(--font-zh-title);
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--deep);
+      margin: 0;
+      line-height: 1.4;
+    }
+    .upcoming-card-price {
+      font-size: 13px;
+      color: var(--charcoal);
+    }
+    .upcoming-card-cta {
+      margin-top: auto;
+      padding-top: 10px;
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 720px) {
+      .upcoming-events-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -3303,7 +3407,19 @@
               </article>
             </div>
           </div>
-        </section>
+        
+          <div id="upcomingEventsContainer" class="upcoming-events" hidden>
+            <div class="upcoming-events-head">
+              <div class="upcoming-events-kicker">Apply Now</div>
+              <h3 class="upcoming-events-title">目前開放報名的場次</h3>
+              <p class="upcoming-events-subtitle">
+                點進去看詳情、線上報名。<br>
+                還不是會員的話，會帶你去註冊。
+              </p>
+            </div>
+            <div id="upcomingEventsGrid" class="upcoming-events-grid"></div>
+          </div>
+</section>
 
         <section class="section-dark" id="rules">
           <div class="wrap">
@@ -3815,6 +3931,62 @@
 
       tryPlay();
     });
+
+  
+    /* Upcoming events — fetch from app.strangersconnecting.com */
+    (function () {
+      const API = 'https://app.strangersconnecting.com/api/public/events';
+      const container = document.getElementById('upcomingEventsContainer');
+      const grid = document.getElementById('upcomingEventsGrid');
+      if (!container || !grid) return;
+
+      function escapeHtml(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;',
+          '"': '&quot;', "'": '&#39;',
+        })[c]);
+      }
+
+      function formatDate(iso) {
+        try {
+          const d = new Date(iso);
+          return d.toLocaleString('zh-TW', {
+            month: 'long', day: 'numeric', weekday: 'short',
+            hour: '2-digit', minute: '2-digit',
+          });
+        } catch (e) { return ''; }
+      }
+
+      fetch(API, { method: 'GET' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          const events = (data && data.events) || [];
+          if (!events.length) return;
+          grid.innerHTML = events.map((e) => {
+            const visualStyle = e.cover_image_url
+              ? ' style="background-image: url(\'' + escapeHtml(e.cover_image_url).replace(/'/g, "%27") + '\')"'
+              : '';
+            const price = e.price_amount != null
+              ? '<div class="upcoming-card-price">NT$' + Number(e.price_amount).toLocaleString() +
+                (e.price_note ? ' · ' + escapeHtml(e.price_note) : '') + '</div>'
+              : '';
+            const meta = escapeHtml(formatDate(e.starts_at)) +
+              (e.location ? ' · ' + escapeHtml(e.location) : '');
+            return ''
+              + '<a class="upcoming-card" href="https://app.strangersconnecting.com/events/' + Number(e.id) + '">'
+              +   '<div class="upcoming-card-visual"' + visualStyle + '></div>'
+              +   '<div class="upcoming-card-body">'
+              +     '<div class="upcoming-card-date">' + meta + '</div>'
+              +     '<h4 class="upcoming-card-title">' + escapeHtml(e.title) + '</h4>'
+              +     price
+              +     '<div class="upcoming-card-cta">查看與報名 <span aria-hidden="true">&rarr;</span></div>'
+              +   '</div>'
+              + '</a>';
+          }).join('');
+          container.hidden = false;
+        })
+        .catch(() => { /* 靜默隱藏 */ });
+    })();
 
   </script>
 </body>
