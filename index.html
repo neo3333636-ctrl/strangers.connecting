@@ -273,7 +273,7 @@
     }
 
     .nav-links {
-      display: flex;
+      display: none;
       align-items: center;
       gap: 24px;
       font-family: var(--font-en);
@@ -309,7 +309,7 @@
     /* User icon + member menu */
     .nav-user-wrap {
       position: relative;
-      margin-left: 22px;
+      margin-left: auto;
       display: inline-flex;
       z-index: 120;
     }
@@ -3386,6 +3386,13 @@
             </button>
             <button class="nav-user-backdrop" type="button" id="userMenuBackdrop" aria-label="關閉會員選單" tabindex="-1" hidden></button>
             <div id="userMenu" class="nav-user-menu" role="menu" aria-labelledby="userMenuToggle" hidden>
+              <button type="button" role="menuitem" data-scroll-target="moments">時刻</button>
+              <button type="button" role="menuitem" data-scroll-target="experience">體驗</button>
+              <button type="button" role="menuitem" data-scroll-target="rooms">場次</button>
+              <button type="button" role="menuitem" data-scroll-target="faq">常見問題</button>
+              <button type="button" role="menuitem" data-scroll-target="request">報名活動</button>
+              <button type="button" role="menuitem" data-scroll-target="collab">合作資訊</button>
+              <div class="nav-user-menu-divider" aria-hidden="true"></div>
               <button class="nav-user-menu-cta" type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入</button>
               <div class="nav-user-menu-divider" aria-hidden="true"></div>
               <button type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/me">我報名的活動</button>
@@ -4165,6 +4172,20 @@
       });
 
       backdrop.addEventListener('click', closeMenu);
+
+      menu.querySelectorAll('[data-scroll-target]').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const targetId = item.getAttribute('data-scroll-target');
+          if (!targetId) return;
+          closeMenu();
+          const target = document.getElementById(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
 
       menu.querySelectorAll('[data-member-nav]').forEach(function (item) {
         item.addEventListener('click', function (e) {
