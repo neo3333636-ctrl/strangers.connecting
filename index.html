@@ -313,6 +313,21 @@
       display: inline-flex;
       z-index: 100;
     }
+    .nav-user-backdrop {
+      position: fixed;
+      inset: 0;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9990;
+    }
+    .nav-user-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
     .nav-user {
       display: inline-flex;
       align-items: center;
@@ -354,7 +369,7 @@
       border-radius: 14px;
       padding: 6px;
       box-shadow: 0 22px 44px rgba(31, 24, 16, 0.22);
-      z-index: 9999;
+      z-index: 10000;
       opacity: 0;
       transform: translateY(-4px);
       transition: opacity 0.18s ease, transform 0.18s ease;
@@ -3379,6 +3394,7 @@
                 <path d="M4 20.5c0.8-3.6 4.2-6 8-6s7.2 2.4 8 6"/>
               </svg>
             </button>
+            <button class="nav-user-backdrop" type="button" id="userMenuBackdrop" aria-label="關閉會員選單" tabindex="-1" hidden></button>
             <div id="userMenu" class="nav-user-menu" role="menu" aria-labelledby="userMenuToggle">
               <a class="nav-user-menu-cta" role="menuitem" href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入</a>
               <div class="nav-user-menu-divider" aria-hidden="true"></div>
@@ -4137,13 +4153,18 @@
     (function () {
       const toggle = document.getElementById('userMenuToggle');
       const menu = document.getElementById('userMenu');
-      if (!toggle || !menu) return;
+      const backdrop = document.getElementById('userMenuBackdrop');
+      if (!toggle || !menu || !backdrop) return;
 
       function close() {
         menu.classList.remove('open');
+        backdrop.classList.remove('open');
+        backdrop.hidden = true;
         toggle.setAttribute('aria-expanded', 'false');
       }
       function open() {
+        backdrop.hidden = false;
+        backdrop.classList.add('open');
         menu.classList.add('open');
         toggle.setAttribute('aria-expanded', 'true');
       }
@@ -4153,9 +4174,7 @@
         if (menu.classList.contains('open')) close(); else open();
       });
 
-      document.addEventListener('click', (e) => {
-        if (!menu.contains(e.target) && !toggle.contains(e.target)) close();
-      });
+      backdrop.addEventListener('click', close);
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') close();
