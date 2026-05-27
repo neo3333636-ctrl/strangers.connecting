@@ -311,7 +311,6 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      margin-left: auto;
       width: 38px;
       height: 30px;
       position: relative;
@@ -341,6 +340,19 @@
     }
     .menu-icon[aria-expanded="true"] span:nth-child(3) {
       transform: translateY(-11px) rotate(-45deg);
+    }
+
+    .account-chip {
+      margin-left: auto;
+      max-width: min(34vw, 240px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: var(--font-zh-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      opacity: 0.84;
     }
 
     /* Unified dropdown menu */
@@ -3282,6 +3294,7 @@
             <a href="#collab">合作資訊</a>
           </nav>
 
+          <div class="account-chip" id="accountChip" aria-live="polite">尚未登入</div>
           <button class="menu-icon" type="button" id="menuToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
             <span></span>
             <span></span>
@@ -4097,6 +4110,7 @@
 
     /* Toggle login / logout links based on app session */
     (function () {
+      const accountChip = document.getElementById('accountChip');
       const guestOnly = document.querySelectorAll('[data-auth-guest]');
       const memberOnly = document.querySelectorAll('[data-auth-member]');
 
@@ -4107,17 +4121,26 @@
         .then((res) => (res.ok ? res.json() : null))
         .then((data) => {
           const authenticated = !!(data && data.authenticated);
+          const displayName = data && typeof data.displayName === 'string'
+            ? data.displayName.trim()
+            : '';
           guestOnly.forEach((el) => {
             el.hidden = authenticated;
           });
           memberOnly.forEach((el) => {
             el.hidden = !authenticated;
           });
+          if (accountChip) {
+            accountChip.textContent = authenticated ? (displayName || '會員') : '尚未登入';
+          }
         })
         .catch(() => {
           memberOnly.forEach((el) => {
             el.hidden = true;
           });
+          if (accountChip) {
+            accountChip.textContent = '尚未登入';
+          }
         });
     })();
 
