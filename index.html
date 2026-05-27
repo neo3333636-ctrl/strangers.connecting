@@ -1555,7 +1555,11 @@
       }
 
       .nav-cta {
-        display: none;
+        margin-left: auto;
+        margin-right: 12px;
+        padding: 6px 12px;
+        font-size: 9px;
+        letter-spacing: 0.16em;
       }
 
       .menu-icon {
@@ -3169,7 +3173,21 @@
     }
     @media (max-width: 720px) {
       .upcoming-events-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .upcoming-card-body {
+        padding: 10px 12px 12px;
+      }
+      .upcoming-card-title {
+        font-size: 13px;
+      }
+      .upcoming-card-date {
+        font-size: 9px;
+      }
+      .upcoming-card-price,
+      .upcoming-card-cta {
+        font-size: 11px;
       }
     }
   </style>
