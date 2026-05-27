@@ -316,6 +316,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex: 0 0 auto;
       width: 36px;
       height: 36px;
       border-radius: 999px;
@@ -326,6 +327,13 @@
       cursor: pointer;
       transition: opacity 0.2s ease, background 0.2s ease, transform 0.2s ease;
       padding: 0;
+    }
+    .nav-user-icon {
+      width: 18px;
+      height: 18px;
+      display: block;
+      flex: 0 0 auto;
+      overflow: visible;
     }
     .nav-user:hover {
       opacity: 1;
@@ -3367,7 +3375,7 @@
 
           <div class="nav-user-wrap">
             <button class="nav-user" type="button" id="userMenuToggle" aria-label="會員選單" aria-haspopup="true" aria-expanded="false" aria-controls="userMenu">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg class="nav-user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="12" cy="8" r="4"/>
                 <path d="M4 20.5c0.8-3.6 4.2-6 8-6s7.2 2.4 8 6"/>
               </svg>
