@@ -306,10 +306,27 @@
       width: 100%;
     }
 
-    /* User icon */
+    /* User icon + member menu */
     .nav-user-wrap {
+      position: relative;
       margin-left: 22px;
       display: inline-flex;
+      z-index: 120;
+    }
+    .nav-user-backdrop {
+      position: fixed;
+      inset: 0;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9990;
+    }
+    .nav-user-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
     }
     .nav-user {
       display: inline-flex;
@@ -337,6 +354,73 @@
     .nav-user:hover {
       opacity: 1;
       background: rgba(255, 255, 255, 0.1);
+    }
+    .nav-user[aria-expanded="true"] {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .nav-user-menu {
+      position: fixed;
+      top: 76px;
+      right: 24px;
+      min-width: 220px;
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 6px;
+      box-shadow: 0 22px 44px rgba(31, 24, 16, 0.22);
+      z-index: 10000;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      pointer-events: none;
+    }
+    .nav-user-menu.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .nav-user-menu button {
+      display: block;
+      width: 100%;
+      padding: 11px 14px;
+      border: 0;
+      background: transparent;
+      font-family: var(--font-zh-body);
+      font-size: 13px;
+      color: var(--deep);
+      border-radius: 9px;
+      letter-spacing: 0.02em;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+    .nav-user-menu button:hover {
+      background: var(--paper);
+    }
+    .nav-user-menu-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 6px;
+      opacity: 0.6;
+    }
+    .nav-user-menu .nav-user-menu-cta {
+      background: var(--deep);
+      color: var(--warm-white);
+      margin: 2px 0;
+      font-weight: 600;
+    }
+    .nav-user-menu .nav-user-menu-cta:hover {
+      background: var(--charcoal);
+    }
+    .nav-user-menu .nav-user-menu-signout {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .nav-user-menu .nav-user-menu-signout:hover {
+      color: var(--rust);
+      background: rgba(156, 74, 44, 0.06);
     }
 
     .menu-icon {
@@ -1646,9 +1730,9 @@
         height: 32px;
       }
       .nav-user-menu {
-        top: calc(100% + 10px);
-        right: 0;
-        min-width: 200px;
+        top: 56px;
+        right: 12px;
+        min-width: 208px;
       }
 
       .menu-icon {
@@ -3308,12 +3392,21 @@
           </nav>
 
           <div class="nav-user-wrap">
-            <a class="nav-user" href="https://app.strangersconnecting.com/me" aria-label="前往會員中心">
+            <button class="nav-user" type="button" id="userMenuToggle" aria-label="會員選單" aria-haspopup="true" aria-expanded="false" aria-controls="userMenu">
               <svg class="nav-user-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="12" cy="8" r="4"/>
                 <path d="M4 20.5c0.8-3.6 4.2-6 8-6s7.2 2.4 8 6"/>
               </svg>
-            </a>
+            </button>
+            <button class="nav-user-backdrop" type="button" id="userMenuBackdrop" aria-label="關閉會員選單" tabindex="-1" hidden></button>
+            <div id="userMenu" class="nav-user-menu" role="menu" aria-labelledby="userMenuToggle">
+              <button class="nav-user-menu-cta" type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入</button>
+              <div class="nav-user-menu-divider" aria-hidden="true"></div>
+              <button type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/me">我報名的活動</button>
+              <button type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/me/profile">個人資料</button>
+              <div class="nav-user-menu-divider" aria-hidden="true"></div>
+              <button class="nav-user-menu-signout" type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/auth/signout?return=https%3A%2F%2Fstrangersconnecting.com%2F">登出</button>
+            </div>
           </div>
 
           <button class="menu-icon" type="button" id="menuToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
@@ -4059,6 +4152,50 @@
         target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
+
+    /* Desktop user menu */
+    (function () {
+      const toggle = document.getElementById('userMenuToggle');
+      const menu = document.getElementById('userMenu');
+      const backdrop = document.getElementById('userMenuBackdrop');
+      if (!toggle || !menu || !backdrop) return;
+
+      function closeMenu() {
+        menu.classList.remove('open');
+        backdrop.classList.remove('open');
+        backdrop.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      function openMenu() {
+        backdrop.hidden = false;
+        backdrop.classList.add('open');
+        menu.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+
+      toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (menu.classList.contains('open')) closeMenu(); else openMenu();
+      });
+
+      backdrop.addEventListener('click', closeMenu);
+
+      menu.querySelectorAll('[data-member-nav]').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const url = item.getAttribute('data-member-nav');
+          if (!url) return;
+          window.location.assign(url);
+        });
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+      });
+    })();
 
     /* Mobile hamburger menu */
     (function () {
