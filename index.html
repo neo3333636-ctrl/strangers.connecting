@@ -1566,6 +1566,10 @@
       display: none;
     }
 
+    .mobile-quickfacts {
+      display: none;
+    }
+
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -1903,6 +1907,51 @@
         margin-top: 28px;
       }
 
+      .mobile-quickfacts {
+        display: block;
+        padding: 0 0 28px;
+        margin-top: -12px;
+        background:
+          linear-gradient(180deg, rgba(15, 14, 13, 0.98), rgba(15, 14, 13, 0.92) 16%, var(--deep) 100%);
+      }
+
+      .mobile-quickfacts-grid {
+        display: grid;
+        gap: 10px;
+      }
+
+      .mobile-quickfact {
+        padding: 18px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(245, 240, 232, 0.1);
+        background: rgba(245, 240, 232, 0.04);
+      }
+
+      .mobile-quickfact-label {
+        font-family: var(--font-en);
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--sand);
+        margin-bottom: 8px;
+      }
+
+      .mobile-quickfact strong {
+        display: block;
+        font-family: var(--font-zh-title);
+        font-size: 18px;
+        line-height: 1.35;
+        color: var(--cream);
+        font-weight: 600;
+      }
+
+      .mobile-quickfact p {
+        margin: 8px 0 0;
+        font-size: 13px;
+        line-height: 1.75;
+        color: rgba(245, 240, 232, 0.68);
+      }
+
       .btn {
         padding: 14px 18px;
         font-size: 0.92rem;
@@ -2022,6 +2071,11 @@
         font-size: 1.72rem;
       }
 
+      .room-desc {
+        font-size: 0.9rem;
+        line-height: 1.78;
+      }
+
       .rule {
         padding: 20px;
         gap: 12px;
@@ -2059,6 +2113,16 @@
       .form-intro p {
         font-size: 0.9rem;
         line-height: 1.85;
+      }
+
+      .form-cta-block {
+        gap: 14px;
+        padding: 24px 0 4px;
+      }
+
+      .form-cta-intro {
+        font-size: 14px;
+        line-height: 1.8;
       }
 
       form {
@@ -3042,6 +3106,12 @@
     .timeline-body p {
       font-size: 14px;
     }
+
+    .timeline-section .section-lede,
+    .faq-section .section-lede {
+      font-size: 14px;
+      line-height: 1.8;
+    }
   }
 
   /* COLLAB */
@@ -3276,9 +3346,34 @@
       margin: 4px 0 8px;
     }
     @media (max-width: 720px) {
+      .upcoming-events {
+        margin-top: 52px;
+        padding-top: 34px;
+      }
+      .upcoming-events-head {
+        text-align: left;
+        margin-bottom: 18px;
+        padding: 0 14px;
+      }
+      .upcoming-events-title {
+        font-size: 1.5rem;
+      }
+      .upcoming-events-subtitle {
+        font-size: 13px;
+      }
       .upcoming-events-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(76vw, 76vw);
+        overflow-x: auto;
+        padding: 0 14px 6px;
+        gap: 12px;
+        margin: 0;
+        scroll-snap-type: x proximity;
+      }
+      .upcoming-card {
+        scroll-snap-align: start;
+        box-shadow: 0 16px 34px rgba(31, 24, 16, 0.16);
       }
       .upcoming-card-body {
         padding: 10px 12px 12px;
@@ -3292,6 +3387,9 @@
       .upcoming-card-price,
       .upcoming-card-cta {
         font-size: 11px;
+      }
+      .upcoming-card-subtitle {
+        font-size: 12.5px;
       }
     }
   </style>
@@ -3408,6 +3506,26 @@
             <span class="triangle"></span>
             <span>Scroll</span>
           </a>
+        </section>
+
+        <section class="mobile-quickfacts" aria-label="手機版快速說明">
+          <div class="wrap mobile-quickfacts-grid">
+            <article class="mobile-quickfact">
+              <div class="mobile-quickfact-label">How It Works</div>
+              <strong>先看開放場次，再決定要不要報名</strong>
+              <p>現在不是先填一張大表單，而是先看每一場的內容、時間、費用與規則。</p>
+            </article>
+            <article class="mobile-quickfact">
+              <div class="mobile-quickfact-label">What Happens Next</div>
+              <strong>送出後由主辦審核，不是先搶先贏</strong>
+              <p>我們會依活動狀況與參加者組合安排邀請，確認結果會透過 email 和會員區通知你。</p>
+            </article>
+            <article class="mobile-quickfact">
+              <div class="mobile-quickfact-label">Before You Apply</div>
+              <strong>費用會先寫清楚，付款後才正式保留</strong>
+              <p>每一場公開活動頁都會直接標示價格與補充說明，不會等到現場才談錢。</p>
+            </article>
+          </div>
         </section>
 
         <section class="section-dark" id="intro">
@@ -3654,8 +3772,7 @@
                 <div>
                   <h3>不急著表現自己</h3>
                   <p>
-  目前活動時間與地點還在確認中，這份表單只是先收集報名資料，讓我更了解想參加的人，也方便之後安排適合的場次。
-  不用把答案寫得很完美，我會一份一份看。比起你多會表達，我更在意你是不是願意真實參與，也尊重這個空間裡的其他人。
+  現在的流程是先看公開場次，再決定要不要送出報名。你不用把自己寫得很完美，比起你多會表達，我更在意你是不是願意真實參與，也尊重這個空間裡的其他人。
 </p>
                 </div>
               </article>
@@ -3762,7 +3879,7 @@
                 <div class="timeline-marker"><span>01</span></div>
                 <div class="timeline-body">
                   <h3>填寫入場申請</h3>
-                  <p>四段式表單，10 分鐘可完成。寫得真實比寫得完美重要。</p>
+                  <p>先打開公開活動頁，確認你真的想參加其中一場，再登入會員系統送出資料。寫得真實比寫得完美重要。</p>
                 </div>
               </li>
 
@@ -3770,31 +3887,31 @@
                 <div class="timeline-marker"><span>02</span></div>
                 <div class="timeline-body">
                   <h3>主辦方閱讀報名資料</h3>
-                  <p>一份一份看，不機械篩選。會結合該場主題、現有名單的組成考量。</p>
+                  <p>一份一份看，不機械篩選。會結合該場主題、目前報名狀況與整體名單組合考量。</p>
                 </div>
               </li>
 
               <li class="timeline-step">
                 <div class="timeline-marker"><span>03</span></div>
                 <div class="timeline-body">
-                  <h3>週日中午寄出正取邀請</h3>
-                  <p>Email 通知你是正取或候補，信中附「我會出席 / 這次先不參加」兩個按鈕。寄件人是 <strong>hello@strangersconnecting.com</strong>。</p>
+                  <h3>以 email 通知審核結果</h3>
+                  <p>你會收到正取、候補或這次未安排的通知。寄件人是 <strong>hello@strangersconnecting.com</strong>，會員區也會同步顯示狀態。</p>
                 </div>
               </li>
 
               <li class="timeline-step">
                 <div class="timeline-marker"><span>04</span></div>
                 <div class="timeline-body">
-                  <h3>24 小時內確認是否出席</h3>
-                  <p>點 email 內按鈕回覆即可。若超過時間沒回，名額會自動釋出給候補；候補若有人補上，我會再寄通知給你。</p>
+                  <h3>收到邀請後完成付款</h3>
+                  <p>若你被安排為正取，會依信中的方式完成付款。付款完成後，名額才正式保留。</p>
                 </div>
               </li>
 
               <li class="timeline-step">
                 <div class="timeline-marker"><span>05</span></div>
                 <div class="timeline-body">
-                  <h3>週三晚上寄出正式活動資訊</h3>
-                  <p>餐廳名稱、地址、訂位資訊、Google Maps 連結、以及一個「我臨時無法出席」備用按鈕。準時抵達，一起吃飯。</p>
+                  <h3>活動前收到最後資訊</h3>
+                  <p>活動細節、地點與注意事項會在出席確認後寄給你。若臨時不能來，也請盡快取消，讓名額能回到候補名單。</p>
                 </div>
               </li>
             </ol>
