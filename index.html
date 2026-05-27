@@ -320,13 +320,7 @@
       padding: 0;
       margin: 0;
       background: transparent;
-      opacity: 0;
-      pointer-events: none;
       z-index: 9990;
-    }
-    .nav-user-backdrop.open {
-      opacity: 1;
-      pointer-events: auto;
     }
     .nav-user {
       display: inline-flex;
@@ -370,15 +364,7 @@
       padding: 6px;
       box-shadow: 0 22px 44px rgba(31, 24, 16, 0.22);
       z-index: 10000;
-      opacity: 0;
-      transform: translateY(-4px);
-      transition: opacity 0.18s ease, transform 0.18s ease;
-      pointer-events: none;
-    }
-    .nav-user-menu.open {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+      display: block;
     }
     .nav-user-menu button {
       display: block;
@@ -3399,7 +3385,7 @@
               </svg>
             </button>
             <button class="nav-user-backdrop" type="button" id="userMenuBackdrop" aria-label="關閉會員選單" tabindex="-1" hidden></button>
-            <div id="userMenu" class="nav-user-menu" role="menu" aria-labelledby="userMenuToggle">
+            <div id="userMenu" class="nav-user-menu" role="menu" aria-labelledby="userMenuToggle" hidden>
               <button class="nav-user-menu-cta" type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入</button>
               <div class="nav-user-menu-divider" aria-hidden="true"></div>
               <button type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/me">我報名的活動</button>
@@ -4161,23 +4147,21 @@
       if (!toggle || !menu || !backdrop) return;
 
       function closeMenu() {
-        menu.classList.remove('open');
-        backdrop.classList.remove('open');
+        menu.hidden = true;
         backdrop.hidden = true;
         toggle.setAttribute('aria-expanded', 'false');
       }
 
       function openMenu() {
+        menu.hidden = false;
         backdrop.hidden = false;
-        backdrop.classList.add('open');
-        menu.classList.add('open');
         toggle.setAttribute('aria-expanded', 'true');
       }
 
       toggle.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
-        if (menu.classList.contains('open')) closeMenu(); else openMenu();
+        if (menu.hidden) openMenu(); else closeMenu();
       });
 
       backdrop.addEventListener('click', closeMenu);
