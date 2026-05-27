@@ -363,7 +363,7 @@
       right: 0;
       background: rgba(15, 14, 13, 0.96);
       backdrop-filter: blur(12px);
-      padding: 28px 32px 36px;
+      padding: 24px 24px 36px;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -390,18 +390,19 @@
     .mobile-menu a {
       color: var(--cream);
       font-family: var(--font-zh-body);
-      font-size: 16px;
+      font-size: 15px;
       letter-spacing: 0.06em;
-      padding: 14px 4px;
+      padding: 16px 8px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       text-decoration: none;
+      line-height: 1.5;
     }
     .mobile-menu a:last-of-type {
       border-bottom: none;
     }
     .mobile-menu .mobile-menu-cta {
-      margin-top: 12px;
-      padding: 14px 18px;
+      margin-top: 8px;
+      padding: 15px 18px;
       background: var(--accent);
       color: var(--warm-white);
       border-radius: 999px;
@@ -411,7 +412,7 @@
       border: none;
     }
     .mobile-menu .mobile-menu-secondary {
-      padding: 12px 4px;
+      padding: 14px 8px;
       font-size: 14px;
       color: rgba(245, 240, 232, 0.78);
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -426,12 +427,12 @@
     }
 
     .mobile-menu-group {
-      margin-top: 14px;
+      margin-top: 18px;
     }
 
     .mobile-menu-group-label {
       display: block;
-      margin: 0 4px 8px;
+      margin: 0 8px 10px;
       font-family: var(--font-en);
       font-size: 10px;
       letter-spacing: 0.18em;
@@ -441,6 +442,10 @@
 
     .mobile-menu-group .mobile-menu-secondary:first-of-type {
       margin-top: 0;
+    }
+
+    .mobile-menu-group a + a {
+      margin-top: 2px;
     }
 
     /* HERO */
@@ -1931,22 +1936,27 @@
 
       .mobile-quickfacts {
         display: block;
-        padding: 0 0 28px;
-        margin-top: -12px;
-        background:
-          linear-gradient(180deg, rgba(15, 14, 13, 0.98), rgba(15, 14, 13, 0.92) 16%, var(--deep) 100%);
+        padding: 8px 0 0;
+        margin-top: 0;
+        background: transparent;
       }
 
       .mobile-quickfacts-grid {
         display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(76vw, 76vw);
         gap: 10px;
+        overflow-x: auto;
+        padding: 0 2px 4px;
       }
 
       .mobile-quickfact {
-        padding: 18px 16px;
+        padding: 16px 15px;
         border-radius: 18px;
-        border: 1px solid rgba(245, 240, 232, 0.1);
-        background: rgba(245, 240, 232, 0.04);
+        border: 1px solid rgba(44, 42, 39, 0.08);
+        background: rgba(253, 250, 244, 0.86);
+        box-shadow: 0 14px 30px rgba(31, 24, 16, 0.08);
+        scroll-snap-align: start;
       }
 
       .mobile-quickfact-label {
@@ -1954,24 +1964,24 @@
         font-size: 9px;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: var(--sand);
-        margin-bottom: 8px;
+        color: var(--accent);
+        margin-bottom: 6px;
       }
 
       .mobile-quickfact strong {
         display: block;
         font-family: var(--font-zh-title);
-        font-size: 18px;
+        font-size: 16px;
         line-height: 1.35;
-        color: var(--cream);
+        color: var(--charcoal);
         font-weight: 600;
       }
 
       .mobile-quickfact p {
-        margin: 8px 0 0;
-        font-size: 13px;
-        line-height: 1.75;
-        color: rgba(245, 240, 232, 0.68);
+        margin: 6px 0 0;
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--muted);
       }
 
       .btn {
@@ -2010,8 +2020,8 @@
       }
 
       .section-copy {
-        font-size: 0.92rem;
-        line-height: 1.9;
+        font-size: 0.88rem;
+        line-height: 1.78;
       }
 
       .intro-center h2 {
@@ -2020,8 +2030,8 @@
       }
 
       .intro-center p {
-        font-size: 0.92rem;
-        line-height: 1.9;
+        font-size: 0.88rem;
+        line-height: 1.78;
       }
 
       .intro-en {
@@ -2077,8 +2087,8 @@
       }
 
       .experience-card p {
-        font-size: 0.9rem;
-        line-height: 1.85;
+        font-size: 0.86rem;
+        line-height: 1.75;
       }
 
       .room-visual {
@@ -2094,8 +2104,8 @@
       }
 
       .room-desc {
-        font-size: 0.9rem;
-        line-height: 1.78;
+        font-size: 0.85rem;
+        line-height: 1.7;
       }
 
       .rule {
@@ -2133,8 +2143,8 @@
       }
 
       .form-intro p {
-        font-size: 0.9rem;
-        line-height: 1.85;
+        font-size: 0.86rem;
+        line-height: 1.72;
       }
 
       .form-cta-block {
@@ -2143,8 +2153,8 @@
       }
 
       .form-cta-intro {
-        font-size: 14px;
-        line-height: 1.8;
+        font-size: 13px;
+        line-height: 1.72;
       }
 
       .mobile-bottom-cta {
@@ -3575,7 +3585,7 @@
             </h1>
 
             <p class="hero-desc">
-              這是一場給陌生人的小聚會。你可以先看看目前開放的場次、時間、費用與規則，選一場真的適合自己的相遇，再決定要不要報名。
+              看看現在開放的場次，選一場你真的想去的相遇。
             </p>
 
             <div class="hero-actions">
@@ -3595,26 +3605,6 @@
           </a>
         </section>
 
-        <section class="mobile-quickfacts" aria-label="手機版快速說明">
-          <div class="wrap mobile-quickfacts-grid">
-            <article class="mobile-quickfact">
-              <div class="mobile-quickfact-label">How It Works</div>
-              <strong>先看開放場次，再決定要不要報名</strong>
-              <p>現在不是先填一張大表單，而是先看每一場的內容、時間、費用與規則。</p>
-            </article>
-            <article class="mobile-quickfact">
-              <div class="mobile-quickfact-label">What Happens Next</div>
-              <strong>送出後由主辦審核，不是先搶先贏</strong>
-              <p>我們會依活動狀況與參加者組合安排邀請，確認結果會透過 email 和會員區通知你。</p>
-            </article>
-            <article class="mobile-quickfact">
-              <div class="mobile-quickfact-label">Before You Apply</div>
-              <strong>費用會先寫清楚，付款後才正式保留</strong>
-              <p>每一場公開活動頁都會直接標示價格與補充說明，不會等到現場才談錢。</p>
-            </article>
-          </div>
-        </section>
-
         <section class="section-dark" id="intro">
           <div class="wrap intro-center">
             <div class="intro-en">MEET • EXPERIENCE • CONNECT</div>
@@ -3624,7 +3614,7 @@
             </h2>
 
             <p>
-              比起只是坐下來聊天，我更想創造一個大家可以一起經歷的小時刻。可能是一頓飯、一場野餐、一次散步，當我們一起做了點什麼，關係就比較容易自然發生。
+              不只是坐下來聊天，而是一起吃飯、散步、野餐，讓關係從共同經驗自然開始。
             </p>
           </div>
         </section>
@@ -3687,7 +3677,7 @@
                 </h2>
 
                 <p class="section-copy">
-                  你不用是很外向的人，也不用準備什麼厲害的故事。只要你願意來，願意聽，也願意分享一點點自己，就已經很夠了。
+                  你不用很外向，也不用準備精彩故事。願意來、願意聽、願意分享一點點自己，就夠了。
                 </p>
               </div>
             </div>
@@ -3744,7 +3734,7 @@
                 </h2>
 
                 <p class="section-copy">
-                  未來的陌生連結所會以 Room 的方式延伸，每一間 Room 都有不同主題、不同體驗，也會吸引不同狀態的人進來。
+                  每一間 Room 都有不同主題與氣氛，會吸引不同狀態的人走進來。
                 </p>
               </div>
             </div>
@@ -3799,6 +3789,26 @@
             </div>
             <div id="upcomingEventsGrid" class="upcoming-events-grid"></div>
           </div>
+
+          <section class="mobile-quickfacts" aria-label="手機版快速說明">
+            <div class="wrap mobile-quickfacts-grid">
+              <article class="mobile-quickfact">
+                <div class="mobile-quickfact-label">How It Works</div>
+                <strong>喜歡哪一場，就報哪一場</strong>
+                <p>先看內容與規則，再決定要不要送出。</p>
+              </article>
+              <article class="mobile-quickfact">
+                <div class="mobile-quickfact-label">Selection</div>
+                <strong>主辦會審核，不是先搶先贏</strong>
+                <p>結果會用 email 和會員區通知。</p>
+              </article>
+              <article class="mobile-quickfact">
+                <div class="mobile-quickfact-label">Payment</div>
+                <strong>費用先公開，付款後才算保留</strong>
+                <p>不會等到現場才談錢。</p>
+              </article>
+            </div>
+          </section>
 </section>
 
         <section class="section-dark" id="rules">
@@ -4123,13 +4133,13 @@
                 <h2>先看開放場次，<br>再決定要不要報名</h2>
 
                 <p>
-                  現在的流程不是先填一張大表單，而是先看每一場公開活動的內容與規則。當你真的想參加其中一場，再登入會員系統送出資料就好。
+                  先看每一場公開活動的內容與規則。真的想參加，再登入會員系統送出資料就好。
                 </p>
               </div>
 
               <div class="form-cta-block">
                 <p class="form-cta-intro">
-                  目前已升級為會員制：建立一次基本資料，之後就可以直接報名不同場次，也能在會員區看到自己的報名狀態。
+                  建立一次基本資料，之後就能直接報名不同場次。
                 </p>
                 <a class="btn btn-light form-cta-primary" href="https://app.strangersconnecting.com/events">
                   查看開放中的聚會
