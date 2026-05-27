@@ -4131,7 +4131,7 @@
             el.hidden = !authenticated;
           });
           if (accountChip) {
-            accountChip.textContent = authenticated ? (displayName || '會員') : '尚未登入';
+            accountChip.textContent = authenticated ? (displayName || '尚未設定稱呼') : '尚未登入';
           }
         })
         .catch(() => {
