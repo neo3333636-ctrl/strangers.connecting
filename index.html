@@ -3255,6 +3255,26 @@
       font-weight: 600;
       letter-spacing: 0.04em;
     }
+    .upcoming-card-meta {
+      font-size: 12px;
+      color: #8a7f72;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .upcoming-card-badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .upcoming-card-subtitle {
+      font-size: 13px;
+      color: #2c2a27;
+      line-height: 1.5;
+      margin: 4px 0 8px;
+    }
     @media (max-width: 720px) {
       .upcoming-events-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -4208,6 +4228,21 @@
         } catch (e) { return ''; }
       }
 
+      const stateLabels = {
+        open: '開放報名中',
+        full: '名額已滿',
+        not_yet_open: '即將開放',
+        closed: '報名已截止',
+        cancelled: '活動取消',
+      };
+      const stateColors = {
+        open:        { bg: '#485244', fg: '#f5f0e8' },
+        full:        { bg: '#c17f4a', fg: '#fdfaf4' },
+        not_yet_open: { bg: '#8a7f72', fg: '#f5f0e8' },
+        closed:      { bg: '#8a7f72', fg: '#f5f0e8' },
+        cancelled:   { bg: '#8a7f72', fg: '#f5f0e8' },
+      };
+
       fetch(API, { method: 'GET' })
         .then((r) => (r.ok ? r.json() : null))
         .then((data) => {
@@ -4221,14 +4256,25 @@
               ? '<div class="upcoming-card-price">NT$' + Number(e.price_amount).toLocaleString() +
                 (e.price_note ? ' · ' + escapeHtml(e.price_note) : '') + '</div>'
               : '';
-            const meta = escapeHtml(formatDate(e.starts_at)) +
+            const dateMeta = escapeHtml(formatDate(e.starts_at)) +
               (e.location ? ' · ' + escapeHtml(e.location) : '');
+            const c = stateColors[e.state] || stateColors.open;
+            const label = stateLabels[e.state] || stateLabels.open;
+            const cardMeta = '<div class="upcoming-card-meta">'
+              + (e.activity_type ? '<span>' + escapeHtml(e.activity_type) + '</span> · ' : '')
+              + '<span class="upcoming-card-badge" style="background:' + c.bg + ';color:' + c.fg + '">' + escapeHtml(label) + '</span>'
+              + '</div>';
+            const subtitle = e.subtitle
+              ? '<p class="upcoming-card-subtitle">' + escapeHtml(e.subtitle) + '</p>'
+              : '';
             return ''
               + '<a class="upcoming-card" href="https://app.strangersconnecting.com/events/' + Number(e.id) + '">'
               +   '<div class="upcoming-card-visual"' + visualStyle + '></div>'
               +   '<div class="upcoming-card-body">'
-              +     '<div class="upcoming-card-date">' + meta + '</div>'
+              +     '<div class="upcoming-card-date">' + dateMeta + '</div>'
+              +     cardMeta
               +     '<h4 class="upcoming-card-title">' + escapeHtml(e.title) + '</h4>'
+              +     subtitle
               +     price
               +     '<div class="upcoming-card-cta">查看與報名 <span aria-hidden="true">&rarr;</span></div>'
               +   '</div>'
