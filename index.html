@@ -346,6 +346,66 @@
       border-radius: 999px;
       background: currentColor;
       margin-bottom: 7px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+      transform-origin: center;
+    }
+    .menu-icon span:last-child { margin-bottom: 0; }
+    .menu-icon[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(11px) rotate(45deg);
+    }
+    .menu-icon[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-icon[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-11px) rotate(-45deg);
+    }
+
+    /* Mobile dropdown menu */
+    .mobile-menu {
+      position: fixed;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: rgba(15, 14, 13, 0.96);
+      backdrop-filter: blur(12px);
+      padding: 28px 32px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 60;
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
+      transform: translateY(-12px);
+      opacity: 0;
+      transition: transform 0.28s ease, opacity 0.22s ease;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+    }
+    .mobile-menu.open {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .mobile-menu a {
+      color: var(--cream);
+      font-family: var(--font-zh-body);
+      font-size: 16px;
+      letter-spacing: 0.06em;
+      padding: 14px 4px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      text-decoration: none;
+    }
+    .mobile-menu a:last-of-type {
+      border-bottom: none;
+    }
+    .mobile-menu .mobile-menu-cta {
+      margin-top: 12px;
+      padding: 14px 18px;
+      background: var(--accent);
+      color: var(--warm-white);
+      border-radius: 999px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      border: none;
     }
 
     /* HERO */
@@ -3218,15 +3278,25 @@
             <a href="#collab">合作資訊</a>
           </nav>
 
-          <a class="nav-cta" href="https://app.strangersconnecting.com/login">登入</a>
+          <a class="nav-cta" href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入</a>
 
-          <button class="menu-icon" type="button" onclick="scrollToRequest()" aria-label="前往報名">
+          <button class="menu-icon" type="button" id="menuToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
             <span></span>
             <span></span>
             <span></span>
           </button>
         </div>
       </header>
+
+      <nav id="mobileMenu" class="mobile-menu" aria-label="行動版選單" hidden>
+        <a href="#moments">時刻</a>
+        <a href="#experience">體驗</a>
+        <a href="#rooms">場次</a>
+        <a href="#faq">常見問題</a>
+        <a href="#request">報名活動</a>
+        <a href="#collab">合作資訊</a>
+        <a class="mobile-menu-cta" href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入 →</a>
+      </nav>
 
       <main>
         <section class="hero" id="top">
@@ -3943,13 +4013,61 @@
       els.forEach(function (el) { io.observe(el); });
     })();
 
-    /* 報名表單已於會員系統上線後移除；保留 scrollToRequest 給 nav 連結使用 */
+    /* 報名表單已於會員系統上線後移除；保留 scrollToRequest 給舊連結相容 */
     function scrollToRequest() {
       const target = document.getElementById("request");
       if (target) {
         target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
+
+    /* Mobile hamburger menu */
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+
+      function openMenu() {
+        menu.hidden = false;
+        // double-rAF to ensure the transition runs after hidden flip
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          menu.classList.add('open');
+        }));
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', '關閉選單');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu() {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', '開啟選單');
+        document.body.style.overflow = '';
+        // wait for transition to finish before hiding
+        setTimeout(() => { menu.hidden = true; }, 280);
+      }
+      function toggleMenu() {
+        if (menu.classList.contains('open')) closeMenu(); else openMenu();
+      }
+
+      toggle.addEventListener('click', toggleMenu);
+
+      // 點任何選項都收起選單
+      menu.querySelectorAll('a').forEach((a) => {
+        a.addEventListener('click', () => {
+          if (menu.classList.contains('open')) closeMenu();
+        });
+      });
+
+      // ESC 關閉
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+      });
+
+      // 縮放回桌機時自動收起
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 720 && menu.classList.contains('open')) closeMenu();
+      });
+    })();
 
     // Hero video helper:
     // GitHub Pages 路徑會區分大小寫。請確認影片存在：
