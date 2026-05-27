@@ -311,7 +311,7 @@
       position: relative;
       margin-left: auto;
       display: inline-flex;
-      z-index: 120;
+      z-index: 10001;
     }
     .nav-user-backdrop {
       position: fixed;
@@ -320,7 +320,7 @@
       padding: 0;
       margin: 0;
       background: transparent;
-      z-index: 9990;
+      z-index: 9998;
     }
     .nav-user {
       display: inline-flex;
@@ -3390,10 +3390,10 @@
               <button type="button" role="menuitem" data-scroll-target="experience">體驗</button>
               <button type="button" role="menuitem" data-scroll-target="rooms">場次</button>
               <button type="button" role="menuitem" data-scroll-target="faq">常見問題</button>
-              <button type="button" role="menuitem" data-scroll-target="request">報名活動</button>
+              <button type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/events">報名活動</button>
               <button type="button" role="menuitem" data-scroll-target="collab">合作資訊</button>
               <div class="nav-user-menu-divider" aria-hidden="true"></div>
-              <button class="nav-user-menu-cta" type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入</button>
+              <button class="nav-user-menu-cta" type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/login?next=/me">註冊或登入</button>
               <div class="nav-user-menu-divider" aria-hidden="true"></div>
               <button type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/me">我報名的活動</button>
               <button type="button" role="menuitem" data-member-nav="https://app.strangersconnecting.com/me/profile">個人資料</button>
@@ -4172,6 +4172,11 @@
       });
 
       backdrop.addEventListener('click', closeMenu);
+      document.addEventListener('click', function (e) {
+        if (menu.hidden) return;
+        if (menu.contains(e.target) || toggle.contains(e.target)) return;
+        closeMenu();
+      });
 
       menu.querySelectorAll('[data-scroll-target]').forEach(function (item) {
         item.addEventListener('click', function (e) {
@@ -4193,6 +4198,7 @@
           e.stopPropagation();
           const url = item.getAttribute('data-member-nav');
           if (!url) return;
+          closeMenu();
           window.location.assign(url);
         });
       });
