@@ -4139,11 +4139,17 @@
     })();
 
     /* 報名表單已於會員系統上線後移除；保留 scrollToRequest 給舊連結相容 */
+    function scrollToSection(sectionId) {
+      const target = document.getElementById(sectionId);
+      if (!target) return;
+      const topbar = document.getElementById('topbar');
+      const offset = (topbar ? topbar.offsetHeight : 0) + 16;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
     function scrollToRequest() {
-      const target = document.getElementById("request");
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      scrollToSection('request');
     }
 
     /* Desktop user menu */
@@ -4185,10 +4191,7 @@
           const targetId = item.getAttribute('data-scroll-target');
           if (!targetId) return;
           closeMenu();
-          const target = document.getElementById(targetId);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+          scrollToSection(targetId);
         });
       });
 
