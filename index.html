@@ -310,6 +310,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
       margin-left: auto;
       width: 38px;
       height: 30px;
@@ -323,6 +324,7 @@
 
     .menu-icon span {
       display: block;
+      width: 100%;
       height: 4px;
       border-radius: 999px;
       background: currentColor;
@@ -3295,10 +3297,19 @@
         <a href="#faq">常見問題</a>
         <a href="#request">報名活動</a>
         <a href="#collab">合作資訊</a>
-        <a class="mobile-menu-cta" href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入 →</a>
+        <a
+          class="mobile-menu-cta"
+          data-auth-guest
+          href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F"
+        >註冊或登入 →</a>
         <a class="mobile-menu-secondary" href="https://app.strangersconnecting.com/me">我報名的活動</a>
         <a class="mobile-menu-secondary" href="https://app.strangersconnecting.com/me/profile">個人資料</a>
-        <a class="mobile-menu-secondary mobile-menu-signout" href="https://app.strangersconnecting.com/auth/signout?return=https%3A%2F%2Fstrangersconnecting.com%2F">登出</a>
+        <a
+          class="mobile-menu-secondary mobile-menu-signout"
+          data-auth-member
+          href="https://app.strangersconnecting.com/auth/signout?return=https%3A%2F%2Fstrangersconnecting.com%2F"
+          hidden
+        >登出</a>
       </nav>
 
       <main>
@@ -4082,6 +4093,32 @@
       window.addEventListener('resize', () => {
         if (window.innerWidth > 720 && menu.classList.contains('open')) closeMenu();
       });
+    })();
+
+    /* Toggle login / logout links based on app session */
+    (function () {
+      const guestOnly = document.querySelectorAll('[data-auth-guest]');
+      const memberOnly = document.querySelectorAll('[data-auth-member]');
+
+      fetch('https://app.strangersconnecting.com/api/public/auth-status', {
+        method: 'GET',
+        credentials: 'include',
+      })
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          const authenticated = !!(data && data.authenticated);
+          guestOnly.forEach((el) => {
+            el.hidden = authenticated;
+          });
+          memberOnly.forEach((el) => {
+            el.hidden = !authenticated;
+          });
+        })
+        .catch(() => {
+          memberOnly.forEach((el) => {
+            el.hidden = true;
+          });
+        });
     })();
 
     // Hero video helper:
