@@ -306,28 +306,91 @@
       width: 100%;
     }
 
-    .nav-cta {
+    /* User icon + dropdown */
+    .nav-user-wrap {
+      position: relative;
       margin-left: 22px;
       display: inline-flex;
-      align-items: center;
-      padding: 7px 16px;
-      border: 1px solid currentColor;
-      border-radius: 999px;
-      font-family: var(--font-en);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: currentColor;
-      opacity: 0.85;
-      transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-      text-decoration: none;
-      white-space: nowrap;
     }
-    .nav-cta:hover {
+    .nav-user {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      background: transparent;
+      color: currentColor;
+      opacity: 0.82;
+      cursor: pointer;
+      transition: opacity 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      padding: 0;
+    }
+    .nav-user:hover {
       opacity: 1;
-      transform: translateY(-1px);
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .nav-user[aria-expanded="true"] {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.14);
+    }
+    .nav-user-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      min-width: 190px;
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 6px;
+      box-shadow: 0 22px 44px rgba(31, 24, 16, 0.22);
+      z-index: 80;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      pointer-events: none;
+    }
+    .nav-user-menu.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .nav-user-menu a {
+      display: block;
+      padding: 11px 14px;
+      font-family: var(--font-zh-body);
+      font-size: 13px;
+      color: var(--deep);
+      border-radius: 9px;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .nav-user-menu a:hover {
+      background: var(--paper);
+    }
+    .nav-user-menu-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 6px;
+      opacity: 0.6;
+    }
+    .nav-user-menu .nav-user-menu-cta {
+      background: var(--deep);
+      color: var(--warm-white);
+      margin: 2px 0;
+      font-weight: 600;
+    }
+    .nav-user-menu .nav-user-menu-cta:hover {
+      background: var(--charcoal);
+    }
+    .nav-user-menu .nav-user-menu-signout {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .nav-user-menu .nav-user-menu-signout:hover {
+      color: var(--rust);
+      background: rgba(156, 74, 44, 0.06);
     }
 
     .menu-icon {
@@ -406,6 +469,20 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       border: none;
+    }
+    .mobile-menu .mobile-menu-secondary {
+      padding: 12px 4px;
+      font-size: 14px;
+      color: rgba(245, 240, 232, 0.78);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .mobile-menu .mobile-menu-secondary:first-of-type {
+      margin-top: 4px;
+    }
+    .mobile-menu .mobile-menu-secondary.mobile-menu-signout {
+      color: rgba(245, 240, 232, 0.5);
+      font-size: 13px;
+      border-bottom: none;
     }
 
     /* HERO */
@@ -1614,12 +1691,20 @@
         display: none;
       }
 
-      .nav-cta {
+      .nav-user-wrap {
         margin-left: auto;
-        margin-right: 12px;
-        padding: 6px 12px;
-        font-size: 9px;
-        letter-spacing: 0.16em;
+        margin-right: 10px;
+      }
+      .nav-user {
+        width: 32px;
+        height: 32px;
+      }
+      .nav-user-menu {
+        position: fixed;
+        top: 56px;
+        right: 12px;
+        left: auto;
+        min-width: 200px;
       }
 
       .menu-icon {
@@ -3278,7 +3363,22 @@
             <a href="#collab">合作資訊</a>
           </nav>
 
-          <a class="nav-cta" href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入</a>
+          <div class="nav-user-wrap">
+            <button class="nav-user" type="button" id="userMenuToggle" aria-label="會員選單" aria-haspopup="true" aria-expanded="false" aria-controls="userMenu">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 20.5c0.8-3.6 4.2-6 8-6s7.2 2.4 8 6"/>
+              </svg>
+            </button>
+            <div id="userMenu" class="nav-user-menu" role="menu" aria-labelledby="userMenuToggle">
+              <a class="nav-user-menu-cta" role="menuitem" href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入</a>
+              <div class="nav-user-menu-divider" aria-hidden="true"></div>
+              <a role="menuitem" href="https://app.strangersconnecting.com/me">我報名的活動</a>
+              <a role="menuitem" href="https://app.strangersconnecting.com/me/profile">個人資料</a>
+              <div class="nav-user-menu-divider" aria-hidden="true"></div>
+              <a class="nav-user-menu-signout" role="menuitem" href="https://app.strangersconnecting.com/auth/signout?return=https%3A%2F%2Fstrangersconnecting.com%2F">登出</a>
+            </div>
+          </div>
 
           <button class="menu-icon" type="button" id="menuToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
             <span></span>
@@ -3296,6 +3396,9 @@
         <a href="#request">報名活動</a>
         <a href="#collab">合作資訊</a>
         <a class="mobile-menu-cta" href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F">註冊或登入 →</a>
+        <a class="mobile-menu-secondary" href="https://app.strangersconnecting.com/me">我報名的活動</a>
+        <a class="mobile-menu-secondary" href="https://app.strangersconnecting.com/me/profile">個人資料</a>
+        <a class="mobile-menu-secondary mobile-menu-signout" href="https://app.strangersconnecting.com/auth/signout?return=https%3A%2F%2Fstrangersconnecting.com%2F">登出</a>
       </nav>
 
       <main>
@@ -4020,6 +4123,35 @@
         target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
+
+    /* Desktop user dropdown */
+    (function () {
+      const toggle = document.getElementById('userMenuToggle');
+      const menu = document.getElementById('userMenu');
+      if (!toggle || !menu) return;
+
+      function close() {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      function open() {
+        menu.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (menu.classList.contains('open')) close(); else open();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && !toggle.contains(e.target)) close();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') close();
+      });
+    })();
 
     /* Mobile hamburger menu */
     (function () {
