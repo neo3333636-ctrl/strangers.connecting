@@ -361,12 +361,12 @@
       top: 86px;
       left: 0;
       right: 0;
-      background: rgba(15, 14, 13, 0.96);
-      backdrop-filter: blur(12px);
-      padding: 24px 24px 36px;
+      background: rgba(15, 14, 13, 0.98);
+      backdrop-filter: blur(16px);
+      padding: 28px 24px 40px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 0;
       z-index: 90;
       max-height: calc(100vh - 86px);
       overflow-y: auto;
@@ -375,7 +375,7 @@
       visibility: hidden;
       pointer-events: none;
       transition: transform 0.28s ease, opacity 0.22s ease, visibility 0s linear 0.22s;
-      box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.5);
     }
     .mobile-menu.open {
       transform: translateY(0);
@@ -387,65 +387,111 @@
     .mobile-menu[hidden] {
       display: none;
     }
-    .mobile-menu a {
-      color: var(--cream);
-      font-family: var(--font-zh-body);
-      font-size: 15px;
-      letter-spacing: 0.06em;
-      padding: 16px 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      text-decoration: none;
-      line-height: 1.5;
-    }
-    .mobile-menu a:last-of-type {
-      border-bottom: none;
-    }
-    .mobile-menu .mobile-menu-cta {
-      margin-top: 8px;
-      padding: 15px 18px;
-      background: var(--accent);
-      color: var(--warm-white);
-      border-radius: 999px;
-      text-align: center;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      border: none;
-    }
-    .mobile-menu .mobile-menu-secondary {
-      padding: 14px 8px;
-      font-size: 14px;
-      color: rgba(245, 240, 232, 0.78);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .mobile-menu .mobile-menu-secondary:first-of-type {
-      margin-top: 4px;
-    }
-    .mobile-menu .mobile-menu-secondary.mobile-menu-signout {
-      color: rgba(245, 240, 232, 0.5);
-      font-size: 13px;
-      border-bottom: none;
-    }
 
+    /* Group separator */
     .mobile-menu-group {
-      margin-top: 18px;
+      padding-top: 24px;
+      padding-bottom: 4px;
+      border-top: 1px solid rgba(245, 240, 232, 0.1);
+    }
+    .mobile-menu-group:first-child {
+      padding-top: 0;
+      border-top: none;
     }
 
     .mobile-menu-group-label {
       display: block;
-      margin: 0 8px 10px;
+      margin: 0 4px 14px;
       font-family: var(--font-en);
-      font-size: 10px;
-      letter-spacing: 0.18em;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: rgba(245, 240, 232, 0.44);
+      color: rgba(245, 240, 232, 0.5);
     }
 
-    .mobile-menu-group .mobile-menu-secondary:first-of-type {
-      margin-top: 0;
+    .mobile-menu-group a {
+      display: block;
+      color: var(--cream);
+      font-family: var(--font-zh-body);
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      padding: 14px 4px;
+      text-decoration: none;
+      line-height: 1.4;
+      opacity: 0.9;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+    .mobile-menu-group a:hover,
+    .mobile-menu-group a:active {
+      opacity: 1;
+      transform: translateX(2px);
     }
 
-    .mobile-menu-group a + a {
-      margin-top: 2px;
+    /* Member group: distinct visual treatment with prominent login */
+    .mobile-menu-member {
+      padding-top: 0;
+      border-top: none;
+      margin-bottom: 4px;
+    }
+
+    .mobile-menu-login {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 20px !important;
+      background: rgba(193, 127, 74, 0.16);
+      border: 1px solid rgba(193, 127, 74, 0.5);
+      color: var(--accent-light) !important;
+      border-radius: 14px;
+      font-size: 15px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.08em !important;
+      opacity: 1 !important;
+      text-align: center;
+    }
+    .mobile-menu-login::before {
+      content: "→";
+      opacity: 0.7;
+    }
+    .mobile-menu-login:hover {
+      background: rgba(193, 127, 74, 0.22);
+      transform: none !important;
+    }
+
+    .mobile-menu-member-link {
+      font-size: 14px !important;
+      color: rgba(245, 240, 232, 0.74) !important;
+    }
+
+    .mobile-menu-signout {
+      font-size: 13px !important;
+      color: rgba(245, 240, 232, 0.46) !important;
+    }
+
+    /* Bottom CTA — the only big call-to-action in the menu */
+    .mobile-menu-bottom-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 28px;
+      padding: 16px 22px;
+      background: var(--accent);
+      color: var(--warm-white) !important;
+      border-radius: 999px;
+      font-family: var(--font-zh-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(193, 127, 74, 0.32);
+    }
+    .mobile-menu-bottom-cta:hover {
+      background: var(--rust);
     }
 
     /* HERO */
@@ -3836,7 +3882,7 @@
           </nav>
 
           <a class="nav-cta" href="https://app.strangersconnecting.com/events">
-            查看開放中的聚會 →
+            重新打開你的生活圈 →
           </a>
 
           <div class="account-chip" id="accountChip" aria-live="polite">尚未登入</div>
@@ -3849,40 +3895,17 @@
       </header>
 
       <nav id="mobileMenu" class="mobile-menu" aria-label="行動版選單" hidden>
-        <div class="mobile-menu-group">
-          <span class="mobile-menu-group-label">Start Here</span>
+        <!-- Member 區塊優先：登入是最常用入口 -->
+        <div class="mobile-menu-group mobile-menu-member">
           <a
-            class="mobile-menu-cta"
-            href="https://app.strangersconnecting.com/events"
-          >直接看開放場次 →</a>
-        </div>
-
-        <div class="mobile-menu-group">
-          <span class="mobile-menu-group-label">About</span>
-          <a href="about.html">關於陌生連結所</a>
-          <a href="how-to-join.html">怎麼參加</a>
-          <a href="rules.html">聚會規範</a>
-          <a href="#collab">合作資訊</a>
-        </div>
-
-        <div class="mobile-menu-group">
-          <span class="mobile-menu-group-label">Explore</span>
-          <a href="#events">開放中的聚會</a>
-          <a href="#moments">時刻</a>
-          <a href="#voices">參加者語錄</a>
-        </div>
-
-        <div class="mobile-menu-group">
-          <span class="mobile-menu-group-label">Member</span>
-          <a
-            class="mobile-menu-secondary"
+            class="mobile-menu-login"
             data-auth-guest
             href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F"
           >註冊或登入</a>
-          <a class="mobile-menu-secondary" href="https://app.strangersconnecting.com/me">我報名的活動</a>
-          <a class="mobile-menu-secondary" href="https://app.strangersconnecting.com/me/profile">個人資料</a>
+          <a class="mobile-menu-member-link" data-auth-member href="https://app.strangersconnecting.com/me" hidden>我報名的活動</a>
+          <a class="mobile-menu-member-link" data-auth-member href="https://app.strangersconnecting.com/me/profile" hidden>個人資料</a>
           <a
-            class="mobile-menu-secondary mobile-menu-signout"
+            class="mobile-menu-signout"
             data-auth-member
             href="https://app.strangersconnecting.com/auth/signout?return=https%3A%2F%2Fstrangersconnecting.com%2F"
             hidden
@@ -3890,10 +3913,30 @@
         </div>
 
         <div class="mobile-menu-group">
-          <span class="mobile-menu-group-label">Legal</span>
-          <a class="mobile-menu-secondary" href="terms.html">服務條款</a>
-          <a class="mobile-menu-secondary" href="privacy.html">隱私權政策</a>
+          <span class="mobile-menu-group-label">About</span>
+          <a href="about.html">關於陌生連結所</a>
+          <a href="how-to-join.html">怎麼參加</a>
+          <a href="rules.html">聚會規範</a>
         </div>
+
+        <div class="mobile-menu-group">
+          <span class="mobile-menu-group-label">Explore</span>
+          <a href="#events">開放中的聚會</a>
+          <a href="#moments">時刻</a>
+          <a href="#voices">參加者語錄</a>
+          <a href="#collab">合作資訊</a>
+        </div>
+
+        <div class="mobile-menu-group">
+          <span class="mobile-menu-group-label">Legal</span>
+          <a href="terms.html">服務條款</a>
+          <a href="privacy.html">隱私權政策</a>
+        </div>
+
+        <a
+          class="mobile-menu-bottom-cta"
+          href="https://app.strangersconnecting.com/events"
+        >重新打開你的生活圈 →</a>
       </nav>
 
       <main>
@@ -3928,18 +3971,17 @@
             <div class="hero-main-tagline">MEET • EXPERIENCE • CONNECT</div>
 
             <h1 class="hero-title">
-              把原本不認識的人，<br>
-              <span class="underlined">放進一場被好好設計過的相遇。</span>
+              把生活圈，<br>
+              重新打開。
             </h1>
 
             <p class="hero-desc">
-              不是尷尬社交，也不是聯誼。<br>
               一場被好好安排的相遇。
             </p>
 
             <div class="hero-actions">
               <a class="btn btn-light" href="https://app.strangersconnecting.com/events">
-                查看開放中的聚會 →
+                重新打開你的生活圈 →
               </a>
 
               <a class="btn btn-ghost" href="#what">
@@ -3960,13 +4002,14 @@
             <div class="essay-kicker">About</div>
             <h2 class="essay-title">
               在城市裡，<br>
-              真正能坐下來認識一個人的<br>
-              機會越來越少。
+              真正能坐下來<br>
+              認識一個人的機會，<br>
+              越來越少。
             </h2>
             <p class="essay-lede">
-              陌生連結所想做的，<br>
-              是把這些原本不會遇見的人，<br>
-              放進一個被好好設計過的相遇裡。
+              陌生連結所，<br>
+              把原本不會遇見的人，<br>
+              放進一個被好好設計過的相遇。
             </p>
 
             <hr class="essay-divider" />
@@ -3983,7 +4026,7 @@
                 </div>
                 <div class="essay-item-body">
                   <strong>想認識新的人</strong>
-                  <p>不一定要交朋友，只是想離開熟悉的迴圈，看看別的人怎麼過生活。</p>
+                  <p>想離開熟悉的迴圈，看看別人怎麼過生活。</p>
                 </div>
               </li>
 
@@ -3996,7 +4039,7 @@
                 </div>
                 <div class="essay-item-body">
                   <strong>想換一個生活圈</strong>
-                  <p>覺得身邊都是同一類人，想試試和不同背景、不同節奏的人坐在同一張桌。</p>
+                  <p>想試試和不同背景的人坐同一張桌。</p>
                 </div>
               </li>
 
@@ -4010,7 +4053,7 @@
                 </div>
                 <div class="essay-item-body">
                   <strong>一個人也想參加舒服的聚會</strong>
-                  <p>不用帶朋友、不用先認識誰。一個人來，也會被照顧到。</p>
+                  <p>不用帶朋友。一個人來，也會被照顧。</p>
                 </div>
               </li>
 
@@ -4021,8 +4064,8 @@
                   </svg>
                 </div>
                 <div class="essay-item-body">
-                  <strong>不想硬社交，但願意試著和人聊聊</strong>
-                  <p>你不用很會聊天，也不用準備什麼。願意來、願意聽、願意分享一點點自己，就夠了。</p>
+                  <strong>不想硬社交，但願意聊聊</strong>
+                  <p>願意來、願意聽，就夠了。</p>
                 </div>
               </li>
             </ul>
@@ -4038,12 +4081,11 @@
           <div class="essay-wrap reveal">
             <div class="essay-kicker">How to Join</div>
             <h2 class="essay-title">
-              從註冊到坐進那場聚會，<br>
-              這是會經過的幾步。
+              從註冊到坐下，<br>
+              會經過這幾步。
             </h2>
             <p class="essay-lede">
-              每一場名額有限，<br>
-              主辦會看你的報名內容再寄出邀請。
+              名額有限，主辦會看內容再寄邀請。
             </p>
 
             <hr class="essay-divider" />
@@ -4053,7 +4095,7 @@
                 <div class="essay-item-mark is-number" aria-hidden="true">01</div>
                 <div class="essay-item-body">
                   <strong>註冊與填資料</strong>
-                  <p>用 email 註冊，填一次基本資料，之後就能直接報名不同場次。</p>
+                  <p>用 email 註冊，填一次基本資料。</p>
                 </div>
               </li>
 
@@ -4061,7 +4103,7 @@
                 <div class="essay-item-mark is-number" aria-hidden="true">02</div>
                 <div class="essay-item-body">
                   <strong>選一場、送出報名</strong>
-                  <p>看活動內容、時間與費用，挑你真的想去的，再送出。</p>
+                  <p>挑你真的想去的那場，再送出。</p>
                 </div>
               </li>
 
@@ -4069,7 +4111,7 @@
                 <div class="essay-item-mark is-number" aria-hidden="true">03</div>
                 <div class="essay-item-body">
                   <strong>等通知與付款</strong>
-                  <p>若入選，會收到邀請與付款資訊。完成付款後，名額才正式保留。</p>
+                  <p>入選後完成付款，名額才正式保留。</p>
                 </div>
               </li>
 
@@ -4077,7 +4119,7 @@
                 <div class="essay-item-mark is-number" aria-hidden="true">04</div>
                 <div class="essay-item-body">
                   <strong>參加與回饋</strong>
-                  <p>準時抵達，活動後留下幾句感受，會幫助下一場辦得更好。</p>
+                  <p>準時抵達，活動後留下感受。</p>
                 </div>
               </li>
             </ol>
@@ -4134,8 +4176,7 @@
               請先把界線帶上。
             </h2>
             <p class="essay-lede">
-              一個好的聚會不只是要好玩，也要讓人安心。<br>
-              這是三個我們最在意的原則。
+              三個我們最在意的原則。
             </p>
 
             <hr class="essay-divider" />
@@ -4150,7 +4191,7 @@
                 </div>
                 <div class="essay-item-body">
                   <strong>尊重每個人的界線</strong>
-                  <p>對方願意出現，不代表願意被靠近、被追問、或回答任何問題。</p>
+                  <p>願意出現，不代表願意被追問。</p>
                 </div>
               </li>
 
@@ -4161,8 +4202,8 @@
                   </svg>
                 </div>
                 <div class="essay-item-body">
-                  <strong>不把聚會當成獵豔或推銷場合</strong>
-                  <p>不是搭訕場、不是聯誼、不是業務開發桌。把現場留給對話本身。</p>
+                  <strong>不把聚會當成獵豔或推銷</strong>
+                  <p>把現場留給對話本身。</p>
                 </div>
               </li>
 
@@ -4174,8 +4215,8 @@
                   </svg>
                 </div>
                 <div class="essay-item-body">
-                  <strong>不未經同意拍攝或公開他人</strong>
-                  <p>主辦會避開不想入鏡的人，參加者之間若想拍對方，也請先取得同意。</p>
+                  <strong>不未經同意拍他人</strong>
+                  <p>想拍對方，請先取得同意。</p>
                 </div>
               </li>
             </ul>
@@ -4391,10 +4432,10 @@
     <div class="mobile-bottom-cta" aria-label="手機版固定報名入口">
       <div class="mobile-bottom-cta-copy">
         <span class="mobile-bottom-cta-kicker">Open Events</span>
-        <span class="mobile-bottom-cta-title">直接看目前可以報名的場次</span>
+        <span class="mobile-bottom-cta-title">看現在開放的聚會</span>
       </div>
       <a class="btn btn-light" href="https://app.strangersconnecting.com/events">
-        查看場次 →
+        看場次 →
       </a>
     </div>
   </div>

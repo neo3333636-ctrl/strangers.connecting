@@ -39,9 +39,11 @@
           <a href="about.html">關於</a>
           <a href="how-to-join.html">怎麼參加</a>
           <a href="rules.html">聚會規範</a>
-          <a href="index.html#faq">常見問題</a>
-          <a href="https://app.strangersconnecting.com/events">查看場次</a>
         </nav>
+
+        <a class="nav-cta" href="https://app.strangersconnecting.com/events">
+          重新打開你的生活圈 →
+        </a>
 
         <button class="menu-icon" type="button" id="menuToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
@@ -50,23 +52,40 @@
     </header>
 
     <nav id="mobileMenu" class="mobile-menu" aria-label="行動版選單" hidden>
-      <div class="mobile-menu-group">
-        <span class="mobile-menu-group-label">Start Here</span>
-        <a class="mobile-menu-cta" href="https://app.strangersconnecting.com/events">直接看開放場次 →</a>
+      <div class="mobile-menu-group mobile-menu-member">
+        <a
+          class="mobile-menu-login"
+          data-auth-guest
+          href="https://app.strangersconnecting.com/login?next=https%3A%2F%2Fstrangersconnecting.com%2F"
+        >註冊或登入</a>
+        <a class="mobile-menu-member-link" data-auth-member href="https://app.strangersconnecting.com/me" hidden>我報名的活動</a>
+        <a class="mobile-menu-member-link" data-auth-member href="https://app.strangersconnecting.com/me/profile" hidden>個人資料</a>
+        <a
+          class="mobile-menu-signout"
+          data-auth-member
+          href="https://app.strangersconnecting.com/auth/signout?return=https%3A%2F%2Fstrangersconnecting.com%2F"
+          hidden
+        >登出</a>
       </div>
+
       <div class="mobile-menu-group">
         <span class="mobile-menu-group-label">About</span>
         <a href="index.html">首頁</a>
         <a href="about.html">關於陌生連結所</a>
         <a href="how-to-join.html">怎麼參加</a>
         <a href="rules.html">聚會規範</a>
-        <a href="index.html#faq">常見問題</a>
       </div>
+
       <div class="mobile-menu-group">
         <span class="mobile-menu-group-label">Legal</span>
         <a href="terms.html">服務條款</a>
         <a href="privacy.html">隱私權政策</a>
       </div>
+
+      <a
+        class="mobile-menu-bottom-cta"
+        href="https://app.strangersconnecting.com/events"
+      >重新打開你的生活圈 →</a>
     </nav>
 
     <main>
@@ -75,8 +94,8 @@
           <div class="subpage-kicker">Privacy</div>
           <h1 class="subpage-title">隱私權政策</h1>
           <p class="subpage-lede">
-            我們會用最小必要的方式收集你的資料，<br>
-            並且只用在你預期得到的地方。
+            最小必要地收集，<br>
+            只用在你預期得到的地方。
           </p>
         </div>
       </section>
@@ -211,7 +230,6 @@
             <li><a href="about.html">關於陌生連結所</a></li>
             <li><a href="how-to-join.html">怎麼參加</a></li>
             <li><a href="rules.html">聚會規範</a></li>
-            <li><a href="index.html#faq">常見問題</a></li>
           </ul>
         </div>
         <div class="footer-col">
