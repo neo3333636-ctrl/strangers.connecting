@@ -610,12 +610,13 @@
 
     .hero-title {
       font-family: var(--font-zh-title);
-      font-size: clamp(2.1rem, 5.6vw, 5.3rem);
+      font-size: clamp(1.9rem, 5.2vw, 4.8rem);
       font-weight: 600;
       line-height: 1.18;
       letter-spacing: -0.04em;
       max-width: 980px;
       margin: 0 auto 14px;
+      white-space: nowrap;
     }
 
     .hero-title .underlined {
@@ -2085,7 +2086,8 @@
       }
 
       .hero-title {
-        font-size: clamp(2rem, 10vw, 3.2rem);
+        font-size: clamp(1.7rem, 7.8vw, 2.9rem);
+        white-space: nowrap;
       }
 
       .hero-desc {
@@ -2298,10 +2300,11 @@
       }
 
       .hero-title {
-        font-size: clamp(1.95rem, 9vw, 2.8rem);
+        font-size: clamp(1.5rem, 7.4vw, 2.4rem);
         line-height: 1.2;
         letter-spacing: -0.03em;
-        max-width: 330px;
+        max-width: 360px;
+        white-space: nowrap;
       }
 
       .hero-desc {
@@ -3971,8 +3974,7 @@
             <div class="hero-main-tagline">MEET • EXPERIENCE • CONNECT</div>
 
             <h1 class="hero-title">
-              把生活圈，<br>
-              重新打開。
+              把生活圈，重新打開。
             </h1>
 
             <p class="hero-desc">
@@ -4280,23 +4282,23 @@
 
               <div>
                 <h2 class="section-title">
-                  第一場結束後，<br>
                   剩下的不只是合照。
                 </h2>
                 <p class="section-lede">
-                  陌生連結所還在最開始的階段。下面是目前累積的軌跡，以及第一場走進房間的人留下的句子。
+                  目前累積的軌跡，<br>
+                  與走進房間的人留下的句子。
                 </p>
               </div>
             </div>
 
-            <ul class="stats-row reveal" role="list">
+            <ul class="stats-row reveal" role="list" id="liveStatsRow">
               <li class="stat-item">
-                <span class="stat-num">1</span>
-                <span class="stat-label">場已完整舉辦</span>
+                <span class="stat-num" id="statSessionsHeld">—</span>
+                <span class="stat-label">場已舉辦</span>
               </li>
               <li class="stat-item">
-                <span class="stat-num">6</span>
-                <span class="stat-label">位陌生人坐到同一張桌</span>
+                <span class="stat-num" id="statTotalApplicants">—</span>
+                <span class="stat-label">人次累積報名</span>
               </li>
               <li class="stat-item">
                 <span class="stat-num">@strangers_connecting</span>
@@ -4304,18 +4306,11 @@
               </li>
             </ul>
 
-            <div class="quotes-grid reveal">
-              <blockquote class="quote-card">
-                <p>「我以為自己會很尷尬，結果聊到不想離開。」</p>
-                <cite>— 第一場參加者</cite>
-              </blockquote>
-              <blockquote class="quote-card">
-                <p>「沒有刻意要交朋友，但桌上每個人都很真實，是我那週裡最放鬆的兩個小時。」</p>
-                <cite>— 第一場參加者，台北</cite>
-              </blockquote>
+            <div class="quotes-grid reveal" id="liveVoicesGrid">
+              <!-- 由 JS 從 /api/public/voices 動態填入 -->
             </div>
 
-            <p class="quotes-note">
+            <p class="quotes-note" id="voicesNote" hidden>
               <em>更多回饋會陸續整理進這裡。</em>
             </p>
           </div>
@@ -4682,6 +4677,59 @@
           if (emptyState) emptyState.hidden = true;
         })
         .catch(() => { /* 靜默：保留 empty state 顯示 */ });
+    })();
+
+    /* Public stats — sessions held & total applicants */
+    (function () {
+      const API = 'https://app.strangersconnecting.com/api/public/stats';
+      const elSessions = document.getElementById('statSessionsHeld');
+      const elApplicants = document.getElementById('statTotalApplicants');
+      if (!elSessions || !elApplicants) return;
+      fetch(API)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          if (!data) return;
+          if (typeof data.sessions_held === 'number') {
+            elSessions.textContent = String(data.sessions_held);
+          }
+          if (typeof data.total_applicants === 'number') {
+            elApplicants.textContent = String(data.total_applicants);
+          }
+        })
+        .catch(() => { /* 靜默：保留 — 顯示 */ });
+    })();
+
+    /* Public voices — anonymous memorable_moment quotes */
+    (function () {
+      const API = 'https://app.strangersconnecting.com/api/public/voices';
+      const grid = document.getElementById('liveVoicesGrid');
+      const note = document.getElementById('voicesNote');
+      if (!grid) return;
+
+      function escapeHtmlV(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;',
+          '"': '&quot;', "'": '&#39;',
+        })[c]);
+      }
+
+      fetch(API)
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          const voices = (data && data.voices) || [];
+          if (!voices.length) return;
+          grid.innerHTML = voices.map((v) => {
+            const loc = v.location
+              ? '<cite>— 參加者，' + escapeHtmlV(v.location) + '</cite>'
+              : '<cite>— 參加者</cite>';
+            return '<blockquote class="quote-card">'
+              + '<p>「' + escapeHtmlV(v.quote) + '」</p>'
+              + loc
+              + '</blockquote>';
+          }).join('');
+          if (note) note.hidden = false;
+        })
+        .catch(() => { /* 靜默 */ });
     })();
 
   </script>
