@@ -874,6 +874,100 @@
       margin-top: 12px;
     }
 
+    /* WHO inside section-head layout */
+    .who-list-block {
+      margin-top: 32px;
+      padding: 24px 28px;
+      background: rgba(245, 240, 232, 0.04);
+      border: 1px solid rgba(245, 240, 232, 0.1);
+      border-radius: 18px;
+    }
+
+    .who-list-label {
+      font-family: var(--font-en);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sand);
+      margin-bottom: 16px;
+    }
+
+    .who-list-block .who-list {
+      margin: 0;
+      max-width: none;
+    }
+
+    .who-list-block .who-list li {
+      background: transparent;
+      border: none;
+      padding: 8px 0 8px 24px;
+      font-size: 0.95rem;
+    }
+
+    .who-list-block .who-list li::before {
+      left: 0;
+      width: 6px;
+      height: 6px;
+      box-shadow: 0 0 0 3px rgba(193, 127, 74, 0.18);
+    }
+
+    /* SECTION-CTA (used across what/how/events/rules previews) */
+    .section-cta {
+      margin-top: 36px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* EVENTS empty state */
+    .events-empty {
+      padding: 36px 28px;
+      text-align: center;
+      background: var(--warm-white);
+      border: 1px dashed var(--border);
+      border-radius: 20px;
+      color: var(--charcoal);
+    }
+
+    .events-empty p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      margin-bottom: 18px;
+      color: var(--muted);
+    }
+
+    /* NAV CTA — prominent pill button in topbar */
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      background: var(--accent);
+      color: var(--warm-white);
+      border-radius: 999px;
+      font-family: var(--font-zh-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      transition: transform 0.18s ease, background 0.2s ease;
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      background: #d4925a;
+    }
+    .topbar.scrolled .nav-cta {
+      background: var(--accent);
+      color: var(--warm-white);
+    }
+    /* Hide nav-cta on small screens — mobile-bottom-cta already covers this. */
+    @media (max-width: 640px) {
+      .nav-cta {
+        display: none;
+      }
+    }
+
     /* MOMENTS */
     .moments-grid {
       display: grid;
@@ -3572,9 +3666,11 @@
             <a href="about.html">關於</a>
             <a href="how-to-join.html">怎麼參加</a>
             <a href="rules.html">聚會規範</a>
-            <a href="#faq">常見問題</a>
-            <a href="https://app.strangersconnecting.com/events">查看場次</a>
           </nav>
+
+          <a class="nav-cta" href="https://app.strangersconnecting.com/events">
+            查看開放中的聚會 →
+          </a>
 
           <div class="account-chip" id="accountChip" aria-live="polite">尚未登入</div>
           <button class="menu-icon" type="button" id="menuToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
@@ -3599,15 +3695,14 @@
           <a href="about.html">關於陌生連結所</a>
           <a href="how-to-join.html">怎麼參加</a>
           <a href="rules.html">聚會規範</a>
-          <a href="#faq">常見問題</a>
           <a href="#collab">合作資訊</a>
         </div>
 
         <div class="mobile-menu-group">
           <span class="mobile-menu-group-label">Explore</span>
+          <a href="#events">開放中的聚會</a>
           <a href="#moments">時刻</a>
-          <a href="#experience">體驗</a>
-          <a href="#rooms">場次</a>
+          <a href="#voices">參加者語錄</a>
         </div>
 
         <div class="mobile-menu-group">
@@ -3679,53 +3774,216 @@
                 查看開放中的聚會 →
               </a>
 
-              <a class="btn btn-ghost" href="#intro">
+              <a class="btn btn-ghost" href="#what">
                 先了解這是什麼
               </a>
             </div>
           </div>
 
-          <a href="#intro" class="scroll-cue" aria-label="往下看">
+          <a href="#what" class="scroll-cue" aria-label="往下看">
             <span class="triangle"></span>
             <span>Scroll</span>
           </a>
         </section>
 
-        <section class="section-dark" id="intro">
-          <div class="wrap intro-center">
-            <div class="intro-en">MEET • EXPERIENCE • CONNECT</div>
+        <!-- 01 What — 這是什麼 + 適合誰來 -->
+        <section class="section-dark" id="what">
+          <div class="wrap">
+            <div class="section-head reveal">
+              <div class="section-index">
+                01<br>
+                About
+              </div>
 
-            <h2>
-              讓原本不會相遇的人，<span class="hand-line">在這裡開始。</span>
-            </h2>
+              <div>
+                <h2 class="section-title">
+                  把原本不認識的人，<br>
+                  放進一場被好好設計過的相遇。
+                </h2>
 
-            <p>
-              陌生連結所設計一些讓陌生人比較容易自然靠近彼此的聚會。<br>
-              不是尷尬社交，也不是聯誼，而是一場被好好安排的相遇。
-            </p>
+                <p class="section-copy">
+                  陌生連結所設計一些讓陌生人比較容易自然靠近彼此的聚會。<br>
+                  不是尷尬社交，也不是聯誼，而是一場被好好安排的相遇。
+                </p>
+              </div>
+            </div>
+
+            <div class="who-list-block reveal">
+              <p class="who-list-label">適合誰來</p>
+              <ul class="who-list">
+                <li>想認識新的人</li>
+                <li>想換一個生活圈</li>
+                <li>一個人也想參加舒服的聚會</li>
+                <li>不想硬社交，但願意試著和人聊聊</li>
+              </ul>
+            </div>
+
+            <div class="section-cta reveal">
+              <a class="btn btn-ghost" href="about.html">看完整介紹 →</a>
+            </div>
           </div>
         </section>
 
-        <section class="section-dark" id="who" aria-label="適合誰來">
-          <div class="wrap who-wrap">
-            <div class="who-head reveal">
-              <div class="who-kicker">Who is this for</div>
-              <h2 class="who-title">適合誰來</h2>
-              <p class="who-lede">
-                你不用很會聊天，也不用準備什麼。<br>
-                只要你符合以下其中一種狀態，這裡就有你的位置。
-              </p>
+        <!-- 02 How — 怎麼參加摘要 -->
+        <section class="section-dark" id="how">
+          <div class="wrap">
+            <div class="section-head reveal">
+              <div class="section-index">
+                02<br>
+                How to Join
+              </div>
+
+              <div>
+                <h2 class="section-title">
+                  怎麼參加
+                </h2>
+                <p class="section-copy">
+                  從註冊到坐進那場聚會，這是會經過的幾步。<br>
+                  每一場名額有限，主辦會看你的報名內容再寄出邀請。
+                </p>
+              </div>
             </div>
 
-            <ul class="who-list reveal">
-              <li>想認識新的人</li>
-              <li>想換一個生活圈</li>
-              <li>一個人也想參加舒服的聚會</li>
-              <li>不想硬社交，但願意試著和人聊聊</li>
-            </ul>
+            <div class="rules reveal" aria-label="參加流程摘要">
+              <article class="rule">
+                <div class="rule-icon" aria-hidden="true" style="font-family: var(--font-en); font-weight: 600; font-size: 14px; letter-spacing: 0.06em;">01</div>
+                <div>
+                  <h3>註冊與填資料</h3>
+                  <p>用 email 註冊，填一次基本資料，之後就能直接報名不同場次。</p>
+                </div>
+              </article>
 
-            <div class="who-cta reveal">
-              <a class="btn btn-ghost" href="how-to-join.html">看怎麼參加 →</a>
+              <article class="rule">
+                <div class="rule-icon" aria-hidden="true" style="font-family: var(--font-en); font-weight: 600; font-size: 14px; letter-spacing: 0.06em;">02</div>
+                <div>
+                  <h3>選一場、送出報名</h3>
+                  <p>看活動內容、時間與費用，挑你真的想去的，再送出。</p>
+                </div>
+              </article>
+
+              <article class="rule">
+                <div class="rule-icon" aria-hidden="true" style="font-family: var(--font-en); font-weight: 600; font-size: 14px; letter-spacing: 0.06em;">03</div>
+                <div>
+                  <h3>等通知與付款</h3>
+                  <p>若入選，會收到邀請與付款資訊。完成付款，名額才正式保留。</p>
+                </div>
+              </article>
+
+              <article class="rule">
+                <div class="rule-icon" aria-hidden="true" style="font-family: var(--font-en); font-weight: 600; font-size: 14px; letter-spacing: 0.06em;">04</div>
+                <div>
+                  <h3>參加與回饋</h3>
+                  <p>準時抵達，活動後留下幾句感受，會幫助下一場辦得更好。</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="section-cta reveal">
+              <a class="btn btn-ghost" href="how-to-join.html">看完整流程 →</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 03 Open Events — 開放中的聚會 -->
+        <section class="section-light" id="events">
+          <div class="wrap">
+            <div class="section-head reveal">
+              <div class="section-index">
+                03<br>
+                Open Events
+              </div>
+
+              <div>
+                <h2 class="section-title">
+                  目前開放中的聚會
+                </h2>
+                <p class="section-copy">
+                  先看每一場的內容、時間、費用與報名規則，再決定要不要送出。<br>
+                  還不是會員的話，系統會先帶你建立基本資料。
+                </p>
+              </div>
+            </div>
+
+            <div id="upcomingEventsContainer" class="upcoming-events" hidden>
+              <div id="upcomingEventsGrid" class="upcoming-events-grid"></div>
+            </div>
+
+            <div id="upcomingEventsEmpty" class="events-empty reveal">
+              <p>目前沒有開放中的場次。<br>追蹤 IG 粉專可以第一時間收到下一場開放消息。</p>
+              <a class="btn btn-ghost" href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">追蹤 IG @strangers_connecting →</a>
+            </div>
+
+            <div class="section-cta reveal">
+              <a class="btn btn-light" href="https://app.strangersconnecting.com/events">
+                到會員區查看所有場次 →
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 04 House Rules — 規範預覽 -->
+        <section class="section-dark" id="rules">
+          <div class="wrap">
+            <div class="section-head reveal">
+              <div class="section-index">
+                04<br>
+                House Rules
+              </div>
+
+              <div>
+                <h2 class="section-title">
+                  進入聚會前，<br>
+                  請先把界線帶上。
+                </h2>
+                <p class="section-copy">
+                  一個好的聚會不只是要好玩，也要讓人安心。<br>
+                  以下是三個我們最在意的原則。
+                </p>
+              </div>
+            </div>
+
+            <div class="rules reveal">
+              <article class="rule">
+                <div class="rule-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 21s7-3.7 7-10V5l-7-3-7 3v6c0 6.3 7 10 7 10Z" stroke="currentColor" stroke-width="1.7"/>
+                    <path d="m8.5 12 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3>尊重每個人的界線</h3>
+                  <p>對方願意出現，不代表願意被靠近、被追問、或回答任何問題。</p>
+                </div>
+              </article>
+
+              <article class="rule">
+                <div class="rule-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 8h16M6 8V6.5A2.5 2.5 0 0 1 8.5 4h7A2.5 2.5 0 0 1 18 6.5V8M7 8l1 12h8l1-12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3>不把聚會當成獵豔或推銷場合</h3>
+                  <p>不是搭訕場、不是聯誼、不是業務開發桌。把現場留給對話本身。</p>
+                </div>
+              </article>
+
+              <article class="rule">
+                <div class="rule-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 7h4l2-2h4l2 2h4v12H4V7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                    <path d="M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.7"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3>不未經同意拍攝或公開他人</h3>
+                  <p>主辦會避開不想入鏡的人，參加者之間若想拍對方，也請先取得同意。</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="section-cta reveal">
+              <a class="btn btn-ghost" href="rules.html">看完整聚會規範 →</a>
             </div>
           </div>
         </section>
@@ -3734,7 +3992,7 @@
           <div class="wrap">
             <div class="section-head reveal">
               <div class="section-index">
-                01<br>
+                05<br>
                 Past Moments
               </div>
 
@@ -3773,277 +4031,11 @@
 
         
 
-        <section class="section-dark" id="experience">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                02<br>
-                The Experience
-              </div>
-
-              <div>
-                <h2 class="section-title">
-                  陌生人不是目的地，<br>
-                  是通往新體驗的入口。
-                </h2>
-
-                <p class="section-copy">
-                  你不用很外向，也不用準備精彩故事。願意來、願意聽、願意分享一點點自己，就夠了。
-                </p>
-              </div>
-            </div>
-
-            <div class="experience-grid reveal">
-              <article class="experience-card" data-big="Meet">
-                <div class="experience-num">01</div>
-
-                <div>
-                  <h3>Meet｜遇見</h3>
-                  <p>
-                    遇見原本不會出現在你生活裡的人。不是急著交換資源，而是先讓彼此成為一個真實的人。
-                  </p>
-                </div>
-              </article>
-
-              <article class="experience-card" data-big="Experience">
-                <div class="experience-num">02</div>
-
-                <div>
-                  <h3>Experience｜體驗</h3>
-                  <p>
-                    一起吃飯、野餐、散步、看展，或進入一個被設計過的場景。讓共同經驗成為聊天的起點。
-                  </p>
-                </div>
-              </article>
-
-              <article class="experience-card" data-big="Connect">
-                <div class="experience-num">03</div>
-
-                <div>
-                  <h3>Connect｜連結</h3>
-                  <p>
-                    不強迫成為朋友，也不保證結果。只是替連結創造一個可以發生的空間。
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <section class="section-light" id="rooms">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                03<br>
-                Rooms
-              </div>
-
-              <div>
-                <h2 class="section-title">
-                  每一場聚會，<br>
-                  都是一片新的 OPENFIELD。
-                </h2>
-
-                <p class="section-copy">
-                  每一間 Room 都有不同主題與氣氛，會吸引不同狀態的人走進來。
-                </p>
-              </div>
-            </div>
-
-            <div class="rooms-grid reveal">
-              <article class="room-card">
-                <div class="room-visual" data-room="Room 01"></div>
-
-                <div class="room-body">
-                  <div class="room-label">Room 01</div>
-                  <h3 class="room-title">The Dinner</h3>
-                  <p class="room-desc">
-                    彼此還不熟的飯桌。帶一件最近正在做的事，和陌生人一起坐下來，慢慢聊。
-                  </p>
-                </div>
-              </article>
-
-              <article class="room-card">
-                <div class="room-visual" data-room="Room 02"></div>
-
-                <div class="room-body">
-                  <div class="room-label">Room 02</div>
-                  <h3 class="room-title">The Picnic</h3>
-                  <p class="room-desc">
-                    帶一本書、一道食物，或一個最近想分享的念頭。和陌生人去草地上坐坐。
-                  </p>
-                </div>
-              </article>
-
-              <article class="room-card">
-                <div class="room-visual" data-room="Room 03"></div>
-
-                <div class="room-body">
-                  <div class="room-label">Room 03</div>
-                  <h3 class="room-title">The Sea</h3>
-                  <p class="room-desc">
-                    十個陌生人，一起去海邊做瑜伽、散步、看海。讓連結從共同的風景開始。
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
-        
-          <div id="upcomingEventsContainer" class="upcoming-events" hidden>
-            <div class="upcoming-events-head">
-              <div class="upcoming-events-kicker">Apply Now</div>
-              <h3 class="upcoming-events-title">目前開放報名的場次</h3>
-              <p class="upcoming-events-subtitle">
-                先看活動內容、時間、費用與報名規則。<br>
-                還不是會員的話，系統會先帶你建立基本資料。
-              </p>
-            </div>
-            <div id="upcomingEventsGrid" class="upcoming-events-grid"></div>
-          </div>
-
-          <section class="mobile-quickfacts" aria-label="手機版快速說明">
-            <div class="wrap mobile-quickfacts-grid">
-              <article class="mobile-quickfact">
-                <div class="mobile-quickfact-label">How It Works</div>
-                <strong>喜歡哪一場，就報哪一場</strong>
-                <p>先看內容與規則，再決定要不要送出。</p>
-              </article>
-              <article class="mobile-quickfact">
-                <div class="mobile-quickfact-label">Selection</div>
-                <strong>主辦會審核，不是先搶先贏</strong>
-                <p>結果會用 email 和會員區通知。</p>
-              </article>
-              <article class="mobile-quickfact">
-                <div class="mobile-quickfact-label">Payment</div>
-                <strong>費用先公開，付款後才算保留</strong>
-                <p>不會等到現場才談錢。</p>
-              </article>
-            </div>
-          </section>
-</section>
-
-        <section class="section-dark" id="rules">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                04<br>
-                Rules of the Room
-              </div>
-
-              <div>
-                <h2 class="section-title">
-                  進入聚會前，<br>
-                  請先把界線帶上。
-                </h2>
-
-                <p class="section-copy">
-                  一個好的聚會，不只是要好玩，也要讓人安心。先把界線說清楚，大家才有空間好好認識彼此。
-                </p>
-              </div>
-            </div>
-
-            <div class="rules reveal">
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 21s7-3.7 7-10V5l-7-3-7 3v6c0 6.3 7 10 7 10Z" stroke="currentColor" stroke-width="1.7"/>
-                    <path d="m8.5 12 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-
-                <div>
-                  <h3>尊重每個人的界線</h3>
-                  <p>每個人來到聚會的狀態都不一樣。對方願意出現在現場，不代表願意被靠近、被追問、或回答任何問題。</p>
-                </div>
-              </article>
-
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M16 11V7a4 4 0 1 0-8 0v4M5 11h14v9H5z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-
-                <div>
-                  <h3>不強迫交換聯絡方式</h3>
-                  <p>聊得來想留下聯絡方式很自然，但對方有權利說不。不留也可以，這場本身就已經完成了。</p>
-                </div>
-              </article>
-
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 5v4m0 4h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-
-                <div>
-                  <h3>不做讓他人不舒服的追問</h3>
-                  <p>關於感情、收入、家庭、外貌、過去經歷⋯⋯，這些題目對方不主動聊，就不要追問。</p>
-                </div>
-              </article>
-
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 8h16M6 8V6.5A2.5 2.5 0 0 1 8.5 4h7A2.5 2.5 0 0 1 18 6.5V8M7 8l1 12h8l1-12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-                  </svg>
-                </div>
-
-                <div>
-                  <h3>不把聚會當成獵豔或推銷場合</h3>
-                  <p>這裡不是搭訕場、不是聯誼、不是業務開發桌。可以分享你在做的事，但請不要把現場當作目標客戶。</p>
-                </div>
-              </article>
-
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 7h4l2-2h4l2 2h4v12H4V7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                    <path d="M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.7"/>
-                  </svg>
-                </div>
-
-                <div>
-                  <h3>不未經同意拍攝或公開他人</h3>
-                  <p>主辦方會記錄活動氛圍，但會避開不想入鏡的人。參與者之間若想拍對方或上傳社群，請先取得對方同意。</p>
-                </div>
-              </article>
-
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M21 12a9 9 0 1 1-3.2-6.9L21 3v6h-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-
-                <div>
-                  <h3>不舒服可以告訴我們</h3>
-                  <p>聚會中或結束後若有任何讓你不舒服的情況，可以私訊官方 IG <a href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener" style="text-decoration:underline">@strangers_connecting</a> 告訴我們，會協助紀錄與處理。</p>
-                </div>
-              </article>
-            </div>
-
-            <aside class="rules-disclaimer reveal" aria-label="主辦方與參與者的責任">
-              <div class="rules-disclaimer-label">主辦方與參與者，分擔同一張桌</div>
-              <p>
-                陌生連結所會透過報名資料、主辦篩選、活動規範與回饋機制，盡量維持聚會的舒服與安全。
-              </p>
-              <p>
-                每位參與者也需為自己的言行與人身安全負責。若有參與者違反上述規範，主辦方保留取消後續邀請資格的權利。
-              </p>
-              <p style="margin-top: 12px;">
-                <a href="rules.html" style="text-decoration:underline; color: var(--accent-light);">查看完整聚會規範 →</a>
-              </p>
-            </aside>
-          </div>
-        </section>
-
         <section class="section-light trust-section" id="voices">
           <div class="wrap">
             <div class="section-head reveal">
               <div class="section-index">
-                05<br>
+                06<br>
                 Voices &amp; Stats
               </div>
 
@@ -4090,212 +4082,11 @@
           </div>
         </section>
 
-        <section class="section-dark timeline-section" id="timeline">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                06<br>
-                Application Timeline
-              </div>
-
-              <div>
-                <h2 class="section-title">
-                  報名之後，<br>
-                  會發生什麼。
-                </h2>
-                <p class="section-lede">
-                  從遞出表單到走進房間，這是你會經歷的軌跡。每一步我都會用 email 通知你，不用一直擔心被忽略。
-                </p>
-              </div>
-            </div>
-
-            <ol class="timeline reveal" aria-label="報名後流程">
-              <li class="timeline-step">
-                <div class="timeline-marker"><span>01</span></div>
-                <div class="timeline-body">
-                  <h3>填寫入場申請</h3>
-                  <p>先打開公開活動頁，確認你真的想參加其中一場，再登入會員系統送出資料。寫得真實比寫得完美重要。</p>
-                </div>
-              </li>
-
-              <li class="timeline-step">
-                <div class="timeline-marker"><span>02</span></div>
-                <div class="timeline-body">
-                  <h3>主辦方閱讀報名資料</h3>
-                  <p>一份一份看，不機械篩選。會結合該場主題、目前報名狀況與整體名單組合考量。</p>
-                </div>
-              </li>
-
-              <li class="timeline-step">
-                <div class="timeline-marker"><span>03</span></div>
-                <div class="timeline-body">
-                  <h3>以 email 通知審核結果</h3>
-                  <p>你會收到正取、候補或這次未安排的通知。寄件人是 <strong>hello@strangersconnecting.com</strong>，會員區也會同步顯示狀態。</p>
-                </div>
-              </li>
-
-              <li class="timeline-step">
-                <div class="timeline-marker"><span>04</span></div>
-                <div class="timeline-body">
-                  <h3>收到邀請後完成付款</h3>
-                  <p>若你被安排為正取，會依信中的方式完成付款。付款完成後，名額才正式保留。</p>
-                </div>
-              </li>
-
-              <li class="timeline-step">
-                <div class="timeline-marker"><span>05</span></div>
-                <div class="timeline-body">
-                  <h3>活動前收到最後資訊</h3>
-                  <p>活動細節、地點與注意事項會在出席確認後寄給你。若臨時不能來，也請盡快取消，讓名額能回到候補名單。</p>
-                </div>
-              </li>
-            </ol>
-          </div>
-        </section>
-
-        <section class="section-dark faq-section" id="faq">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                07<br>
-                Before You Apply
-              </div>
-
-              <div>
-                <h2 class="section-title">
-                  在報名之前，<br>
-                  你可能會想知道。
-                </h2>
-                <p class="section-lede">
-                  以下是大家最常問到的問題。沒在上面、又想先確認的事，歡迎直接私訊 IG。
-                </p>
-              </div>
-            </div>
-
-            <div class="faq-list reveal">
-              <details class="faq-item">
-                <summary>
-                  <span class="faq-q">我不太會聊天，或不算外向的人，也可以來嗎？</span>
-                  <span class="faq-toggle" aria-hidden="true"></span>
-                </summary>
-                <div class="faq-a">
-                  <p>
-                    可以。陌生連結所就是為「不太敢主動、但仍想認識新的人」的人設計的。每一場聚會都有明確的 Rules（見上方 04 區塊），不會逼任何人發言。即使你整場大多在聽，也完全 OK——這是一個放下表現壓力的空間。
-                  </p>
-                </div>
-              </details>
-
-              <details class="faq-item">
-                <summary>
-                  <span class="faq-q">如果報名人數不足、無法成團怎麼辦？</span>
-                  <span class="faq-toggle" aria-hidden="true"></span>
-                </summary>
-                <div class="faq-a">
-                  <p>
-                    每一場有最低成團人數。若該場最終未達門檻，會在活動前透過 email 通知你延期或保留到下一場名單，不會臨時要你出門。寧可延後一週，也不開不舒服的場。
-                  </p>
-                </div>
-              </details>
-
-              <details class="faq-item">
-                <summary>
-                  <span class="faq-q">送出報名後，怎麼知道自己有沒有入選？候補怎麼算？</span>
-                  <span class="faq-toggle" aria-hidden="true"></span>
-                </summary>
-                <div class="faq-a">
-                  <p>
-                    主辦審核後會以 email 通知結果；如果你已經是會員，也可以直接在會員區看到目前報名狀態。若正取額滿，仍可能先列候補，等有人取消或整體組合調整後再遞補。
-                  </p>
-                  <p>
-                    所有 email 都會從 <strong>hello@strangersconnecting.com</strong> 寄出，建議加為聯絡人避免進垃圾信。
-                  </p>
-                </div>
-              </details>
-
-              <details class="faq-item">
-                <summary>
-                  <span class="faq-q">確認出席之後臨時不能來，怎麼辦？</span>
-                  <span class="faq-toggle" aria-hidden="true"></span>
-                </summary>
-                <div class="faq-a">
-                  <p>
-                    請盡快依通知信中的方式取消，讓名額能回到候補名單；也歡迎私訊 IG 跟我說一聲。
-                  </p>
-                  <p>
-                    若一再臨時取消、不到場，後續可能會暫停邀請，這是為了保護其他真的會出席的人。
-                  </p>
-                </div>
-              </details>
-
-              <details class="faq-item">
-                <summary>
-                  <span class="faq-q">活動有費用嗎？</span>
-                  <span class="faq-toggle" aria-hidden="true"></span>
-                </summary>
-                <div class="faq-a">
-                  <p>
-                    會。每一場公開活動頁都會直接標示費用與補充說明，你可以先確認能不能接受，再決定要不要送出報名。我們不會等到現場才談錢。
-                  </p>
-                </div>
-              </details>
-
-              <details class="faq-item">
-                <summary>
-                  <span class="faq-q">現場或活動後感到不舒服，可以怎麼處理？</span>
-                  <span class="faq-toggle" aria-hidden="true"></span>
-                </summary>
-                <div class="faq-a">
-                  <p>
-                    請隨時私訊陌生連結所 IG 粉專
-                    <a href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">@strangers_connecting</a>，我們會協助紀錄與後續處理。
-                  </p>
-                  <p>
-                    Rules of the Room 條列的「不把禮貌當成邀請、不推銷、拍攝先尊重」也是現場執行的依據——若有人違反，會請對方離場，並且不再邀請。
-                  </p>
-                </div>
-              </details>
-            </div>
-          </div>
-        </section>
-
-        <section class="section-light" id="request">
-          <div class="narrow">
-            <div class="form-card reveal">
-              <div class="form-intro">
-                <div class="logo-mark" aria-hidden="true">
-                  <img class="logo-img" src="images/logo.png" alt="" />
-                </div>
-
-                <div class="form-kicker">See Open Events</div>
-
-                <h2>先看開放場次，<br>再決定要不要報名</h2>
-
-                <p>
-                  先看每一場公開活動的內容與規則。真的想參加，再登入會員系統送出資料就好。
-                </p>
-              </div>
-
-              <div class="form-cta-block">
-                <p class="form-cta-intro">
-                  建立一次基本資料，之後就能直接報名不同場次。
-                </p>
-                <a class="btn btn-light form-cta-primary" href="https://app.strangersconnecting.com/events">
-                  查看開放中的聚會
-                  <span aria-hidden="true">→</span>
-                </a>
-                <p class="form-cta-secondary">
-                  已經是會員？<a href="https://app.strangersconnecting.com/login">直接登入 →</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section class="section-dark" id="collab">
           <div class="wrap">
             <div class="section-head reveal">
               <div class="section-index">
-                08<br>
+                07<br>
                 Collaborate
               </div>
 
@@ -4361,7 +4152,6 @@
             <li><a href="about.html">關於陌生連結所</a></li>
             <li><a href="how-to-join.html">怎麼參加</a></li>
             <li><a href="rules.html">聚會規範</a></li>
-            <li><a href="#faq">常見問題</a></li>
             <li><a href="https://app.strangersconnecting.com/events">查看場次</a></li>
           </ul>
         </div>
@@ -4577,6 +4367,7 @@
       const API = 'https://app.strangersconnecting.com/api/public/events';
       const container = document.getElementById('upcomingEventsContainer');
       const grid = document.getElementById('upcomingEventsGrid');
+      const emptyState = document.getElementById('upcomingEventsEmpty');
       if (!container || !grid) return;
 
       function escapeHtml(s) {
@@ -4649,8 +4440,9 @@
               + '</a>';
           }).join('');
           container.hidden = false;
+          if (emptyState) emptyState.hidden = true;
         })
-        .catch(() => { /* 靜默隱藏 */ });
+        .catch(() => { /* 靜默：保留 empty state 顯示 */ });
     })();
 
   </script>
