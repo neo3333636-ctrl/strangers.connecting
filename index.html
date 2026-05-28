@@ -920,6 +920,173 @@
       gap: 12px;
     }
 
+    /* ─────────────────────────────────────────────────────────────
+       ESSAY SECTION — for What / How / Rules preview
+       Borrowed visual language from sub-pages (about / how-to-join / rules).
+       Use these classes inside .section-dark / .section-light wrappers.
+       ───────────────────────────────────────────────────────────── */
+    .essay-wrap {
+      width: min(720px, calc(100% - 36px));
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .essay-kicker {
+      font-family: var(--font-en);
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--sand);
+      font-size: 0.78rem;
+      margin-bottom: 18px;
+    }
+
+    .essay-title {
+      font-family: var(--font-zh-title);
+      font-size: clamp(1.9rem, 4.2vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 1.32;
+      color: var(--cream);
+      margin-bottom: 22px;
+    }
+
+    .section-light .essay-title {
+      color: var(--deep);
+    }
+
+    .essay-lede {
+      font-family: var(--font-zh-body);
+      color: rgba(245, 240, 232, 0.78);
+      font-size: 1rem;
+      line-height: 1.95;
+      letter-spacing: 0.02em;
+      margin-bottom: 36px;
+    }
+
+    .section-light .essay-lede {
+      color: var(--muted);
+    }
+
+    .essay-divider {
+      width: 36px;
+      height: 1px;
+      background: rgba(245, 240, 232, 0.24);
+      margin: 0 auto 36px;
+      border: 0;
+    }
+
+    .section-light .essay-divider {
+      background: rgba(15, 14, 13, 0.18);
+    }
+
+    /* Item cards stack — used for 適合誰來 / 怎麼參加 steps / rules preview */
+    .essay-items {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 36px;
+      display: grid;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .essay-item {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 22px 24px;
+      background: rgba(245, 240, 232, 0.045);
+      border: 1px solid rgba(245, 240, 232, 0.1);
+      border-radius: 18px;
+    }
+
+    .section-light .essay-item {
+      background: rgba(255, 255, 255, 0.7);
+      border-color: var(--border);
+    }
+
+    .essay-item-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(245, 240, 232, 0.22);
+      display: grid;
+      place-items: center;
+      color: var(--sand);
+      flex-shrink: 0;
+    }
+
+    .section-light .essay-item-mark {
+      border-color: rgba(193, 127, 74, 0.4);
+      color: var(--accent);
+    }
+
+    .essay-item-mark.is-number {
+      font-family: var(--font-en);
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      background: rgba(193, 127, 74, 0.12);
+      border-color: rgba(193, 127, 74, 0.32);
+      color: var(--accent-light);
+    }
+
+    .essay-item-mark svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .essay-item-body strong {
+      display: block;
+      color: var(--cream);
+      font-family: var(--font-zh-title);
+      font-size: 1.02rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .section-light .essay-item-body strong {
+      color: var(--deep);
+    }
+
+    .essay-item-body p {
+      color: rgba(245, 240, 232, 0.66);
+      font-family: var(--font-zh-body);
+      font-size: 0.93rem;
+      line-height: 1.85;
+      margin: 0;
+      font-weight: 300;
+    }
+
+    .section-light .essay-item-body p {
+      color: var(--muted);
+    }
+
+    .essay-cta {
+      margin-top: 8px;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    @media (max-width: 480px) {
+      .essay-item {
+        grid-template-columns: 40px 1fr;
+        gap: 14px;
+        padding: 18px 18px;
+      }
+      .essay-item-mark {
+        width: 36px;
+        height: 36px;
+      }
+      .essay-item-mark.is-number { font-size: 12px; }
+      .essay-item-mark svg { width: 18px; height: 18px; }
+    }
+
     /* EVENTS empty state */
     .events-empty {
       padding: 36px 28px;
@@ -3761,12 +3928,13 @@
             <div class="hero-main-tagline">MEET • EXPERIENCE • CONNECT</div>
 
             <h1 class="hero-title">
-              <span class="underlined">陌生連結所</span>
+              把原本不認識的人，<br>
+              <span class="underlined">放進一場被好好設計過的相遇。</span>
             </h1>
 
             <p class="hero-desc">
-              把原本不認識的人，<br>
-              放進一個被好好設計過的相遇裡。
+              不是尷尬社交，也不是聯誼。<br>
+              一場被好好安排的相遇。
             </p>
 
             <div class="hero-actions">
@@ -3788,37 +3956,78 @@
 
         <!-- 01 What — 這是什麼 + 適合誰來 -->
         <section class="section-dark" id="what">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                01<br>
-                About
-              </div>
+          <div class="essay-wrap reveal">
+            <div class="essay-kicker">About</div>
+            <h2 class="essay-title">
+              在城市裡，<br>
+              真正能坐下來認識一個人的<br>
+              機會越來越少。
+            </h2>
+            <p class="essay-lede">
+              陌生連結所想做的，<br>
+              是把這些原本不會遇見的人，<br>
+              放進一個被好好設計過的相遇裡。
+            </p>
 
-              <div>
-                <h2 class="section-title">
-                  把原本不認識的人，<br>
-                  放進一場被好好設計過的相遇。
-                </h2>
+            <hr class="essay-divider" />
 
-                <p class="section-copy">
-                  陌生連結所設計一些讓陌生人比較容易自然靠近彼此的聚會。<br>
-                  不是尷尬社交，也不是聯誼，而是一場被好好安排的相遇。
-                </p>
-              </div>
-            </div>
+            <div class="essay-kicker" style="margin-bottom: 22px;">Who is this for</div>
 
-            <div class="who-list-block reveal">
-              <p class="who-list-label">適合誰來</p>
-              <ul class="who-list">
-                <li>想認識新的人</li>
-                <li>想換一個生活圈</li>
-                <li>一個人也想參加舒服的聚會</li>
-                <li>不想硬社交，但願意試著和人聊聊</li>
-              </ul>
-            </div>
+            <ul class="essay-items">
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M5 20c1.3-3.2 4-5 7-5s5.7 1.8 7 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>想認識新的人</strong>
+                  <p>不一定要交朋友，只是想離開熟悉的迴圈，看看別的人怎麼過生活。</p>
+                </div>
+              </li>
 
-            <div class="section-cta reveal">
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>想換一個生活圈</strong>
+                  <p>覺得身邊都是同一類人，想試試和不同背景、不同節奏的人坐在同一張桌。</p>
+                </div>
+              </li>
+
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M5 21c0-3.9 3.1-7 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M16 18l4 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>一個人也想參加舒服的聚會</strong>
+                  <p>不用帶朋友、不用先認識誰。一個人來，也會被照顧到。</p>
+                </div>
+              </li>
+
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M21 11.5a8.4 8.4 0 0 1-1 4 8.5 8.5 0 0 1-7.5 4.5 8.4 8.4 0 0 1-4-1L3 21l2-5.5a8.4 8.4 0 0 1-1-4 8.5 8.5 0 0 1 4.5-7.5 8.4 8.4 0 0 1 4-1h.5a8.5 8.5 0 0 1 8 8v.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>不想硬社交，但願意試著和人聊聊</strong>
+                  <p>你不用很會聊天，也不用準備什麼。願意來、願意聽、願意分享一點點自己，就夠了。</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="essay-cta reveal">
               <a class="btn btn-ghost" href="about.html">看完整介紹 →</a>
             </div>
           </div>
@@ -3826,59 +4035,54 @@
 
         <!-- 02 How — 怎麼參加摘要 -->
         <section class="section-dark" id="how">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                02<br>
-                How to Join
-              </div>
+          <div class="essay-wrap reveal">
+            <div class="essay-kicker">How to Join</div>
+            <h2 class="essay-title">
+              從註冊到坐進那場聚會，<br>
+              這是會經過的幾步。
+            </h2>
+            <p class="essay-lede">
+              每一場名額有限，<br>
+              主辦會看你的報名內容再寄出邀請。
+            </p>
 
-              <div>
-                <h2 class="section-title">
-                  怎麼參加
-                </h2>
-                <p class="section-copy">
-                  從註冊到坐進那場聚會，這是會經過的幾步。<br>
-                  每一場名額有限，主辦會看你的報名內容再寄出邀請。
-                </p>
-              </div>
-            </div>
+            <hr class="essay-divider" />
 
-            <div class="rules reveal" aria-label="參加流程摘要">
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true" style="font-family: var(--font-en); font-weight: 600; font-size: 14px; letter-spacing: 0.06em;">01</div>
-                <div>
-                  <h3>註冊與填資料</h3>
+            <ol class="essay-items" aria-label="參加流程摘要">
+              <li class="essay-item">
+                <div class="essay-item-mark is-number" aria-hidden="true">01</div>
+                <div class="essay-item-body">
+                  <strong>註冊與填資料</strong>
                   <p>用 email 註冊，填一次基本資料，之後就能直接報名不同場次。</p>
                 </div>
-              </article>
+              </li>
 
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true" style="font-family: var(--font-en); font-weight: 600; font-size: 14px; letter-spacing: 0.06em;">02</div>
-                <div>
-                  <h3>選一場、送出報名</h3>
+              <li class="essay-item">
+                <div class="essay-item-mark is-number" aria-hidden="true">02</div>
+                <div class="essay-item-body">
+                  <strong>選一場、送出報名</strong>
                   <p>看活動內容、時間與費用，挑你真的想去的，再送出。</p>
                 </div>
-              </article>
+              </li>
 
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true" style="font-family: var(--font-en); font-weight: 600; font-size: 14px; letter-spacing: 0.06em;">03</div>
-                <div>
-                  <h3>等通知與付款</h3>
-                  <p>若入選，會收到邀請與付款資訊。完成付款，名額才正式保留。</p>
+              <li class="essay-item">
+                <div class="essay-item-mark is-number" aria-hidden="true">03</div>
+                <div class="essay-item-body">
+                  <strong>等通知與付款</strong>
+                  <p>若入選，會收到邀請與付款資訊。完成付款後，名額才正式保留。</p>
                 </div>
-              </article>
+              </li>
 
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true" style="font-family: var(--font-en); font-weight: 600; font-size: 14px; letter-spacing: 0.06em;">04</div>
-                <div>
-                  <h3>參加與回饋</h3>
+              <li class="essay-item">
+                <div class="essay-item-mark is-number" aria-hidden="true">04</div>
+                <div class="essay-item-body">
+                  <strong>參加與回饋</strong>
                   <p>準時抵達，活動後留下幾句感受，會幫助下一場辦得更好。</p>
                 </div>
-              </article>
-            </div>
+              </li>
+            </ol>
 
-            <div class="section-cta reveal">
+            <div class="essay-cta">
               <a class="btn btn-ghost" href="how-to-join.html">看完整流程 →</a>
             </div>
           </div>
@@ -3923,66 +4127,60 @@
 
         <!-- 04 House Rules — 規範預覽 -->
         <section class="section-dark" id="rules">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                04<br>
-                House Rules
-              </div>
+          <div class="essay-wrap reveal">
+            <div class="essay-kicker">House Rules</div>
+            <h2 class="essay-title">
+              進入聚會前，<br>
+              請先把界線帶上。
+            </h2>
+            <p class="essay-lede">
+              一個好的聚會不只是要好玩，也要讓人安心。<br>
+              這是三個我們最在意的原則。
+            </p>
 
-              <div>
-                <h2 class="section-title">
-                  進入聚會前，<br>
-                  請先把界線帶上。
-                </h2>
-                <p class="section-copy">
-                  一個好的聚會不只是要好玩，也要讓人安心。<br>
-                  以下是三個我們最在意的原則。
-                </p>
-              </div>
-            </div>
+            <hr class="essay-divider" />
 
-            <div class="rules reveal">
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true">
+            <ul class="essay-items">
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 21s7-3.7 7-10V5l-7-3-7 3v6c0 6.3 7 10 7 10Z" stroke="currentColor" stroke-width="1.7"/>
-                    <path d="m8.5 12 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 21s7-3.7 7-10V5l-7-3-7 3v6c0 6.3 7 10 7 10Z" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="m8.5 12 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
-                <div>
-                  <h3>尊重每個人的界線</h3>
+                <div class="essay-item-body">
+                  <strong>尊重每個人的界線</strong>
                   <p>對方願意出現，不代表願意被靠近、被追問、或回答任何問題。</p>
                 </div>
-              </article>
+              </li>
 
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true">
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 8h16M6 8V6.5A2.5 2.5 0 0 1 8.5 4h7A2.5 2.5 0 0 1 18 6.5V8M7 8l1 12h8l1-12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                    <path d="M4 8h16M6 8V6.5A2.5 2.5 0 0 1 8.5 4h7A2.5 2.5 0 0 1 18 6.5V8M7 8l1 12h8l1-12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
                   </svg>
                 </div>
-                <div>
-                  <h3>不把聚會當成獵豔或推銷場合</h3>
+                <div class="essay-item-body">
+                  <strong>不把聚會當成獵豔或推銷場合</strong>
                   <p>不是搭訕場、不是聯誼、不是業務開發桌。把現場留給對話本身。</p>
                 </div>
-              </article>
+              </li>
 
-              <article class="rule">
-                <div class="rule-icon" aria-hidden="true">
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 7h4l2-2h4l2 2h4v12H4V7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
-                    <path d="M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.7"/>
+                    <path d="M4 7h4l2-2h4l2 2h4v12H4V7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.6"/>
                   </svg>
                 </div>
-                <div>
-                  <h3>不未經同意拍攝或公開他人</h3>
+                <div class="essay-item-body">
+                  <strong>不未經同意拍攝或公開他人</strong>
                   <p>主辦會避開不想入鏡的人，參加者之間若想拍對方，也請先取得同意。</p>
                 </div>
-              </article>
-            </div>
+              </li>
+            </ul>
 
-            <div class="section-cta reveal">
+            <div class="essay-cta">
               <a class="btn btn-ghost" href="rules.html">看完整聚會規範 →</a>
             </div>
           </div>
