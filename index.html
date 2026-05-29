@@ -841,13 +841,13 @@
     /* ───────── Anchor panels (Manifesto-style sections) ───────── */
     .anchor-panel {
       position: relative;
-      min-height: 85vh;
+      min-height: 50vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 96px 24px;
+      padding: 72px 24px;
     }
     .panel-number {
       font-family: var(--font-en);
@@ -873,6 +873,19 @@
       letter-spacing: 0.06em;
       color: rgba(245, 240, 232, 0.55);
       margin: 0 0 36px;
+    }
+    .panel-title-zh::after {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--sand);
+      opacity: 0.4;
+      margin: 18px auto 0;
+    }
+    .anchor-panel.is-light .panel-title-zh::after {
+      background: var(--accent);
+      opacity: 0.5;
     }
     .panel-body {
       max-width: 520px;
@@ -929,7 +942,7 @@
       background: rgba(15, 14, 13, 0.06);
     }
     @media (max-width: 640px) {
-      .anchor-panel { min-height: 80vh; padding: 72px 20px; }
+      .anchor-panel { min-height: 56vh; padding: 56px 20px; }
       .panel-number { margin-bottom: 18px; }
       .panel-title { margin-bottom: 18px; }
       .panel-title-zh { margin-bottom: 24px; }
@@ -4184,14 +4197,14 @@
           <a href="#top" class="brand" aria-label="回到首頁">
             <span class="brand-mark" aria-hidden="true">
               <svg viewBox="0 0 80 70" xmlns="http://www.w3.org/2000/svg">
-                <!-- left hooded silhouette -->
-                <path d="M 12 35 Q 12 14 26 14 Q 40 14 40 35 L 40 56 Q 26 60 12 56 Z" fill="#fdfaf4" />
-                <circle cx="34" cy="38" r="2.2" fill="#0f0e0d" />
-                <!-- right hooded silhouette -->
-                <path d="M 40 35 Q 40 14 54 14 Q 68 14 68 35 L 68 56 Q 54 60 40 56 Z" fill="#c8ad8d" />
-                <circle cx="46" cy="38" r="2.2" fill="#0f0e0d" />
-                <!-- stream -->
-                <path d="M 32 56 Q 36 62 40 66 Q 44 62 48 56 Q 44 60 40 60 Q 36 60 32 56 Z" fill="#8c9a73" />
+                <!-- Left silhouette: cream-coloured rounded arch -->
+                <path d="M 22 22 Q 22 14 30 14 Q 38 14 38 22 L 38 42 Q 30 44 22 42 Z" fill="#fdfaf4" />
+                <circle cx="34" cy="28" r="1.8" fill="#0f0e0d" />
+                <!-- Right silhouette: sand-coloured rounded arch (mirror, with gap between) -->
+                <path d="M 42 22 Q 42 14 50 14 Q 58 14 58 22 L 58 42 Q 50 44 42 42 Z" fill="#c8ad8d" />
+                <circle cx="46" cy="28" r="1.8" fill="#0f0e0d" />
+                <!-- Green stream flowing from between silhouettes downward -->
+                <path d="M 38 42 Q 36 50 38 58 Q 40 62 42 58 Q 44 50 42 42 Z" fill="#8c9a73" />
               </svg>
             </span>
             <span class="brand-text">
@@ -4288,39 +4301,16 @@
 
               <!-- Final logo silhouettes — hidden initially, revealed after morph -->
               <g id="logoTarget" opacity="0">
-                <!-- Left hooded silhouette: rounded top arch, body block, eye dot -->
-                <path d="M 320 440
-                         Q 320 380 380 380
-                         Q 440 380 440 440
-                         L 440 540
-                         Q 380 555 320 540
-                         Z"
-                      fill="#fdfaf4" />
-                <circle cx="415" cy="455" r="6" fill="#0f0e0d" />
-
-                <!-- Right hooded silhouette: mirror -->
-                <path d="M 480 440
-                         Q 480 380 540 380
-                         Q 600 380 600 440
-                         L 600 540
-                         Q 540 555 480 540
-                         Z"
-                      fill="#c8ad8d" />
-                <circle cx="505" cy="455" r="6" fill="#0f0e0d" />
-
-                <!-- Green stream between them -->
-                <path d="M 440 540
-                         Q 450 580 460 600
-                         Q 470 580 480 540
-                         L 480 540
-                         Q 460 560 440 540 Z"
-                      fill="#8c9a73" />
-
-                <!-- Brand wordmark below, fades in last -->
-                <text x="460" y="660" text-anchor="middle"
-                      font-family="'Noto Serif TC', serif"
-                      font-size="22" letter-spacing="6"
-                      fill="#f5f0e8">陌生連結所</text>
+                <!-- Left silhouette (cream), scaled to fit centre of 800x800 viewBox -->
+                <path d="M 320 440 Q 320 360 400 360 Q 480 360 480 440 L 480 540 Q 400 560 320 540 Z" fill="#fdfaf4" />
+                <circle cx="440" cy="480" r="14" fill="#0f0e0d" />
+                <!-- Right silhouette (sand), with gap -->
+                <path d="M 520 440 Q 520 360 600 360 Q 680 360 680 440 L 680 540 Q 600 560 520 540 Z" fill="#c8ad8d" />
+                <circle cx="560" cy="480" r="14" fill="#0f0e0d" />
+                <!-- Green stream emerging from gap, flowing downward -->
+                <path d="M 480 540 Q 470 590 490 640 Q 500 660 510 640 Q 530 590 520 540 Z" fill="#8c9a73" />
+                <!-- Brand wordmark below -->
+                <text x="500" y="700" text-anchor="middle" font-family="'Noto Serif TC', serif" font-size="28" letter-spacing="8" fill="#f5f0e8">陌生連結所</text>
               </g>
             </svg>
           </div>
