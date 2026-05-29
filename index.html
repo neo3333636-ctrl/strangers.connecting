@@ -4045,6 +4045,67 @@
       </nav>
 
       <main>
+        <div id="introOverlay" class="intro-overlay" role="presentation" aria-hidden="true">
+          <div class="intro-stage">
+            <svg id="introSvg" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+              <!-- ground line: faint, hints at the meeting point -->
+              <line id="introGround" x1="120" y1="560" x2="680" y2="560"
+                    stroke="#c8ad8d" stroke-width="1" opacity="0.25"
+                    stroke-dasharray="4 6" />
+
+              <!-- the path the walkers will trace: emerges as a green stream during meet -->
+              <path id="introStream" d="M 380 600 Q 390 540 400 500 Q 410 540 420 600 Z"
+                    fill="#8c9a73" opacity="0" />
+
+              <!-- Left walker: starts as a white circle, far left -->
+              <g id="leftWalker">
+                <circle cx="120" cy="500" r="32" fill="#fdfaf4" />
+              </g>
+
+              <!-- Right walker: starts as a sand circle, far right -->
+              <g id="rightWalker">
+                <circle cx="680" cy="500" r="32" fill="#c8ad8d" />
+              </g>
+
+              <!-- Final logo silhouettes — hidden initially, revealed after morph -->
+              <g id="logoTarget" opacity="0">
+                <!-- Left hooded silhouette: rounded top arch, body block, eye dot -->
+                <path d="M 320 440
+                         Q 320 380 380 380
+                         Q 440 380 440 440
+                         L 440 540
+                         Q 380 555 320 540
+                         Z"
+                      fill="#fdfaf4" />
+                <circle cx="415" cy="455" r="6" fill="#0f0e0d" />
+
+                <!-- Right hooded silhouette: mirror -->
+                <path d="M 480 440
+                         Q 480 380 540 380
+                         Q 600 380 600 440
+                         L 600 540
+                         Q 540 555 480 540
+                         Z"
+                      fill="#c8ad8d" />
+                <circle cx="505" cy="455" r="6" fill="#0f0e0d" />
+
+                <!-- Green stream between them -->
+                <path d="M 440 540
+                         Q 450 580 460 600
+                         Q 470 580 480 540
+                         L 480 540
+                         Q 460 560 440 540 Z"
+                      fill="#8c9a73" />
+
+                <!-- Brand wordmark below, fades in last -->
+                <text x="460" y="660" text-anchor="middle"
+                      font-family="'Noto Serif TC', serif"
+                      font-size="22" letter-spacing="6"
+                      fill="#f5f0e8">陌生連結所</text>
+              </g>
+            </svg>
+          </div>
+        </div>
         <section class="hero" id="top">
           <!--
             換 Hero 影片：
