@@ -3898,6 +3898,60 @@
         font-size: 12.5px;
       }
     }
+
+/* ───────── Inline brand mark (used in nav + intro morph target) ───────── */
+.brand-mark {
+  display: inline-block;
+  width: 32px;
+  height: 28px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ───────── Intro overlay ───────── */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--deep);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 400ms ease-out;
+}
+.intro-overlay[hidden] { display: none; }
+.intro-overlay.is-fading { opacity: 0; }
+.intro-stage {
+  width: min(560px, 80vw);
+  height: min(560px, 80vw);
+}
+.intro-stage svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* While intro plays, hide hero content + lock scroll */
+body.intro-playing {
+  overflow: hidden;
+}
+body.intro-playing .hero-content,
+body.intro-playing .topbar,
+body.intro-playing .scroll-cue {
+  opacity: 0;
+}
+body.intro-done .hero-content,
+body.intro-done .topbar,
+body.intro-done .scroll-cue {
+  opacity: 1;
+  transition: opacity 600ms ease-out;
+}
   </style>
 </head>
 
