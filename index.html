@@ -835,6 +835,104 @@
       50% { transform: translateY(8px); opacity: 0.9; }
     }
 
+    /* ───────── Anchor panels (Manifesto-style sections) ───────── */
+    .anchor-panel {
+      position: relative;
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 96px 24px;
+    }
+    .panel-number {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      color: var(--sand);
+      margin-bottom: 28px;
+      opacity: 0.7;
+    }
+    .panel-title {
+      font-family: var(--font-en);
+      font-size: clamp(2.6rem, 8vw, 5.4rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      color: var(--cream);
+      margin: 0 0 28px;
+    }
+    .panel-title-zh {
+      font-family: var(--font-zh-title);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgba(245, 240, 232, 0.55);
+      margin: 0 0 36px;
+    }
+    .panel-body {
+      max-width: 520px;
+      margin: 0 auto 40px;
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.98rem, 1.4vw, 1.1rem);
+      line-height: 1.95;
+      color: rgba(245, 240, 232, 0.78);
+    }
+    .panel-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 28px;
+      border: 1px solid rgba(245, 240, 232, 0.35);
+      border-radius: 999px;
+      color: var(--cream);
+      font-family: var(--font-zh-body);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      font-weight: 500;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .panel-cta:hover {
+      background: rgba(245, 240, 232, 0.08);
+      border-color: rgba(245, 240, 232, 0.6);
+    }
+    .panel-cta.is-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--warm-white);
+    }
+    .panel-cta.is-primary:hover {
+      background: var(--rust);
+    }
+    .anchor-panel.is-light {
+      background: var(--cream);
+    }
+    .anchor-panel.is-light .panel-title,
+    .anchor-panel.is-light .panel-number {
+      color: var(--deep);
+    }
+    .anchor-panel.is-light .panel-title-zh {
+      color: var(--charcoal);
+    }
+    .anchor-panel.is-light .panel-body {
+      color: var(--charcoal);
+    }
+    .anchor-panel.is-light .panel-cta {
+      border-color: rgba(15, 14, 13, 0.25);
+      color: var(--deep);
+    }
+    .anchor-panel.is-light .panel-cta:hover {
+      background: rgba(15, 14, 13, 0.06);
+    }
+    @media (max-width: 640px) {
+      .anchor-panel { min-height: 80vh; padding: 72px 20px; }
+      .panel-number { margin-bottom: 18px; }
+      .panel-title { margin-bottom: 18px; }
+      .panel-title-zh { margin-bottom: 24px; }
+      .panel-body { margin-bottom: 28px; }
+    }
+
     /* GENERAL SECTIONS */
     .section-dark {
       background: var(--deep);
@@ -4255,297 +4353,63 @@
           </a>
         </section>
 
-        <!-- 01 What — 這是什麼 + 適合誰來 -->
-        <section class="section-dark" id="what">
-          <div class="essay-wrap reveal">
-            <div class="essay-kicker">About</div>
-            <h2 class="essay-title">
-              在城市裡，<br>
-              真正能坐下來<br>
-              認識一個人的機會，<br>
-              越來越少。
-            </h2>
-            <p class="essay-lede">
-              陌生連結所，<br>
-              把原本不會遇見的人，<br>
-              放進一個被好好設計過的相遇。
-            </p>
-
-            <hr class="essay-divider" />
-
-            <div class="essay-kicker" style="margin-bottom: 22px;">Who is this for</div>
-
-            <ul class="essay-items">
-              <li class="essay-item">
-                <div class="essay-item-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/>
-                    <path d="M5 20c1.3-3.2 4-5 7-5s5.7 1.8 7 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div class="essay-item-body">
-                  <strong>想認識新的人</strong>
-                  <p>想離開熟悉的迴圈，看看別人怎麼過生活。</p>
-                </div>
-              </li>
-
-              <li class="essay-item">
-                <div class="essay-item-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
-                  </svg>
-                </div>
-                <div class="essay-item-body">
-                  <strong>想換一個生活圈</strong>
-                  <p>想試試和不同背景的人坐同一張桌。</p>
-                </div>
-              </li>
-
-              <li class="essay-item">
-                <div class="essay-item-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.6"/>
-                    <path d="M5 21c0-3.9 3.1-7 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                    <path d="M16 18l4 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div class="essay-item-body">
-                  <strong>一個人也想參加舒服的聚會</strong>
-                  <p>不用帶朋友。一個人來，也會被照顧。</p>
-                </div>
-              </li>
-
-              <li class="essay-item">
-                <div class="essay-item-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M21 11.5a8.4 8.4 0 0 1-1 4 8.5 8.5 0 0 1-7.5 4.5 8.4 8.4 0 0 1-4-1L3 21l2-5.5a8.4 8.4 0 0 1-1-4 8.5 8.5 0 0 1 4.5-7.5 8.4 8.4 0 0 1 4-1h.5a8.5 8.5 0 0 1 8 8v.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div class="essay-item-body">
-                  <strong>不想硬社交，但願意聊聊</strong>
-                  <p>願意來、願意聽，就夠了。</p>
-                </div>
-              </li>
-            </ul>
-
-            <div class="essay-cta reveal">
-              <a class="btn btn-ghost" href="about.html">看完整介紹 →</a>
-            </div>
-          </div>
+        <!-- 01 About -->
+        <section class="anchor-panel" id="what">
+          <div class="panel-number">⟪ № 01 ⟫</div>
+          <h2 class="panel-title">About</h2>
+          <p class="panel-title-zh">關於陌生連結所</p>
+          <p class="panel-body">
+            把不會遇見的人，<br>
+            放進一場被好好安排的相遇。
+          </p>
+          <a class="panel-cta" href="about.html">看完整介紹 →</a>
         </section>
 
-        <!-- 02 How — 怎麼參加摘要 -->
-        <section class="section-dark" id="how">
-          <div class="essay-wrap reveal">
-            <div class="essay-kicker">How to Join</div>
-            <h2 class="essay-title">
-              從註冊到坐下，<br>
-              會經過這幾步。
-            </h2>
-            <p class="essay-lede">
-              名額有限，主辦會看內容再寄邀請。
-            </p>
-
-            <hr class="essay-divider" />
-
-            <ol class="essay-items" aria-label="參加流程摘要">
-              <li class="essay-item">
-                <div class="essay-item-mark is-number" aria-hidden="true">01</div>
-                <div class="essay-item-body">
-                  <strong>註冊與填資料</strong>
-                  <p>用 email 註冊，填一次基本資料。</p>
-                </div>
-              </li>
-
-              <li class="essay-item">
-                <div class="essay-item-mark is-number" aria-hidden="true">02</div>
-                <div class="essay-item-body">
-                  <strong>選一場、送出報名</strong>
-                  <p>挑你真的想去的那場，再送出。</p>
-                </div>
-              </li>
-
-              <li class="essay-item">
-                <div class="essay-item-mark is-number" aria-hidden="true">03</div>
-                <div class="essay-item-body">
-                  <strong>等通知與付款</strong>
-                  <p>入選後完成付款，名額才正式保留。</p>
-                </div>
-              </li>
-
-              <li class="essay-item">
-                <div class="essay-item-mark is-number" aria-hidden="true">04</div>
-                <div class="essay-item-body">
-                  <strong>參加與回饋</strong>
-                  <p>準時抵達，活動後留下感受。</p>
-                </div>
-              </li>
-            </ol>
-
-            <div class="essay-cta">
-              <a class="btn btn-ghost" href="how-to-join.html">看完整流程 →</a>
-            </div>
-          </div>
+        <!-- 02 How to Join -->
+        <section class="anchor-panel" id="how">
+          <div class="panel-number">⟪ № 02 ⟫</div>
+          <h2 class="panel-title">How to Join</h2>
+          <p class="panel-title-zh">怎麼參加</p>
+          <p class="panel-body">
+            從註冊到坐下，<br>
+            會經過的四步。
+          </p>
+          <a class="panel-cta" href="how-to-join.html">看完整流程 →</a>
         </section>
 
-        <!-- 03 Open Events — 開放中的聚會 -->
-        <section class="section-light" id="events">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                03<br>
-                Open Events
-              </div>
-
-              <div>
-                <h2 class="section-title">
-                  目前開放中的聚會
-                </h2>
-                <p class="section-copy">
-                  先看每一場的內容、時間、費用與報名規則，再決定要不要送出。<br>
-                  還不是會員的話，系統會先帶你建立基本資料。
-                </p>
-              </div>
-            </div>
-
-            <div id="upcomingEventsContainer" class="upcoming-events" hidden>
-              <div id="upcomingEventsGrid" class="upcoming-events-grid"></div>
-            </div>
-
-            <div id="upcomingEventsEmpty" class="events-empty reveal">
-              <p>目前沒有開放中的場次。<br>追蹤 IG 粉專可以第一時間收到下一場開放消息。</p>
-              <a class="btn btn-ghost" href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">追蹤 IG @strangers_connecting →</a>
-            </div>
-
-            <div class="section-cta reveal">
-              <a class="btn btn-light" href="https://app.strangersconnecting.com/events">
-                到會員區查看所有場次 →
-              </a>
-            </div>
-          </div>
+        <!-- 03 Open Events -->
+        <section class="anchor-panel is-light" id="events">
+          <div class="panel-number">⟪ № 03 ⟫</div>
+          <h2 class="panel-title">Open Events</h2>
+          <p class="panel-title-zh">開放中的聚會</p>
+          <p class="panel-body">
+            看現在開放的場次，<br>
+            挑你真的想去的。
+          </p>
+          <a class="panel-cta is-primary" href="https://app.strangersconnecting.com/events">
+            重新打開你的生活圈 →
+          </a>
         </section>
 
-        <!-- 04 House Rules — 規範預覽 -->
-        <section class="section-dark" id="rules">
-          <div class="essay-wrap reveal">
-            <div class="essay-kicker">House Rules</div>
-            <h2 class="essay-title">
-              進入聚會前，<br>
-              請先把界線帶上。
-            </h2>
-            <p class="essay-lede">
-              三個我們最在意的原則。
-            </p>
-
-            <hr class="essay-divider" />
-
-            <ul class="essay-items">
-              <li class="essay-item">
-                <div class="essay-item-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 21s7-3.7 7-10V5l-7-3-7 3v6c0 6.3 7 10 7 10Z" stroke="currentColor" stroke-width="1.6"/>
-                    <path d="m8.5 12 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div class="essay-item-body">
-                  <strong>尊重每個人的界線</strong>
-                  <p>願意出現，不代表願意被追問。</p>
-                </div>
-              </li>
-
-              <li class="essay-item">
-                <div class="essay-item-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 8h16M6 8V6.5A2.5 2.5 0 0 1 8.5 4h7A2.5 2.5 0 0 1 18 6.5V8M7 8l1 12h8l1-12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div class="essay-item-body">
-                  <strong>不把聚會當成獵豔或推銷</strong>
-                  <p>把現場留給對話本身。</p>
-                </div>
-              </li>
-
-              <li class="essay-item">
-                <div class="essay-item-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 7h4l2-2h4l2 2h4v12H4V7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-                    <path d="M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.6"/>
-                  </svg>
-                </div>
-                <div class="essay-item-body">
-                  <strong>不未經同意拍他人</strong>
-                  <p>想拍對方，請先取得同意。</p>
-                </div>
-              </li>
-            </ul>
-
-            <div class="essay-cta">
-              <a class="btn btn-ghost" href="rules.html">看完整聚會規範 →</a>
-            </div>
-          </div>
+        <!-- 04 House Rules -->
+        <section class="anchor-panel" id="rules">
+          <div class="panel-number">⟪ № 04 ⟫</div>
+          <h2 class="panel-title">House Rules</h2>
+          <p class="panel-title-zh">聚會規範</p>
+          <p class="panel-body">
+            進入聚會前，<br>
+            請先把界線帶上。
+          </p>
+          <a class="panel-cta" href="rules.html">看完整規範 →</a>
         </section>
 
-        <section class="section-dark" id="moments">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                05<br>
-                Past Moments
-              </div>
-
-              <div>
-                <h2 class="section-title">
-                  Stories bring us closer.
-                </h2>
-
-                <p class="section-copy">
-                  每一場相遇不一定會變成朋友，但總會留下某個片刻。
-                </p>
-              </div>
-            </div>
-
-            <div class="moments-grid reveal">
-              <article class="moment-card">
-                <div class="moment-placeholder" aria-hidden="true"></div>
-                <img src="assets/images/moment-01.jpg" alt="陌生連結所活動照片 01" onerror="this.remove()" />
-                <div class="moment-label">
-                  <span>Shared table</span>
-                  <strong>陌生人一起吃飯，也一起慢慢熟起來</strong>
-                </div>
-              </article>
-
-              <article class="moment-card">
-                <div class="moment-placeholder" aria-hidden="true"></div>
-                <img src="assets/images/moment-02.jpg" alt="陌生連結所活動照片 02" onerror="this.remove()" />
-                <div class="moment-label">
-                  <span>First conversations</span>
-                  <strong>陌生人假情侶攝影，詳情可以看IG</strong>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        
 
         <section class="section-light trust-section" id="voices">
           <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                06<br>
-                Voices &amp; Stats
-              </div>
-
-              <div>
-                <h2 class="section-title">
-                  剩下的不只是合照。
-                </h2>
-                <p class="section-lede">
-                  目前累積的軌跡，<br>
-                  與走進房間的人留下的句子。
-                </p>
-              </div>
+            <div class="panel-header" style="text-align: center; padding: 32px 0 8px;">
+              <div class="panel-number" style="color: var(--accent);">⟪ № 05 ⟫</div>
+              <h2 class="panel-title" style="color: var(--deep);">Voices</h2>
+              <p class="panel-title-zh" style="color: var(--charcoal);">走進房間的人留下的句子</p>
             </div>
 
             <ul class="stats-row reveal" role="list" id="liveStatsRow">
