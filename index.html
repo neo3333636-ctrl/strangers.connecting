@@ -258,6 +258,7 @@
       justify-content: center;
       gap: 4px;
     }
+
     .brand-primary {
       display: block;
       font-family: var(--font-zh-title);
@@ -288,6 +289,12 @@
       letter-spacing: 0.28em;
       color: currentColor;
       opacity: 0.78;
+    }
+
+    @media (min-width: 641px) {
+      .nav-links {
+        display: flex;
+      }
     }
 
     .nav-links a {
