@@ -3022,6 +3022,33 @@
     border: 1px solid var(--border);
     border-left: 3px solid var(--sand);
     border-radius: 4px;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: 16px;
+    align-items: start;
+  }
+
+  .quote-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    filter: blur(6px);
+    opacity: 0.85;
+    flex-shrink: 0;
+    grid-row: span 2;
+    /* Background is overridden inline per quote (hue derived from seed). */
+    background: radial-gradient(circle at 30% 30%, var(--cream), var(--sand));
+  }
+
+  .quote-avatar::after {
+    /* faint inner ring so the blurred edge feels intentional, not soft */
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1px rgba(15, 14, 13, 0.08);
   }
 
   .quote-card p {
@@ -3039,6 +3066,18 @@
     font-size: 12px;
     color: var(--muted);
     letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 768px) {
+    .quote-card {
+      grid-template-columns: 36px 1fr;
+      column-gap: 12px;
+      padding: 20px 22px 18px;
+    }
+    .quote-avatar {
+      width: 36px;
+      height: 36px;
+    }
   }
 
   .quotes-note {
@@ -4298,7 +4337,7 @@
               </li>
               <li class="stat-item">
                 <span class="stat-num" id="statTotalApplicants">—</span>
-                <span class="stat-label">人次累積報名</span>
+                <span class="stat-label">人累積報名</span>
               </li>
               <li class="stat-item">
                 <span class="stat-num">@strangers_connecting</span>
@@ -4713,6 +4752,21 @@
         })[c]);
       }
 
+      // Derive a stable hue + secondary hue from the seed. The seed is a
+      // hashed value from the API; the actual participant id is never sent.
+      function avatarStyle(seed) {
+        const s = Math.abs(Number(seed) || 0);
+        const hue1 = s % 360;
+        const hue2 = (hue1 + 35 + (s % 23)) % 360;
+        // Soft, warm palette — saturation low so the blurred circle reads as
+        // texture rather than a coloured blob.
+        return (
+          'background: radial-gradient(circle at 30% 30%, '
+          + 'hsl(' + hue1 + ', 42%, 78%), '
+          + 'hsl(' + hue2 + ', 38%, 58%));'
+        );
+      }
+
       fetch(API)
         .then((r) => (r.ok ? r.json() : null))
         .then((data) => {
@@ -4722,7 +4776,11 @@
             const loc = v.location
               ? '<cite>— 參加者，' + escapeHtmlV(v.location) + '</cite>'
               : '<cite>— 參加者</cite>';
+            const avatar = '<div class="quote-avatar" aria-hidden="true" style="'
+              + avatarStyle(v.seed)
+              + '"></div>';
             return '<blockquote class="quote-card">'
+              + avatar
               + '<p>「' + escapeHtmlV(v.quote) + '」</p>'
               + loc
               + '</blockquote>';
