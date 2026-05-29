@@ -656,23 +656,28 @@
       display: inline-block;
       opacity: 0;
       transform: translateY(8px);
-      transition: opacity 0.48s ease-out, transform 0.48s ease-out;
+      animation: heroCharIn 0.48s ease-out forwards;
     }
-    body.intro-done .hero-slogan .char {
-      opacity: 1;
-      transform: translateY(0);
+    @keyframes heroCharIn {
+      to { opacity: 1; transform: translateY(0); }
     }
-    /* Stagger reveal: each char gets a longer delay */
-    body.intro-done .hero-slogan .char:nth-child(1)  { transition-delay: 0s; }
-    body.intro-done .hero-slogan .char:nth-child(2)  { transition-delay: 0.06s; }
-    body.intro-done .hero-slogan .char:nth-child(3)  { transition-delay: 0.12s; }
-    body.intro-done .hero-slogan .char:nth-child(4)  { transition-delay: 0.18s; }
-    body.intro-done .hero-slogan .char:nth-child(5)  { transition-delay: 0.24s; }
-    body.intro-done .hero-slogan .char:nth-child(6)  { transition-delay: 0.36s; }
-    body.intro-done .hero-slogan .char:nth-child(7)  { transition-delay: 0.42s; }
-    body.intro-done .hero-slogan .char:nth-child(8)  { transition-delay: 0.48s; }
-    body.intro-done .hero-slogan .char:nth-child(9)  { transition-delay: 0.54s; }
-    body.intro-done .hero-slogan .char:nth-child(10) { transition-delay: 0.6s; }
+    .hero-slogan .char:nth-child(1)  { animation-delay: 0.15s; }
+    .hero-slogan .char:nth-child(2)  { animation-delay: 0.21s; }
+    .hero-slogan .char:nth-child(3)  { animation-delay: 0.27s; }
+    .hero-slogan .char:nth-child(4)  { animation-delay: 0.33s; }
+    .hero-slogan .char:nth-child(5)  { animation-delay: 0.39s; }
+    .hero-slogan .char:nth-child(6)  { animation-delay: 0.51s; }
+    .hero-slogan .char:nth-child(7)  { animation-delay: 0.57s; }
+    .hero-slogan .char:nth-child(8)  { animation-delay: 0.63s; }
+    .hero-slogan .char:nth-child(9)  { animation-delay: 0.69s; }
+    .hero-slogan .char:nth-child(10) { animation-delay: 0.75s; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-slogan .char {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
 
     .hero-tagline {
       font-family: var(--font-zh-body);
@@ -947,6 +952,70 @@
       .panel-title { margin-bottom: 18px; }
       .panel-title-zh { margin-bottom: 24px; }
       .panel-body { margin-bottom: 28px; }
+    }
+
+    /* ───────── Moments photo strip ───────── */
+    .moments-strip {
+      position: relative;
+      padding: 72px 24px 88px;
+      background: var(--deep);
+    }
+    .moments-strip-head {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .moments-strip-title {
+      font-family: var(--font-en);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      color: var(--cream);
+      margin: 0 0 12px;
+    }
+    .moments-strip-subtitle {
+      font-family: var(--font-zh-title);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: rgba(245, 240, 232, 0.55);
+      margin: 0;
+      letter-spacing: 0.06em;
+    }
+    .moments-strip-subtitle::after {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--sand);
+      opacity: 0.4;
+      margin: 18px auto 0;
+    }
+    .moments-strip-grid {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .moments-strip-item {
+      margin: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      aspect-ratio: 4 / 3;
+      background: rgba(245, 240, 232, 0.04);
+    }
+    .moments-strip-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .moments-strip-item:hover img {
+      transform: scale(1.03);
+    }
+    @media (max-width: 640px) {
+      .moments-strip { padding: 56px 16px 64px; }
+      .moments-strip-head { margin-bottom: 24px; }
+      .moments-strip-grid { grid-template-columns: 1fr; gap: 12px; }
     }
 
     /* GENERAL SECTIONS */
@@ -4138,54 +4207,6 @@
       display: block;
     }
 
-    /* ───────── Intro overlay ───────── */
-    .intro-overlay {
-      position: fixed;
-      inset: 0;
-      background: var(--deep);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      transition: opacity 0.4s ease-out;
-    }
-    .intro-overlay[hidden] { display: none; }
-    .intro-overlay.is-fading { opacity: 0; }
-    .intro-stage {
-      width: min(560px, 80vw);
-      height: min(560px, 80vw);
-    }
-    .intro-stage svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* While intro plays, hide hero content + lock scroll */
-    body.intro-playing {
-      overflow: hidden;
-    }
-    body.intro-playing .hero-content,
-    body.intro-playing .topbar,
-    body.intro-playing .scroll-cue {
-      opacity: 0;
-    }
-    body.intro-done .hero-content,
-    body.intro-done .topbar,
-    body.intro-done .scroll-cue {
-      opacity: 1;
-      transition: opacity 0.6s ease-out;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .intro-overlay,
-      body.intro-done .hero-content,
-      body.intro-done .topbar,
-      body.intro-done .scroll-cue {
-        transition: none;
-      }
-    }
   </style>
 </head>
 
@@ -4277,44 +4298,6 @@
       </nav>
 
       <main>
-        <div id="introOverlay" class="intro-overlay" role="presentation" aria-hidden="true">
-          <div class="intro-stage">
-            <svg id="introSvg" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-              <!-- ground line: faint, hints at the meeting point -->
-              <line id="introGround" x1="120" y1="560" x2="680" y2="560"
-                    stroke="#c8ad8d" stroke-width="1" opacity="0.25"
-                    stroke-dasharray="4 6" />
-
-              <!-- the path the walkers will trace: emerges as a green stream during meet -->
-              <path id="introStream" d="M 380 600 Q 390 540 400 500 Q 410 540 420 600 Z"
-                    fill="#8c9a73" opacity="0" />
-
-              <!-- Left walker: starts as a white circle, far left -->
-              <g id="leftWalker">
-                <circle cx="120" cy="500" r="32" fill="#fdfaf4" />
-              </g>
-
-              <!-- Right walker: starts as a sand circle, far right -->
-              <g id="rightWalker">
-                <circle cx="680" cy="500" r="32" fill="#c8ad8d" />
-              </g>
-
-              <!-- Final logo silhouettes — hidden initially, revealed after morph -->
-              <g id="logoTarget" opacity="0">
-                <!-- Left silhouette (cream), scaled to fit centre of 800x800 viewBox -->
-                <path d="M 320 440 Q 320 360 400 360 Q 480 360 480 440 L 480 540 Q 400 560 320 540 Z" fill="#fdfaf4" />
-                <circle cx="440" cy="480" r="14" fill="#0f0e0d" />
-                <!-- Right silhouette (sand), with gap -->
-                <path d="M 520 440 Q 520 360 600 360 Q 680 360 680 440 L 680 540 Q 600 560 520 540 Z" fill="#c8ad8d" />
-                <circle cx="560" cy="480" r="14" fill="#0f0e0d" />
-                <!-- Green stream emerging from gap, flowing downward -->
-                <path d="M 480 540 Q 470 590 490 640 Q 500 660 510 640 Q 530 590 520 540 Z" fill="#8c9a73" />
-                <!-- Brand wordmark below -->
-                <text x="500" y="700" text-anchor="middle" font-family="'Noto Serif TC', serif" font-size="28" letter-spacing="8" fill="#f5f0e8">陌生連結所</text>
-              </g>
-            </svg>
-          </div>
-        </div>
         <section class="hero" id="top">
           <div class="hero-media" aria-hidden="true">
             <div class="hero-poster"></div>
@@ -4378,9 +4361,6 @@
             看現在開放的場次，<br>
             挑你真的想去的。
           </p>
-          <a class="panel-cta is-primary" href="https://app.strangersconnecting.com/events">
-            重新打開你的生活圈 →
-          </a>
         </section>
 
         <!-- 04 House Rules -->
@@ -4395,6 +4375,22 @@
           <a class="panel-cta" href="rules.html">看完整規範 →</a>
         </section>
 
+        <!-- Moments — photo break between rules and voices -->
+        <section class="moments-strip" id="moments" aria-label="活動時刻">
+          <div class="moments-strip-head">
+            <div class="panel-number">⟪ № 04.5 ⟫</div>
+            <h2 class="moments-strip-title">Moments</h2>
+            <p class="moments-strip-subtitle">過去聚會的片刻</p>
+          </div>
+          <div class="moments-strip-grid">
+            <figure class="moments-strip-item">
+              <img src="assets/images/moment-01.jpg" alt="陌生連結所活動照片" loading="lazy" onerror="this.parentNode.style.display='none'" />
+            </figure>
+            <figure class="moments-strip-item">
+              <img src="assets/images/moment-02.jpg" alt="陌生連結所活動照片" loading="lazy" onerror="this.parentNode.style.display='none'" />
+            </figure>
+          </div>
+        </section>
 
         <section class="section-light trust-section" id="voices">
           <div class="wrap">
@@ -4548,7 +4544,6 @@
     </div>
   </div>
 
-  <script src="assets/intro/intro.js" defer></script>
   <script>
     /* ──────────────────────────────────────────────────────────────
        Scroll reveal — 進入 viewport 才 fade-up，每個元素只觸發一次
