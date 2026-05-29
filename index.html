@@ -87,7 +87,6 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="image" href="assets/images/hero-cover.jpg" />
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Montserrat:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
     rel="stylesheet"
@@ -252,31 +251,25 @@
       object-fit: contain;
     }
 
-    .brand-text {
-      display: inline-flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 4px;
-    }
-
     .brand-primary {
       display: block;
       font-family: var(--font-zh-title);
-      font-size: 14px;
+      font-size: 17px;
       line-height: 1;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.2em;
       font-weight: 600;
       white-space: nowrap;
     }
 
     .brand-secondary {
       display: block;
+      margin-top: 6px;
       font-family: var(--font-en);
-      font-size: 8px;
-      letter-spacing: 0.32em;
+      font-size: 9px;
+      letter-spacing: 0.26em;
       font-weight: 500;
       white-space: nowrap;
-      opacity: 0.6;
+      opacity: 0.64;
     }
 
     .nav-links {
@@ -284,20 +277,12 @@
       align-items: center;
       gap: 24px;
       font-family: var(--font-en);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.18em;
       color: currentColor;
       opacity: 0.78;
-    }
-
-    @media (min-width: 641px) {
-      .nav-links {
-        display: flex;
-      }
-      .menu-icon {
-        display: none;
-      }
+      text-transform: uppercase;
     }
 
     .nav-links a {
@@ -545,6 +530,15 @@
       display: none;
     }
 
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(15, 14, 13, 0.46), rgba(15, 14, 13, 0.52) 36%, rgba(15, 14, 13, 0.92) 100%),
+        radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.18) 58%, rgba(0, 0, 0, 0.5) 100%);
+      z-index: 1;
+    }
+
     .hero-content {
       position: relative;
       z-index: 2;
@@ -612,114 +606,6 @@
       text-transform: uppercase;
       color: var(--sand);
       margin-bottom: 26px;
-    }
-
-    /* ───────── Manifesto hero ───────── */
-    .hero-image {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.55;
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 50% 40%, rgba(15,14,13,0.35), rgba(15,14,13,0.85)),
-        linear-gradient(180deg, rgba(15,14,13,0.4) 0%, rgba(15,14,13,0.75) 100%);
-    }
-    .hero-kicker {
-      font-family: var(--font-en);
-      font-size: 10px;
-      letter-spacing: 0.4em;
-      color: var(--sand);
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 28px;
-      opacity: 0.85;
-    }
-    .hero-slogan {
-      font-family: var(--font-zh-title);
-      font-size: clamp(2.4rem, 6.4vw, 5.6rem);
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      line-height: 1.15;
-      color: var(--cream);
-      text-align: center;
-      margin: 0 auto 24px;
-      white-space: nowrap;
-      text-shadow: 0 2px 28px rgba(0,0,0,0.6);
-    }
-    .hero-slogan .char {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.48s ease-out, transform 0.48s ease-out;
-    }
-    body.intro-done .hero-slogan .char {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    /* Stagger reveal: each char gets a longer delay */
-    body.intro-done .hero-slogan .char:nth-child(1)  { transition-delay: 0s; }
-    body.intro-done .hero-slogan .char:nth-child(2)  { transition-delay: 0.06s; }
-    body.intro-done .hero-slogan .char:nth-child(3)  { transition-delay: 0.12s; }
-    body.intro-done .hero-slogan .char:nth-child(4)  { transition-delay: 0.18s; }
-    body.intro-done .hero-slogan .char:nth-child(5)  { transition-delay: 0.24s; }
-    body.intro-done .hero-slogan .char:nth-child(6)  { transition-delay: 0.36s; }
-    body.intro-done .hero-slogan .char:nth-child(7)  { transition-delay: 0.42s; }
-    body.intro-done .hero-slogan .char:nth-child(8)  { transition-delay: 0.48s; }
-    body.intro-done .hero-slogan .char:nth-child(9)  { transition-delay: 0.54s; }
-    body.intro-done .hero-slogan .char:nth-child(10) { transition-delay: 0.6s; }
-
-    .hero-tagline {
-      font-family: var(--font-zh-body);
-      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-      letter-spacing: 0.12em;
-      color: rgba(245, 240, 232, 0.78);
-      text-align: center;
-      margin: 0 0 36px;
-    }
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 32px;
-      background: var(--accent);
-      color: var(--warm-white);
-      border-radius: 999px;
-      font-family: var(--font-zh-body);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      box-shadow: 0 12px 36px rgba(193, 127, 74, 0.38);
-      transition: transform 0.18s ease, background 0.2s ease, box-shadow 0.2s ease;
-    }
-    .hero-cta:hover {
-      transform: translateY(-1px);
-      background: var(--rust);
-    }
-    .scroll-cue {
-      position: absolute;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: rgba(245, 240, 232, 0.55);
-      font-family: var(--font-en);
-      font-size: 10px;
-      letter-spacing: 0.32em;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-    @media (max-width: 640px) {
-      .hero-kicker { font-size: 9px; margin-bottom: 18px; }
-      .hero-slogan { margin-bottom: 16px; }
-      .hero-tagline { margin-bottom: 24px; }
-      .hero-cta { padding: 12px 24px; font-size: 13px; }
     }
 
     .hero-title {
@@ -836,117 +722,6 @@
     @keyframes floatDown {
       0%, 100% { transform: translateY(0); opacity: 0.4; }
       50% { transform: translateY(8px); opacity: 0.9; }
-    }
-
-    /* ───────── Anchor panels (Manifesto-style sections) ───────── */
-    .anchor-panel {
-      position: relative;
-      min-height: 50vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 72px 24px;
-    }
-    .panel-number {
-      font-family: var(--font-en);
-      font-size: 11px;
-      letter-spacing: 0.4em;
-      color: var(--sand);
-      margin-bottom: 28px;
-      opacity: 0.7;
-    }
-    .panel-title {
-      font-family: var(--font-en);
-      font-size: clamp(2.6rem, 8vw, 5.4rem);
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      line-height: 1;
-      color: var(--cream);
-      margin: 0 0 28px;
-    }
-    .panel-title-zh {
-      font-family: var(--font-zh-title);
-      font-size: clamp(1.4rem, 3vw, 2.2rem);
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      color: rgba(245, 240, 232, 0.55);
-      margin: 0 0 36px;
-    }
-    .panel-title-zh::after {
-      content: "";
-      display: block;
-      width: 24px;
-      height: 1px;
-      background: var(--sand);
-      opacity: 0.4;
-      margin: 18px auto 0;
-    }
-    .anchor-panel.is-light .panel-title-zh::after {
-      background: var(--accent);
-      opacity: 0.5;
-    }
-    .panel-body {
-      max-width: 520px;
-      margin: 0 auto 40px;
-      font-family: var(--font-zh-body);
-      font-size: clamp(0.98rem, 1.4vw, 1.1rem);
-      line-height: 1.95;
-      color: rgba(245, 240, 232, 0.78);
-    }
-    .panel-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 12px 28px;
-      border: 1px solid rgba(245, 240, 232, 0.35);
-      border-radius: 999px;
-      color: var(--cream);
-      font-family: var(--font-zh-body);
-      font-size: 13px;
-      letter-spacing: 0.14em;
-      font-weight: 500;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-    .panel-cta:hover {
-      background: rgba(245, 240, 232, 0.08);
-      border-color: rgba(245, 240, 232, 0.6);
-    }
-    .panel-cta.is-primary {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: var(--warm-white);
-    }
-    .panel-cta.is-primary:hover {
-      background: var(--rust);
-    }
-    .anchor-panel.is-light {
-      background: var(--cream);
-    }
-    .anchor-panel.is-light .panel-title,
-    .anchor-panel.is-light .panel-number {
-      color: var(--deep);
-    }
-    .anchor-panel.is-light .panel-title-zh {
-      color: var(--charcoal);
-    }
-    .anchor-panel.is-light .panel-body {
-      color: var(--charcoal);
-    }
-    .anchor-panel.is-light .panel-cta {
-      border-color: rgba(15, 14, 13, 0.25);
-      color: var(--deep);
-    }
-    .anchor-panel.is-light .panel-cta:hover {
-      background: rgba(15, 14, 13, 0.06);
-    }
-    @media (max-width: 640px) {
-      .anchor-panel { min-height: 56vh; padding: 56px 20px; }
-      .panel-number { margin-bottom: 18px; }
-      .panel-title { margin-bottom: 18px; }
-      .panel-title-zh { margin-bottom: 24px; }
-      .panel-body { margin-bottom: 28px; }
     }
 
     /* GENERAL SECTIONS */
@@ -4123,69 +3898,6 @@
         font-size: 12.5px;
       }
     }
-
-    /* ───────── Inline brand mark (used in nav + intro morph target) ───────── */
-    .brand-mark {
-      display: inline-block;
-      width: 32px;
-      height: 28px;
-      flex-shrink: 0;
-      vertical-align: middle;
-    }
-    .brand-mark svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* ───────── Intro overlay ───────── */
-    .intro-overlay {
-      position: fixed;
-      inset: 0;
-      background: var(--deep);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      transition: opacity 0.4s ease-out;
-    }
-    .intro-overlay[hidden] { display: none; }
-    .intro-overlay.is-fading { opacity: 0; }
-    .intro-stage {
-      width: min(560px, 80vw);
-      height: min(560px, 80vw);
-    }
-    .intro-stage svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* While intro plays, hide hero content + lock scroll */
-    body.intro-playing {
-      overflow: hidden;
-    }
-    body.intro-playing .hero-content,
-    body.intro-playing .topbar,
-    body.intro-playing .scroll-cue {
-      opacity: 0;
-    }
-    body.intro-done .hero-content,
-    body.intro-done .topbar,
-    body.intro-done .scroll-cue {
-      opacity: 1;
-      transition: opacity 0.6s ease-out;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .intro-overlay,
-      body.intro-done .hero-content,
-      body.intro-done .topbar,
-      body.intro-done .scroll-cue {
-        transition: none;
-      }
-    }
   </style>
 </head>
 
@@ -4195,39 +3907,31 @@
       <header class="topbar" id="topbar">
         <div class="wrap topbar-inner">
           <a href="#top" class="brand" aria-label="回到首頁">
-            <span class="brand-mark" aria-hidden="true">
-              <svg viewBox="0 0 80 70" xmlns="http://www.w3.org/2000/svg">
-                <!-- Left silhouette: cream-coloured rounded arch -->
-                <path d="M 22 22 Q 22 14 30 14 Q 38 14 38 22 L 38 42 Q 30 44 22 42 Z" fill="#fdfaf4" />
-                <circle cx="34" cy="28" r="1.8" fill="#0f0e0d" />
-                <!-- Right silhouette: sand-coloured rounded arch (mirror, with gap between) -->
-                <path d="M 42 22 Q 42 14 50 14 Q 58 14 58 22 L 58 42 Q 50 44 42 42 Z" fill="#c8ad8d" />
-                <circle cx="46" cy="28" r="1.8" fill="#0f0e0d" />
-                <!-- Green stream flowing from between silhouettes downward -->
-                <path d="M 38 42 Q 36 50 38 58 Q 40 62 42 58 Q 44 50 42 42 Z" fill="#8c9a73" />
-              </svg>
+            <span class="logo-mark" aria-hidden="true">
+              <img class="logo-img" src="images/logo.png" alt="" />
             </span>
-            <span class="brand-text">
+
+            <span>
               <span class="brand-primary">陌生連結所</span>
               <span class="brand-secondary">STRANGERS CONNECTING</span>
             </span>
           </a>
 
           <nav class="nav-links" aria-label="主選單">
-            <a href="about.html">ABOUT</a>
-            <a href="how-to-join.html">JOIN</a>
-            <a href="rules.html">RULES</a>
+            <a href="about.html">關於</a>
+            <a href="how-to-join.html">怎麼參加</a>
+            <a href="rules.html">聚會規範</a>
           </nav>
 
           <a class="nav-cta" href="https://app.strangersconnecting.com/events">
-            EVENTS →
+            重新打開你的生活圈 →
           </a>
 
           <div class="account-chip" id="accountChip" aria-live="polite">尚未登入</div>
-          <button class="menu-icon" type="button" id="menuToggle"
-                  aria-label="開啟選單" aria-expanded="false"
-                  aria-controls="mobileMenu">
-            <span></span><span></span><span></span>
+          <button class="menu-icon" type="button" id="menuToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
         </div>
       </header>
@@ -4260,6 +3964,7 @@
         <div class="mobile-menu-group">
           <span class="mobile-menu-group-label">Explore</span>
           <a href="#events">開放中的聚會</a>
+          <a href="#moments">時刻</a>
           <a href="#voices">參加者語錄</a>
           <a href="#collab">合作資訊</a>
         </div>
@@ -4277,131 +3982,352 @@
       </nav>
 
       <main>
-        <div id="introOverlay" class="intro-overlay" role="presentation" aria-hidden="true">
-          <div class="intro-stage">
-            <svg id="introSvg" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-              <!-- ground line: faint, hints at the meeting point -->
-              <line id="introGround" x1="120" y1="560" x2="680" y2="560"
-                    stroke="#c8ad8d" stroke-width="1" opacity="0.25"
-                    stroke-dasharray="4 6" />
-
-              <!-- the path the walkers will trace: emerges as a green stream during meet -->
-              <path id="introStream" d="M 380 600 Q 390 540 400 500 Q 410 540 420 600 Z"
-                    fill="#8c9a73" opacity="0" />
-
-              <!-- Left walker: starts as a white circle, far left -->
-              <g id="leftWalker">
-                <circle cx="120" cy="500" r="32" fill="#fdfaf4" />
-              </g>
-
-              <!-- Right walker: starts as a sand circle, far right -->
-              <g id="rightWalker">
-                <circle cx="680" cy="500" r="32" fill="#c8ad8d" />
-              </g>
-
-              <!-- Final logo silhouettes — hidden initially, revealed after morph -->
-              <g id="logoTarget" opacity="0">
-                <!-- Left silhouette (cream), scaled to fit centre of 800x800 viewBox -->
-                <path d="M 320 440 Q 320 360 400 360 Q 480 360 480 440 L 480 540 Q 400 560 320 540 Z" fill="#fdfaf4" />
-                <circle cx="440" cy="480" r="14" fill="#0f0e0d" />
-                <!-- Right silhouette (sand), with gap -->
-                <path d="M 520 440 Q 520 360 600 360 Q 680 360 680 440 L 680 540 Q 600 560 520 540 Z" fill="#c8ad8d" />
-                <circle cx="560" cy="480" r="14" fill="#0f0e0d" />
-                <!-- Green stream emerging from gap, flowing downward -->
-                <path d="M 480 540 Q 470 590 490 640 Q 500 660 510 640 Q 530 590 520 540 Z" fill="#8c9a73" />
-                <!-- Brand wordmark below -->
-                <text x="500" y="700" text-anchor="middle" font-family="'Noto Serif TC', serif" font-size="28" letter-spacing="8" fill="#f5f0e8">陌生連結所</text>
-              </g>
-            </svg>
-          </div>
-        </div>
         <section class="hero" id="top">
-          <div class="hero-media" aria-hidden="true">
-            <div class="hero-poster"></div>
-            <img class="hero-image" id="heroImage"
-                 src="assets/images/hero-cover.jpg"
-                 alt="陌生連結所背景圖片" />
-            <!-- Future: swap heroImage for a video element pointing at assets/video/hero.mp4 -->
-          </div>
-          <div class="hero-overlay" aria-hidden="true"></div>
+          <!--
+            換 Hero 影片：
+            1. 把你的影片放在 assets/video/hero.mp4
+            2. 把影片封面放在 assets/images/hero-cover.jpg
+            3. 檔名大小寫要完全一樣，GitHub Pages 會區分大小寫
+          -->
+         <div class="hero-media" aria-hidden="true">
+  <div class="hero-poster"></div>
 
-          <div class="wrap hero-content">
-            <div class="hero-kicker">⟪ STRANGERS · CONNECTING ⟫</div>
+<img
+  class="hero-video"
+  id="heroImage"
+  src="assets/images/hero-cover.jpg"
+  alt="陌生連結所背景圖片"
+/>
+</div>
 
-            <h1 class="hero-slogan" id="heroSlogan" aria-label="把生活圈，重新打開。">
-              <span class="char">把</span><span class="char">生</span><span class="char">活</span><span class="char">圈</span><span class="char comma">，</span><span class="char">重</span><span class="char">新</span><span class="char">打</span><span class="char">開</span><span class="char">。</span>
+<div class="hero-overlay" aria-hidden="true"></div>
+
+<div class="wrap hero-content">
+            <div class="hero-kicker">
+              <i></i>
+              Invitation Open · Room 01
+            </div>
+
+            <div class="hero-brand-zh">陌生連結所</div>
+            <div class="hero-brand-en">STRANGERS CONNECTING</div>
+            <div class="hero-main-tagline">MEET • EXPERIENCE • CONNECT</div>
+
+            <h1 class="hero-title">
+              把生活圈，重新打開。
             </h1>
 
-            <p class="hero-tagline">一場被好好安排的相遇</p>
+            <p class="hero-desc">
+              一場被好好安排的相遇。
+            </p>
 
-            <a class="hero-cta" href="https://app.strangersconnecting.com/events">
-              重新打開你的生活圈 →
-            </a>
+            <div class="hero-actions">
+              <a class="btn btn-light" href="https://app.strangersconnecting.com/events">
+                重新打開你的生活圈 →
+              </a>
+
+              <a class="btn btn-ghost" href="#what">
+                先了解這是什麼
+              </a>
+            </div>
           </div>
 
           <a href="#what" class="scroll-cue" aria-label="往下看">
             <span class="triangle"></span>
-            <span>SCROLL</span>
+            <span>Scroll</span>
           </a>
         </section>
 
-        <!-- 01 About -->
-        <section class="anchor-panel" id="what">
-          <div class="panel-number">⟪ № 01 ⟫</div>
-          <h2 class="panel-title">About</h2>
-          <p class="panel-title-zh">關於陌生連結所</p>
-          <p class="panel-body">
-            把不會遇見的人，<br>
-            放進一場被好好安排的相遇。
-          </p>
-          <a class="panel-cta" href="about.html">看完整介紹 →</a>
+        <!-- 01 What — 這是什麼 + 適合誰來 -->
+        <section class="section-dark" id="what">
+          <div class="essay-wrap reveal">
+            <div class="essay-kicker">About</div>
+            <h2 class="essay-title">
+              在城市裡，<br>
+              真正能坐下來<br>
+              認識一個人的機會，<br>
+              越來越少。
+            </h2>
+            <p class="essay-lede">
+              陌生連結所，<br>
+              把原本不會遇見的人，<br>
+              放進一個被好好設計過的相遇。
+            </p>
+
+            <hr class="essay-divider" />
+
+            <div class="essay-kicker" style="margin-bottom: 22px;">Who is this for</div>
+
+            <ul class="essay-items">
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M5 20c1.3-3.2 4-5 7-5s5.7 1.8 7 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>想認識新的人</strong>
+                  <p>想離開熟悉的迴圈，看看別人怎麼過生活。</p>
+                </div>
+              </li>
+
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>想換一個生活圈</strong>
+                  <p>想試試和不同背景的人坐同一張桌。</p>
+                </div>
+              </li>
+
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M5 21c0-3.9 3.1-7 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M16 18l4 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>一個人也想參加舒服的聚會</strong>
+                  <p>不用帶朋友。一個人來，也會被照顧。</p>
+                </div>
+              </li>
+
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M21 11.5a8.4 8.4 0 0 1-1 4 8.5 8.5 0 0 1-7.5 4.5 8.4 8.4 0 0 1-4-1L3 21l2-5.5a8.4 8.4 0 0 1-1-4 8.5 8.5 0 0 1 4.5-7.5 8.4 8.4 0 0 1 4-1h.5a8.5 8.5 0 0 1 8 8v.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>不想硬社交，但願意聊聊</strong>
+                  <p>願意來、願意聽，就夠了。</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="essay-cta reveal">
+              <a class="btn btn-ghost" href="about.html">看完整介紹 →</a>
+            </div>
+          </div>
         </section>
 
-        <!-- 02 How to Join -->
-        <section class="anchor-panel" id="how">
-          <div class="panel-number">⟪ № 02 ⟫</div>
-          <h2 class="panel-title">How to Join</h2>
-          <p class="panel-title-zh">怎麼參加</p>
-          <p class="panel-body">
-            從註冊到坐下，<br>
-            會經過的四步。
-          </p>
-          <a class="panel-cta" href="how-to-join.html">看完整流程 →</a>
+        <!-- 02 How — 怎麼參加摘要 -->
+        <section class="section-dark" id="how">
+          <div class="essay-wrap reveal">
+            <div class="essay-kicker">How to Join</div>
+            <h2 class="essay-title">
+              從註冊到坐下，<br>
+              會經過這幾步。
+            </h2>
+            <p class="essay-lede">
+              名額有限，主辦會看內容再寄邀請。
+            </p>
+
+            <hr class="essay-divider" />
+
+            <ol class="essay-items" aria-label="參加流程摘要">
+              <li class="essay-item">
+                <div class="essay-item-mark is-number" aria-hidden="true">01</div>
+                <div class="essay-item-body">
+                  <strong>註冊與填資料</strong>
+                  <p>用 email 註冊，填一次基本資料。</p>
+                </div>
+              </li>
+
+              <li class="essay-item">
+                <div class="essay-item-mark is-number" aria-hidden="true">02</div>
+                <div class="essay-item-body">
+                  <strong>選一場、送出報名</strong>
+                  <p>挑你真的想去的那場，再送出。</p>
+                </div>
+              </li>
+
+              <li class="essay-item">
+                <div class="essay-item-mark is-number" aria-hidden="true">03</div>
+                <div class="essay-item-body">
+                  <strong>等通知與付款</strong>
+                  <p>入選後完成付款，名額才正式保留。</p>
+                </div>
+              </li>
+
+              <li class="essay-item">
+                <div class="essay-item-mark is-number" aria-hidden="true">04</div>
+                <div class="essay-item-body">
+                  <strong>參加與回饋</strong>
+                  <p>準時抵達，活動後留下感受。</p>
+                </div>
+              </li>
+            </ol>
+
+            <div class="essay-cta">
+              <a class="btn btn-ghost" href="how-to-join.html">看完整流程 →</a>
+            </div>
+          </div>
         </section>
 
-        <!-- 03 Open Events -->
-        <section class="anchor-panel is-light" id="events">
-          <div class="panel-number">⟪ № 03 ⟫</div>
-          <h2 class="panel-title">Open Events</h2>
-          <p class="panel-title-zh">開放中的聚會</p>
-          <p class="panel-body">
-            看現在開放的場次，<br>
-            挑你真的想去的。
-          </p>
-          <a class="panel-cta is-primary" href="https://app.strangersconnecting.com/events">
-            重新打開你的生活圈 →
-          </a>
+        <!-- 03 Open Events — 開放中的聚會 -->
+        <section class="section-light" id="events">
+          <div class="wrap">
+            <div class="section-head reveal">
+              <div class="section-index">
+                03<br>
+                Open Events
+              </div>
+
+              <div>
+                <h2 class="section-title">
+                  目前開放中的聚會
+                </h2>
+                <p class="section-copy">
+                  先看每一場的內容、時間、費用與報名規則，再決定要不要送出。<br>
+                  還不是會員的話，系統會先帶你建立基本資料。
+                </p>
+              </div>
+            </div>
+
+            <div id="upcomingEventsContainer" class="upcoming-events" hidden>
+              <div id="upcomingEventsGrid" class="upcoming-events-grid"></div>
+            </div>
+
+            <div id="upcomingEventsEmpty" class="events-empty reveal">
+              <p>目前沒有開放中的場次。<br>追蹤 IG 粉專可以第一時間收到下一場開放消息。</p>
+              <a class="btn btn-ghost" href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">追蹤 IG @strangers_connecting →</a>
+            </div>
+
+            <div class="section-cta reveal">
+              <a class="btn btn-light" href="https://app.strangersconnecting.com/events">
+                到會員區查看所有場次 →
+              </a>
+            </div>
+          </div>
         </section>
 
-        <!-- 04 House Rules -->
-        <section class="anchor-panel" id="rules">
-          <div class="panel-number">⟪ № 04 ⟫</div>
-          <h2 class="panel-title">House Rules</h2>
-          <p class="panel-title-zh">聚會規範</p>
-          <p class="panel-body">
-            進入聚會前，<br>
-            請先把界線帶上。
-          </p>
-          <a class="panel-cta" href="rules.html">看完整規範 →</a>
+        <!-- 04 House Rules — 規範預覽 -->
+        <section class="section-dark" id="rules">
+          <div class="essay-wrap reveal">
+            <div class="essay-kicker">House Rules</div>
+            <h2 class="essay-title">
+              進入聚會前，<br>
+              請先把界線帶上。
+            </h2>
+            <p class="essay-lede">
+              三個我們最在意的原則。
+            </p>
+
+            <hr class="essay-divider" />
+
+            <ul class="essay-items">
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M12 21s7-3.7 7-10V5l-7-3-7 3v6c0 6.3 7 10 7 10Z" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="m8.5 12 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>尊重每個人的界線</strong>
+                  <p>願意出現，不代表願意被追問。</p>
+                </div>
+              </li>
+
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 8h16M6 8V6.5A2.5 2.5 0 0 1 8.5 4h7A2.5 2.5 0 0 1 18 6.5V8M7 8l1 12h8l1-12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>不把聚會當成獵豔或推銷</strong>
+                  <p>把現場留給對話本身。</p>
+                </div>
+              </li>
+
+              <li class="essay-item">
+                <div class="essay-item-mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 7h4l2-2h4l2 2h4v12H4V7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.6"/>
+                  </svg>
+                </div>
+                <div class="essay-item-body">
+                  <strong>不未經同意拍他人</strong>
+                  <p>想拍對方，請先取得同意。</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="essay-cta">
+              <a class="btn btn-ghost" href="rules.html">看完整聚會規範 →</a>
+            </div>
+          </div>
         </section>
 
+        <section class="section-dark" id="moments">
+          <div class="wrap">
+            <div class="section-head reveal">
+              <div class="section-index">
+                05<br>
+                Past Moments
+              </div>
+
+              <div>
+                <h2 class="section-title">
+                  Stories bring us closer.
+                </h2>
+
+                <p class="section-copy">
+                  每一場相遇不一定會變成朋友，但總會留下某個片刻。
+                </p>
+              </div>
+            </div>
+
+            <div class="moments-grid reveal">
+              <article class="moment-card">
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="assets/images/moment-01.jpg" alt="陌生連結所活動照片 01" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>Shared table</span>
+                  <strong>陌生人一起吃飯，也一起慢慢熟起來</strong>
+                </div>
+              </article>
+
+              <article class="moment-card">
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="assets/images/moment-02.jpg" alt="陌生連結所活動照片 02" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>First conversations</span>
+                  <strong>陌生人假情侶攝影，詳情可以看IG</strong>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        
 
         <section class="section-light trust-section" id="voices">
           <div class="wrap">
-            <div class="panel-header" style="text-align: center; padding: 32px 0 8px;">
-              <div class="panel-number" style="color: var(--accent);">⟪ № 05 ⟫</div>
-              <h2 class="panel-title" style="color: var(--deep);">Voices</h2>
-              <p class="panel-title-zh" style="color: var(--charcoal);">走進房間的人留下的句子</p>
+            <div class="section-head reveal">
+              <div class="section-index">
+                06<br>
+                Voices &amp; Stats
+              </div>
+
+              <div>
+                <h2 class="section-title">
+                  剩下的不只是合照。
+                </h2>
+                <p class="section-lede">
+                  目前累積的軌跡，<br>
+                  與走進房間的人留下的句子。
+                </p>
+              </div>
             </div>
 
             <ul class="stats-row reveal" role="list" id="liveStatsRow">
@@ -4548,7 +4474,6 @@
     </div>
   </div>
 
-  <script src="assets/intro/intro.js" defer></script>
   <script>
     /* ──────────────────────────────────────────────────────────────
        Scroll reveal — 進入 viewport 才 fade-up，每個元素只觸發一次
@@ -4710,6 +4635,88 @@
     });
 
   
+    /* Upcoming events — fetch from app.strangersconnecting.com */
+    (function () {
+      const API = 'https://app.strangersconnecting.com/api/public/events';
+      const container = document.getElementById('upcomingEventsContainer');
+      const grid = document.getElementById('upcomingEventsGrid');
+      const emptyState = document.getElementById('upcomingEventsEmpty');
+      if (!container || !grid) return;
+
+      function escapeHtml(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;',
+          '"': '&quot;', "'": '&#39;',
+        })[c]);
+      }
+
+      function formatDate(iso) {
+        try {
+          const d = new Date(iso);
+          return d.toLocaleString('zh-TW', {
+            month: 'long', day: 'numeric', weekday: 'short',
+            hour: '2-digit', minute: '2-digit',
+          });
+        } catch (e) { return ''; }
+      }
+
+      const stateLabels = {
+        open: '開放報名中',
+        full: '名額已滿',
+        not_yet_open: '即將開放',
+        closed: '報名已截止',
+        cancelled: '活動取消',
+      };
+      const stateColors = {
+        open:        { bg: '#485244', fg: '#f5f0e8' },
+        full:        { bg: '#c17f4a', fg: '#fdfaf4' },
+        not_yet_open: { bg: '#8a7f72', fg: '#f5f0e8' },
+        closed:      { bg: '#8a7f72', fg: '#f5f0e8' },
+        cancelled:   { bg: '#8a7f72', fg: '#f5f0e8' },
+      };
+
+      fetch(API, { method: 'GET' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((data) => {
+          const events = (data && data.events) || [];
+          if (!events.length) return;
+          grid.innerHTML = events.map((e) => {
+            const visualStyle = e.cover_image_url
+              ? ' style="background-image: url(\'' + escapeHtml(e.cover_image_url).replace(/'/g, "%27") + '\')"'
+              : '';
+            const price = e.price_amount != null
+              ? '<div class="upcoming-card-price">NT$' + Number(e.price_amount).toLocaleString() +
+                (e.price_note ? ' · ' + escapeHtml(e.price_note) : '') + '</div>'
+              : '';
+            const dateMeta = escapeHtml(formatDate(e.starts_at)) +
+              (e.location ? ' · ' + escapeHtml(e.location) : '');
+            const c = stateColors[e.state] || stateColors.open;
+            const label = stateLabels[e.state] || stateLabels.open;
+            const cardMeta = '<div class="upcoming-card-meta">'
+              + (e.activity_type ? '<span>' + escapeHtml(e.activity_type) + '</span> · ' : '')
+              + '<span class="upcoming-card-badge" style="background:' + c.bg + ';color:' + c.fg + '">' + escapeHtml(label) + '</span>'
+              + '</div>';
+            const subtitle = e.subtitle
+              ? '<p class="upcoming-card-subtitle">' + escapeHtml(e.subtitle) + '</p>'
+              : '';
+            return ''
+              + '<a class="upcoming-card" href="https://app.strangersconnecting.com/events/' + Number(e.id) + '">'
+              +   '<div class="upcoming-card-visual"' + visualStyle + '></div>'
+              +   '<div class="upcoming-card-body">'
+              +     '<div class="upcoming-card-date">' + dateMeta + '</div>'
+              +     cardMeta
+              +     '<h4 class="upcoming-card-title">' + escapeHtml(e.title) + '</h4>'
+              +     subtitle
+              +     price
+              +     '<div class="upcoming-card-cta">查看與報名 <span aria-hidden="true">&rarr;</span></div>'
+              +   '</div>'
+              + '</a>';
+          }).join('');
+          container.hidden = false;
+          if (emptyState) emptyState.hidden = true;
+        })
+        .catch(() => { /* 靜默：保留 empty state 顯示 */ });
+    })();
 
     /* Public stats — sessions held & total applicants */
     (function () {
