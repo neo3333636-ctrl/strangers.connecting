@@ -87,6 +87,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" href="assets/images/hero-cover.jpg" />
   <link
     href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Montserrat:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@500;600;700&display=swap"
     rel="stylesheet"
@@ -530,15 +531,6 @@
       display: none;
     }
 
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(15, 14, 13, 0.46), rgba(15, 14, 13, 0.52) 36%, rgba(15, 14, 13, 0.92) 100%),
-        radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.18) 58%, rgba(0, 0, 0, 0.5) 100%);
-      z-index: 1;
-    }
-
     .hero-content {
       position: relative;
       z-index: 2;
@@ -606,6 +598,114 @@
       text-transform: uppercase;
       color: var(--sand);
       margin-bottom: 26px;
+    }
+
+    /* ───────── Manifesto hero ───────── */
+    .hero-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.55;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(15,14,13,0.35), rgba(15,14,13,0.85)),
+        linear-gradient(180deg, rgba(15,14,13,0.4) 0%, rgba(15,14,13,0.75) 100%);
+    }
+    .hero-kicker {
+      font-family: var(--font-en);
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      color: var(--sand);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 28px;
+      opacity: 0.85;
+    }
+    .hero-slogan {
+      font-family: var(--font-zh-title);
+      font-size: clamp(2.4rem, 6.4vw, 5.6rem);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      color: var(--cream);
+      text-align: center;
+      margin: 0 auto 24px;
+      white-space: nowrap;
+      text-shadow: 0 2px 28px rgba(0,0,0,0.6);
+    }
+    .hero-slogan .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.48s ease-out, transform 0.48s ease-out;
+    }
+    body.intro-done .hero-slogan .char {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Stagger reveal: each char gets a longer delay */
+    body.intro-done .hero-slogan .char:nth-child(1)  { transition-delay: 0s; }
+    body.intro-done .hero-slogan .char:nth-child(2)  { transition-delay: 0.06s; }
+    body.intro-done .hero-slogan .char:nth-child(3)  { transition-delay: 0.12s; }
+    body.intro-done .hero-slogan .char:nth-child(4)  { transition-delay: 0.18s; }
+    body.intro-done .hero-slogan .char:nth-child(5)  { transition-delay: 0.24s; }
+    body.intro-done .hero-slogan .char:nth-child(6)  { transition-delay: 0.36s; }
+    body.intro-done .hero-slogan .char:nth-child(7)  { transition-delay: 0.42s; }
+    body.intro-done .hero-slogan .char:nth-child(8)  { transition-delay: 0.48s; }
+    body.intro-done .hero-slogan .char:nth-child(9)  { transition-delay: 0.54s; }
+    body.intro-done .hero-slogan .char:nth-child(10) { transition-delay: 0.6s; }
+
+    .hero-tagline {
+      font-family: var(--font-zh-body);
+      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+      letter-spacing: 0.12em;
+      color: rgba(245, 240, 232, 0.78);
+      text-align: center;
+      margin: 0 0 36px;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: var(--accent);
+      color: var(--warm-white);
+      border-radius: 999px;
+      font-family: var(--font-zh-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      box-shadow: 0 12px 36px rgba(193, 127, 74, 0.38);
+      transition: transform 0.18s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hero-cta:hover {
+      transform: translateY(-1px);
+      background: var(--rust);
+    }
+    .scroll-cue {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(245, 240, 232, 0.55);
+      font-family: var(--font-en);
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    @media (max-width: 640px) {
+      .hero-kicker { font-size: 9px; margin-bottom: 18px; }
+      .hero-slogan { margin-bottom: 16px; }
+      .hero-tagline { margin-bottom: 24px; }
+      .hero-cta { padding: 12px 24px; font-size: 13px; }
     }
 
     .hero-title {
@@ -4107,57 +4207,32 @@
           </div>
         </div>
         <section class="hero" id="top">
-          <!--
-            換 Hero 影片：
-            1. 把你的影片放在 assets/video/hero.mp4
-            2. 把影片封面放在 assets/images/hero-cover.jpg
-            3. 檔名大小寫要完全一樣，GitHub Pages 會區分大小寫
-          -->
-         <div class="hero-media" aria-hidden="true">
-  <div class="hero-poster"></div>
+          <div class="hero-media" aria-hidden="true">
+            <div class="hero-poster"></div>
+            <img class="hero-image" id="heroImage"
+                 src="assets/images/hero-cover.jpg"
+                 alt="陌生連結所背景圖片" />
+            <!-- Future: swap heroImage for a video element pointing at assets/video/hero.mp4 -->
+          </div>
+          <div class="hero-overlay" aria-hidden="true"></div>
 
-<img
-  class="hero-video"
-  id="heroImage"
-  src="assets/images/hero-cover.jpg"
-  alt="陌生連結所背景圖片"
-/>
-</div>
+          <div class="wrap hero-content">
+            <div class="hero-kicker">⟪ STRANGERS · CONNECTING ⟫</div>
 
-<div class="hero-overlay" aria-hidden="true"></div>
-
-<div class="wrap hero-content">
-            <div class="hero-kicker">
-              <i></i>
-              Invitation Open · Room 01
-            </div>
-
-            <div class="hero-brand-zh">陌生連結所</div>
-            <div class="hero-brand-en">STRANGERS CONNECTING</div>
-            <div class="hero-main-tagline">MEET • EXPERIENCE • CONNECT</div>
-
-            <h1 class="hero-title">
-              把生活圈，重新打開。
+            <h1 class="hero-slogan" id="heroSlogan" aria-label="把生活圈，重新打開。">
+              <span class="char">把</span><span class="char">生</span><span class="char">活</span><span class="char">圈</span><span class="char comma">，</span><span class="char">重</span><span class="char">新</span><span class="char">打</span><span class="char">開</span><span class="char">。</span>
             </h1>
 
-            <p class="hero-desc">
-              一場被好好安排的相遇。
-            </p>
+            <p class="hero-tagline">一場被好好安排的相遇</p>
 
-            <div class="hero-actions">
-              <a class="btn btn-light" href="https://app.strangersconnecting.com/events">
-                重新打開你的生活圈 →
-              </a>
-
-              <a class="btn btn-ghost" href="#what">
-                先了解這是什麼
-              </a>
-            </div>
+            <a class="hero-cta" href="https://app.strangersconnecting.com/events">
+              重新打開你的生活圈 →
+            </a>
           </div>
 
           <a href="#what" class="scroll-cue" aria-label="往下看">
             <span class="triangle"></span>
-            <span>Scroll</span>
+            <span>SCROLL</span>
           </a>
         </section>
 
