@@ -285,6 +285,10 @@
       text-transform: uppercase;
     }
 
+    @media (min-width: 880px) {
+      .nav-links { display: flex; }
+    }
+
     .nav-links a {
       position: relative;
       padding-bottom: 6px;
@@ -978,6 +982,106 @@
       text-align: center;
     }
 
+    /* ───────── Surprise-Lab manifesto block ───────── */
+    .surprise-block {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 24px 88px;
+      text-align: center;
+    }
+    .surprise-title {
+      font-family: var(--font-en);
+      font-size: clamp(2.4rem, 6vw, 5.4rem);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      color: var(--cream);
+      margin: 0;
+    }
+    .surprise-bracket {
+      color: var(--accent);
+      font-weight: 300;
+      padding: 0 0.32em;
+    }
+    .surprise-subtitle {
+      font-family: var(--font-zh-title);
+      font-size: 13px;
+      letter-spacing: 0.6em;
+      color: var(--accent);
+      text-align: center;
+      margin: 14px 0 64px;
+      opacity: 0.85;
+    }
+    .surprise-statement {
+      font-family: var(--font-zh-body);
+      font-size: clamp(1.2rem, 2.8vw, 2.1rem);
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      margin: 0 auto 30px;
+      max-width: 720px;
+    }
+    .surprise-quote {
+      color: var(--sand);
+      opacity: 0.4;
+      font-size: 1.4em;
+      vertical-align: -0.05em;
+      margin: 0 0.15em;
+    }
+    .surprise-key {
+      color: var(--sand);
+      padding: 0 0.18em;
+      position: relative;
+    }
+    .surprise-key.serif {
+      font-family: var(--font-en-title);
+      font-style: italic;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+    .surprise-key.mono {
+      font-family: var(--font-en);
+      letter-spacing: 0.02em;
+      text-shadow: 1px 0 0 var(--accent), -1px 0 0 rgba(245,240,232,0.18);
+    }
+    .surprise-dot {
+      color: var(--sand);
+      margin-left: 1px;
+    }
+    .surprise-tagline {
+      font-family: var(--font-zh-body);
+      font-style: italic;
+      font-size: 14px;
+      color: rgba(245, 240, 232, 0.55);
+      letter-spacing: 0.06em;
+      margin: 0 0 56px;
+    }
+    .surprise-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 30px;
+      background: var(--cream);
+      color: var(--deep);
+      border-radius: 999px;
+      font-family: var(--font-zh-body);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      transition: transform 0.18s ease, background 0.2s ease;
+    }
+    .surprise-cta:hover {
+      transform: translateY(-1px);
+      background: var(--warm-white);
+    }
+    @media (max-width: 640px) {
+      .surprise-block { padding: 24px 16px 64px; }
+      .surprise-subtitle { letter-spacing: 0.4em; margin: 12px 0 44px; }
+      .surprise-statement { font-size: clamp(1.05rem, 4vw, 1.4rem); margin-bottom: 24px; }
+      .surprise-tagline { margin-bottom: 40px; }
+    }
+
     .essay-kicker {
       font-family: var(--font-en);
       font-weight: 500;
@@ -1151,36 +1255,6 @@
       color: var(--muted);
     }
 
-    /* NAV CTA — prominent pill button in topbar */
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 18px;
-      background: var(--accent);
-      color: var(--warm-white);
-      border-radius: 999px;
-      font-family: var(--font-zh-body);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      white-space: nowrap;
-      transition: transform 0.18s ease, background 0.2s ease;
-    }
-    .nav-cta:hover {
-      transform: translateY(-1px);
-      background: #d4925a;
-    }
-    .topbar.scrolled .nav-cta {
-      background: var(--accent);
-      color: var(--warm-white);
-    }
-    /* Hide nav-cta on small screens — mobile-bottom-cta already covers this. */
-    @media (max-width: 640px) {
-      .nav-cta {
-        display: none;
-      }
-    }
 
     /* MOMENTS */
     .moments-grid {
@@ -3918,14 +3992,12 @@
           </a>
 
           <nav class="nav-links" aria-label="主選單">
-            <a href="about.html">關於</a>
-            <a href="how-to-join.html">怎麼參加</a>
-            <a href="rules.html">聚會規範</a>
+            <a href="about.html">ABOUT</a>
+            <a href="how-to-join.html">JOIN</a>
+            <a href="rules.html">RULES</a>
+            <a href="https://app.strangersconnecting.com/events">EVENTS</a>
+            <a href="https://app.strangersconnecting.com/login">LOG IN</a>
           </nav>
-
-          <a class="nav-cta" href="https://app.strangersconnecting.com/events">
-            重新打開你的生活圈 →
-          </a>
 
           <div class="account-chip" id="accountChip" aria-live="polite">尚未登入</div>
           <button class="menu-icon" type="button" id="menuToggle" aria-label="開啟選單" aria-expanded="false" aria-controls="mobileMenu">
@@ -4039,20 +4111,34 @@
 
         <!-- 01 What — 這是什麼 + 適合誰來 -->
         <section class="section-dark" id="what">
-          <div class="essay-wrap reveal">
-            <div class="essay-kicker">About</div>
-            <h2 class="essay-title">
-              在城市裡，<br>
-              真正能坐下來<br>
-              認識一個人的機會，<br>
-              越來越少。
+          <div class="surprise-block reveal">
+            <h2 class="surprise-title">
+              <span class="surprise-bracket">(</span>
+              <span class="surprise-word">ABOUT</span>
+              <span class="surprise-bracket">)</span>
             </h2>
-            <p class="essay-lede">
-              陌生連結所，<br>
-              把原本不會遇見的人，<br>
-              放進一個被好好設計過的相遇。
+            <p class="surprise-subtitle">關 於 我 們</p>
+
+            <p class="surprise-statement">
+              <span class="surprise-quote">&ldquo;</span>
+              我們把
+              <span class="surprise-key serif">陌生</span>
+              放進
+              <span class="surprise-key serif">對話</span>，
+              變成
+              <span class="surprise-key mono">連結</span><span class="surprise-dot">.</span>
+              <span class="surprise-quote">&rdquo;</span>
             </p>
 
+            <p class="surprise-tagline">一場被好好安排的相遇。</p>
+
+            <a class="surprise-cta" href="about.html">
+              認識陌生連結所
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="essay-wrap reveal">
             <hr class="essay-divider" />
 
             <div class="essay-kicker" style="margin-bottom: 22px;">Who is this for</div>
