@@ -1156,6 +1156,71 @@
       transform: translateY(-1px);
       background: var(--warm-white);
     }
+    /* About strip — pair of vertical photos sitting between cycling words and "Who is this for" */
+    .about-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 720px;
+      margin: 56px auto 0;
+      padding: 0 24px;
+    }
+    .about-strip-frame {
+      margin: 0;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(245, 240, 232, 0.1);
+      background: rgba(245, 240, 232, 0.04);
+    }
+    .about-strip-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.88) contrast(1.04);
+      transition: transform 0.5s ease, filter 0.4s ease;
+    }
+    .about-strip-frame:hover img {
+      transform: scale(1.04);
+      filter: saturate(1) contrast(1.06);
+    }
+    @media (max-width: 640px) {
+      .about-strip { gap: 8px; margin-top: 40px; padding: 0 16px; }
+      .about-strip-frame { border-radius: 10px; }
+    }
+
+    /* How banner — single wide doorway photo sitting under the How to Join title */
+    .how-banner {
+      max-width: 980px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
+      position: relative;
+    }
+    .how-banner img {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+      border: 1px solid rgba(245, 240, 232, 0.1);
+      filter: saturate(0.85) contrast(1.08) brightness(0.86);
+    }
+    .how-banner-caption {
+      margin-top: 14px;
+      text-align: center;
+      font-family: var(--font-en-title);
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(245, 240, 232, 0.5);
+      letter-spacing: 0.04em;
+    }
+    @media (max-width: 640px) {
+      .how-banner { margin-bottom: 32px; padding: 0 16px; }
+      .how-banner img { aspect-ratio: 16 / 10; border-radius: 12px; }
+      .how-banner-caption { font-size: 0.85rem; }
+    }
+
     @media (max-width: 640px) {
       .surprise-block { padding: 24px 16px 64px; }
       .surprise-subtitle { letter-spacing: 0.4em; margin: 12px 0 44px; }
@@ -1547,8 +1612,8 @@
     /* MOMENTS */
     .moments-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
     }
 
     .moment-card {
@@ -2356,7 +2421,7 @@
 
     @media (max-width: 1080px) {
       .moments-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
 
       .experience-grid,
@@ -4430,6 +4495,15 @@
             </a>
           </div>
 
+          <div class="about-strip reveal" aria-hidden="true">
+            <figure class="about-strip-frame">
+              <img src="images/about-strip-01.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()" />
+            </figure>
+            <figure class="about-strip-frame">
+              <img src="images/about-strip-02.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()" />
+            </figure>
+          </div>
+
           <div class="essay-wrap reveal">
             <hr class="essay-divider" />
 
@@ -4524,6 +4598,33 @@
                   <strong>陌生人假情侶攝影，詳情可以看IG</strong>
                 </div>
               </article>
+
+              <article class="moment-card">
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="images/moment-03.jpg" alt="陌生連結所活動照片 03" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>Around the table</span>
+                  <strong>食物變成第一個共同話題</strong>
+                </div>
+              </article>
+
+              <article class="moment-card">
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="images/moment-04.jpg" alt="陌生連結所活動照片 04" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>Cheers, strangers</span>
+                  <strong>第一次舉杯，不必特別熟也成立</strong>
+                </div>
+              </article>
+
+              <article class="moment-card">
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="images/moment-05.jpg" alt="陌生連結所活動照片 05" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>Listening</span>
+                  <strong>願意聽，就是這場聚會最大的禮物</strong>
+                </div>
+              </article>
             </div>
           </div>
         </section>
@@ -4576,6 +4677,12 @@
           <div class="chapter-head reveal">
             <h2 class="chapter-title">How to Join</h2>
           </div>
+
+          <figure class="how-banner reveal" aria-hidden="true">
+            <img src="images/how-doorway.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()" />
+            <figcaption class="how-banner-caption">A door, a table, a seat — that's how it begins.</figcaption>
+          </figure>
+
           <div class="essay-wrap reveal">
             <h2 class="essay-title">
               從註冊到坐下，<br>

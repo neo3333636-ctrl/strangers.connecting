@@ -332,6 +332,31 @@ button { -webkit-tap-highlight-color: transparent; }
   border-bottom: 1px solid rgba(245, 240, 232, 0.06);
 }
 
+/* Photo-backdrop variant — set --hero-photo via inline style on the section */
+.subpage-hero--photo {
+  position: relative;
+  background:
+    linear-gradient(to bottom, rgba(15, 14, 13, 0.62) 0%, rgba(15, 14, 13, 0.78) 60%, var(--deep) 100%),
+    var(--hero-photo, none) center/cover no-repeat,
+    linear-gradient(to bottom, var(--deep-3), var(--deep));
+  background-blend-mode: normal;
+  padding: 188px 0 80px;
+}
+.subpage-hero--photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(15, 14, 13, 0.45), transparent 60%);
+}
+.subpage-hero--photo .subpage-hero-inner { position: relative; z-index: 1; }
+.subpage-hero--photo .subpage-title,
+.subpage-hero--photo .subpage-lede,
+.subpage-hero--photo .subpage-kicker {
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
+}
+
 .subpage-hero-inner {
   text-align: center;
   max-width: 760px;
