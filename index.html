@@ -1191,13 +1191,15 @@
     }
 
     /* How banner — single wide doorway photo sitting under the How to Join title */
-    .how-banner {
+    .how-banner,
+    .events-banner {
       max-width: 980px;
       margin: 0 auto 48px;
       padding: 0 24px;
       position: relative;
     }
-    .how-banner img {
+    .how-banner img,
+    .events-banner img {
       width: 100%;
       aspect-ratio: 16 / 7;
       object-fit: cover;
@@ -1206,7 +1208,8 @@
       border: 1px solid rgba(245, 240, 232, 0.1);
       filter: saturate(0.85) contrast(1.08) brightness(0.86);
     }
-    .how-banner-caption {
+    .how-banner-caption,
+    .events-banner-caption {
       margin-top: 14px;
       text-align: center;
       font-family: var(--font-en-title);
@@ -1215,10 +1218,20 @@
       color: rgba(245, 240, 232, 0.5);
       letter-spacing: 0.04em;
     }
+    /* Events banner sits on a light section — flip caption color */
+    .section-light .events-banner-caption {
+      color: rgba(15, 14, 13, 0.5);
+    }
+    .section-light .events-banner img {
+      border: 1px solid rgba(15, 14, 13, 0.08);
+    }
     @media (max-width: 640px) {
-      .how-banner { margin-bottom: 32px; padding: 0 16px; }
-      .how-banner img { aspect-ratio: 16 / 10; border-radius: 12px; }
-      .how-banner-caption { font-size: 0.85rem; }
+      .how-banner,
+      .events-banner { margin-bottom: 32px; padding: 0 16px; }
+      .how-banner img,
+      .events-banner img { aspect-ratio: 16 / 10; border-radius: 12px; }
+      .how-banner-caption,
+      .events-banner-caption { font-size: 0.85rem; }
     }
 
     @media (max-width: 640px) {
@@ -1230,9 +1243,28 @@
 
     /* ───────── Opening epigraph — single quiet sentence ───────── */
     .intro-epigraph {
-      padding: 96px 24px 80px;
+      padding: 120px 24px 100px;
       background: var(--deep);
       position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .intro-epigraph::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('images/epigraph-bg.jpg') center/cover no-repeat;
+      filter: saturate(0.7) contrast(1.05);
+      z-index: -2;
+    }
+    .intro-epigraph::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, var(--deep) 0%, rgba(15,14,13,0.78) 14%, rgba(15,14,13,0.62) 50%, rgba(15,14,13,0.82) 86%, var(--deep) 100%);
+      pointer-events: none;
+      z-index: -1;
     }
     .epigraph-wrap {
       max-width: 760px;
@@ -1674,28 +1706,40 @@
 
     .moment-label {
       position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 18px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 70px 18px 18px;
       z-index: 2;
       color: var(--cream);
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.92) 0%,
+        rgba(0, 0, 0, 0.72) 40%,
+        rgba(0, 0, 0, 0.2) 78%,
+        transparent 100%
+      );
     }
 
     .moment-label span {
       display: block;
       font-family: var(--font-en);
-      color: rgba(245, 240, 232, 0.54);
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
+      color: var(--sand);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       margin-bottom: 8px;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
     }
 
     .moment-label strong {
       font-family: var(--font-zh-title);
       font-size: 1.15rem;
       font-weight: 600;
+      line-height: 1.5;
+      color: var(--warm-white);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
     }
 
     /* EXPERIENCE */
@@ -2692,7 +2736,7 @@
       }
 
       .hero-content {
-        padding: 104px 0 86px;
+        padding: 40px 0 56px;
       }
 
       .hero-kicker {
@@ -3399,11 +3443,14 @@
     margin: 64px 0 56px;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     padding: 36px 0;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .stat-item {
@@ -4649,17 +4696,6 @@
                 <span class="stat-num" id="statTotalApplicants">—</span>
                 <span class="stat-label">人累積報名</span>
               </li>
-              <li class="stat-item stat-item--ig">
-                <a class="stat-ig-link" href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">
-                  <svg class="stat-ig-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
-                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
-                    <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
-                  </svg>
-                  <span class="stat-num">@strangers_connecting</span>
-                  <span class="stat-label">追蹤最新活動動態 →</span>
-                </a>
-              </li>
             </ul>
 
             <div class="quotes-grid reveal" id="liveVoicesGrid">
@@ -4739,6 +4775,12 @@
           <div class="chapter-head reveal">
             <h2 class="chapter-title">Open Events</h2>
           </div>
+
+          <figure class="events-banner reveal" aria-hidden="true">
+            <img src="images/moment-04.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()" />
+            <figcaption class="events-banner-caption">A recent Friday — strangers, raised glasses.</figcaption>
+          </figure>
+
           <div class="wrap">
             <div class="section-head reveal">
               <div class="section-index">
