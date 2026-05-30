@@ -1033,6 +1033,20 @@
       color: var(--sand);
       padding: 0 0.18em;
       position: relative;
+      display: inline-block;
+      min-width: 4em;
+      text-align: center;
+      will-change: contents;
+    }
+    .surprise-key[data-cycling="true"] {
+      animation: surpriseKeyFlicker 0.12s steps(2, end) infinite;
+    }
+    @keyframes surpriseKeyFlicker {
+      0%, 100% { opacity: 1; }
+      50%      { opacity: 0.86; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .surprise-key[data-cycling="true"] { animation: none; }
     }
     .surprise-key.serif {
       font-family: var(--font-en-title);
@@ -4122,11 +4136,11 @@
             <p class="surprise-statement">
               <span class="surprise-quote">&ldquo;</span>
               我們把
-              <span class="surprise-key serif">陌生</span>
+              <span class="surprise-key serif" data-cycle="陌生|偶然|過客|旁人|未知|過往|對方|路人">陌生</span>
               放進
-              <span class="surprise-key serif">對話</span>，
+              <span class="surprise-key serif" data-cycle="對話|飯局|散步|時間|共處|同桌|場景|片刻">對話</span>，
               變成
-              <span class="surprise-key mono">連結</span><span class="surprise-dot">.</span>
+              <span class="surprise-key mono" data-cycle="連結|相遇|默契|朋友|故事|信任|故人|溫度">連結</span><span class="surprise-dot">.</span>
               <span class="surprise-quote">&rdquo;</span>
             </p>
 
@@ -4561,6 +4575,40 @@
   </div>
 
   <script>
+    /* ──────────────────────────────────────────────────────────────
+       Surprise-key cycling — randomly swaps text in [data-cycle] elements
+       at ~120ms so the words feel like they're flickering between options.
+       Respects prefers-reduced-motion. Pauses on hover so the reader can
+       pin a specific word.
+       ────────────────────────────────────────────────────────────── */
+    (function () {
+      var nodes = document.querySelectorAll('[data-cycle]');
+      if (!nodes.length) return;
+      if (window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
+      var INTERVAL_MS = 130;
+      nodes.forEach(function (el) {
+        var words = (el.getAttribute('data-cycle') || '').split('|').filter(Boolean);
+        if (words.length < 2) return;
+        var current = el.textContent.trim();
+        var paused = false;
+        el.setAttribute('data-cycling', 'true');
+        el.addEventListener('mouseenter', function () { paused = true; });
+        el.addEventListener('mouseleave', function () { paused = false; });
+        setInterval(function () {
+          if (paused) return;
+          var next;
+          do {
+            next = words[Math.floor(Math.random() * words.length)];
+          } while (next === current && words.length > 1);
+          el.textContent = next;
+          current = next;
+        }, INTERVAL_MS);
+      });
+    })();
+
     /* ──────────────────────────────────────────────────────────────
        Scroll reveal — 進入 viewport 才 fade-up，每個元素只觸發一次
        ────────────────────────────────────────────────────────────── */
