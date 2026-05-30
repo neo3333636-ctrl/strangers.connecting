@@ -706,6 +706,45 @@
       margin-top: 36px;
     }
 
+    /* Hero scroll-cue (sits where the CTA button used to be) */
+    .hero-scroll-cue {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px;
+      color: rgba(245, 240, 232, 0.82);
+      transition: color 0.2s ease;
+    }
+    .hero-scroll-cue:hover {
+      color: var(--warm-white);
+    }
+    .hero-scroll-label {
+      font-family: var(--font-en);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-chevron {
+      display: inline-block;
+      width: 26px;
+      height: 40px;
+      animation: heroScrollBob 2.6s ease-in-out infinite;
+    }
+    .hero-scroll-chevron svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    @keyframes heroScrollBob {
+      0%, 100% { transform: translateY(0); opacity: 0.85; }
+      50%      { transform: translateY(8px); opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-scroll-chevron { animation: none; }
+    }
+
     .btn {
       border: 0;
       cursor: pointer;
@@ -4310,11 +4349,31 @@
     }
     .upcoming-card-cta {
       margin-top: auto;
-      padding-top: 6px;
-      font-size: 12px;
-      color: var(--accent);
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      background: var(--accent);
+      color: var(--warm-white);
+      font-size: 13px;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
+      border-radius: 999px;
+      box-shadow: 0 6px 18px rgba(193, 127, 74, 0.25);
+      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .upcoming-card:hover .upcoming-card-cta {
+      background: var(--rust);
+      transform: translateX(2px);
+      box-shadow: 0 8px 22px rgba(156, 74, 44, 0.32);
+    }
+    .upcoming-card-cta span {
+      display: inline-block;
+      transition: transform 0.18s ease;
+    }
+    .upcoming-card:hover .upcoming-card-cta span {
+      transform: translateX(2px);
     }
     .upcoming-card-meta {
       font-size: 12px;
@@ -4501,20 +4560,21 @@
             </h1>
 
             <div class="hero-actions">
-              <a class="btn btn-light" href="https://app.strangersconnecting.com/events">
-                重新打開你的生活圈 →
+              <a class="hero-scroll-cue" href="#opening" aria-label="往下閱讀">
+                <span class="hero-scroll-label">Scroll</span>
+                <span class="hero-scroll-chevron" aria-hidden="true">
+                  <svg viewBox="0 0 26 40" width="26" height="40" fill="none">
+                    <path d="M13 4v24" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+                    <path d="M6 24l7 8 7-8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
               </a>
             </div>
           </div>
-
-          <a href="#what" class="scroll-cue" aria-label="往下看">
-            <span class="triangle"></span>
-            <span>Scroll</span>
-          </a>
         </section>
 
         <!-- Opening epigraph — single quiet line setting the tone -->
-        <section class="intro-epigraph" aria-label="Opening">
+        <section class="intro-epigraph" id="opening" aria-label="Opening">
           <div class="epigraph-wrap reveal">
             <div class="epigraph-rule" aria-hidden="true"></div>
             <div class="epigraph-meta">Opening</div>
