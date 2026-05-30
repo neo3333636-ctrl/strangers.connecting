@@ -1191,15 +1191,13 @@
     }
 
     /* How banner — single wide doorway photo sitting under the How to Join title */
-    .how-banner,
-    .events-banner {
+    .how-banner {
       max-width: 980px;
       margin: 0 auto 48px;
       padding: 0 24px;
       position: relative;
     }
-    .how-banner img,
-    .events-banner img {
+    .how-banner img {
       width: 100%;
       aspect-ratio: 16 / 7;
       object-fit: cover;
@@ -1208,8 +1206,7 @@
       border: 1px solid rgba(245, 240, 232, 0.1);
       filter: saturate(0.85) contrast(1.08) brightness(0.86);
     }
-    .how-banner-caption,
-    .events-banner-caption {
+    .how-banner-caption {
       margin-top: 14px;
       text-align: center;
       font-family: var(--font-en-title);
@@ -1218,20 +1215,32 @@
       color: rgba(245, 240, 232, 0.5);
       letter-spacing: 0.04em;
     }
-    /* Events banner sits on a light section — flip caption color */
-    .section-light .events-banner-caption {
-      color: rgba(15, 14, 13, 0.5);
-    }
-    .section-light .events-banner img {
-      border: 1px solid rgba(15, 14, 13, 0.08);
-    }
     @media (max-width: 640px) {
-      .how-banner,
-      .events-banner { margin-bottom: 32px; padding: 0 16px; }
-      .how-banner img,
-      .events-banner img { aspect-ratio: 16 / 10; border-radius: 12px; }
-      .how-banner-caption,
-      .events-banner-caption { font-size: 0.85rem; }
+      .how-banner { margin-bottom: 32px; padding: 0 16px; }
+      .how-banner img { aspect-ratio: 16 / 10; border-radius: 12px; }
+      .how-banner-caption { font-size: 0.85rem; }
+    }
+
+    /* Events intro — compact centered intro replacing the old section-head 2-col layout */
+    .events-intro {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 44px;
+    }
+    .events-intro-title {
+      font-family: var(--font-zh-title);
+      font-size: clamp(1.6rem, 3vw, 2rem);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin: 0 0 14px;
+      color: var(--deep);
+    }
+    .events-intro-copy {
+      font-family: var(--font-zh-body);
+      font-size: 0.96rem;
+      line-height: 1.95;
+      color: rgba(15, 14, 13, 0.6);
+      margin: 0;
     }
 
     @media (max-width: 640px) {
@@ -2605,9 +2614,10 @@
       }
 
       .moment-label {
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 56px 14px 14px;
       }
 
       .moment-label strong {
@@ -2731,12 +2741,12 @@
       }
 
       .hero {
-        min-height: 100svh;
+        min-height: 78svh;
         place-items: center;
       }
 
       .hero-content {
-        padding: 40px 0 56px;
+        padding: 24px 0 32px;
       }
 
       .hero-kicker {
@@ -2913,9 +2923,10 @@
       }
 
       .moment-label {
-        left: 11px;
-        right: 11px;
-        bottom: 11px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 48px 12px 12px;
       }
 
       .moment-label span {
@@ -4616,34 +4627,18 @@
           </div>
         </section>
 
-        <!-- Past Moments — 緊接 About，先讓你看到「真的有發生」 -->
         <!-- 03 Open Events — 開放中的聚會 -->
         <section class="section-light" id="events">
           <div class="chapter-head reveal">
             <h2 class="chapter-title">Open Events</h2>
           </div>
 
-          <figure class="events-banner reveal" aria-hidden="true">
-            <img src="images/moment-04.jpg" alt="" loading="lazy" onerror="this.parentElement.remove()" />
-            <figcaption class="events-banner-caption">A recent Friday — strangers, raised glasses.</figcaption>
-          </figure>
-
           <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                03<br>
-                Open Events
-              </div>
-
-              <div>
-                <h2 class="section-title">
-                  目前開放中的聚會
-                </h2>
-                <p class="section-copy">
-                  先看每一場的內容、時間、費用與報名規則，再決定要不要送出。<br>
-                  還不是會員的話，系統會先帶你建立基本資料。
-                </p>
-              </div>
+            <div class="events-intro reveal">
+              <h3 class="events-intro-title">目前開放中的聚會</h3>
+              <p class="events-intro-copy">
+                先看每一場的內容、時間、費用與報名規則，再決定要不要送出。還不是會員的話，系統會先帶你建立基本資料。
+              </p>
             </div>
 
             <div id="upcomingEventsContainer" class="upcoming-events" hidden>
