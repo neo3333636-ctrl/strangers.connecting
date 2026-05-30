@@ -989,6 +989,20 @@
       padding: 32px 24px 88px;
       text-align: center;
     }
+    /* Header-only variant: shorter padding for sections that re-use bracket title above existing essay content */
+    .surprise-block--header {
+      padding-top: 16px;
+      padding-bottom: 36px;
+    }
+    .surprise-block--light .surprise-title {
+      color: var(--deep);
+    }
+    .surprise-block--light .surprise-bracket {
+      color: var(--rust);
+    }
+    .surprise-block--light .surprise-subtitle {
+      color: var(--rust);
+    }
     .surprise-title {
       font-family: var(--font-en);
       font-size: clamp(2.4rem, 6vw, 5.4rem);
@@ -4219,8 +4233,15 @@
 
         <!-- 02 How — 怎麼參加摘要 -->
         <section class="section-dark" id="how">
+          <div class="surprise-block reveal surprise-block--header">
+            <h2 class="surprise-title">
+              <span class="surprise-bracket">(</span>
+              <span class="surprise-word">JOIN</span>
+              <span class="surprise-bracket">)</span>
+            </h2>
+            <p class="surprise-subtitle">怎 麼 參 加</p>
+          </div>
           <div class="essay-wrap reveal">
-            <div class="essay-kicker">How to Join</div>
             <h2 class="essay-title">
               從註冊到坐下，<br>
               會經過這幾步。
@@ -4273,6 +4294,14 @@
 
         <!-- 03 Open Events — 開放中的聚會 -->
         <section class="section-light" id="events">
+          <div class="surprise-block reveal surprise-block--header surprise-block--light">
+            <h2 class="surprise-title">
+              <span class="surprise-bracket">(</span>
+              <span class="surprise-word">EVENTS</span>
+              <span class="surprise-bracket">)</span>
+            </h2>
+            <p class="surprise-subtitle">開 放 場 次</p>
+          </div>
           <div class="wrap">
             <div class="section-head reveal">
               <div class="section-index">
@@ -4310,8 +4339,15 @@
 
         <!-- 04 House Rules — 規範預覽 -->
         <section class="section-dark" id="rules">
+          <div class="surprise-block reveal surprise-block--header">
+            <h2 class="surprise-title">
+              <span class="surprise-bracket">(</span>
+              <span class="surprise-word">RULES</span>
+              <span class="surprise-bracket">)</span>
+            </h2>
+            <p class="surprise-subtitle">聚 會 規 範</p>
+          </div>
           <div class="essay-wrap reveal">
-            <div class="essay-kicker">House Rules</div>
             <h2 class="essay-title">
               進入聚會前，<br>
               請先把界線帶上。
