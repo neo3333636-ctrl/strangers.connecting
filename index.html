@@ -5272,6 +5272,7 @@
           const events = (data && data.events) || [];
           if (!events.length) return;
           grid.innerHTML = events.map((e) => {
+            const isOpenCall = !!e.is_open_call;
             const visualStyle = e.cover_image_url
               ? ' style="background-image: url(\'' + escapeHtml(e.cover_image_url).replace(/'/g, "%27") + '\')"'
               : '';
@@ -5279,19 +5280,23 @@
               ? '<div class="upcoming-card-price">NT$' + Number(e.price_amount).toLocaleString() +
                 (e.price_note ? ' · ' + escapeHtml(e.price_note) : '') + '</div>'
               : '';
-            const dateMeta = escapeHtml(formatDate(e.starts_at)) +
-              (e.location ? ' · ' + escapeHtml(e.location) : '');
-            const c = stateColors[e.state] || stateColors.open;
-            const label = stateLabels[e.state] || stateLabels.open;
+            const dateMeta = isOpenCall
+              ? '時間待定' + (e.location ? ' · ' + escapeHtml(e.location) : '')
+              : escapeHtml(formatDate(e.starts_at)) +
+                (e.location ? ' · ' + escapeHtml(e.location) : '');
+            const badgeBg = isOpenCall ? '#c17f4a' : ((stateColors[e.state] || stateColors.open).bg);
+            const badgeFg = isOpenCall ? '#fdfaf4' : ((stateColors[e.state] || stateColors.open).fg);
+            const badgeLabel = isOpenCall ? '報名意願收集中' : (stateLabels[e.state] || stateLabels.open);
             const cardMeta = '<div class="upcoming-card-meta">'
               + (e.activity_type ? '<span>' + escapeHtml(e.activity_type) + '</span> · ' : '')
-              + '<span class="upcoming-card-badge" style="background:' + c.bg + ';color:' + c.fg + '">' + escapeHtml(label) + '</span>'
+              + '<span class="upcoming-card-badge" style="background:' + badgeBg + ';color:' + badgeFg + '">' + escapeHtml(badgeLabel) + '</span>'
               + '</div>';
             const subtitle = e.subtitle
               ? '<p class="upcoming-card-subtitle">' + escapeHtml(e.subtitle) + '</p>'
               : '';
+            const ctaText = isOpenCall ? '送出報名意願' : '查看與報名';
             return ''
-              + '<a class="upcoming-card" href="https://app.strangersconnecting.com/events/' + Number(e.id) + '">'
+              + '<a class="upcoming-card' + (isOpenCall ? ' upcoming-card--open-call' : '') + '" href="https://app.strangersconnecting.com/events/' + Number(e.id) + '">'
               +   '<div class="upcoming-card-visual"' + visualStyle + '></div>'
               +   '<div class="upcoming-card-body">'
               +     '<div class="upcoming-card-date">' + dateMeta + '</div>'
@@ -5299,7 +5304,7 @@
               +     '<h4 class="upcoming-card-title">' + escapeHtml(e.title) + '</h4>'
               +     subtitle
               +     price
-              +     '<div class="upcoming-card-cta">查看與報名 <span aria-hidden="true">&rarr;</span></div>'
+              +     '<div class="upcoming-card-cta">' + ctaText + ' <span aria-hidden="true">&rarr;</span></div>'
               +   '</div>'
               + '</a>';
           }).join('');
