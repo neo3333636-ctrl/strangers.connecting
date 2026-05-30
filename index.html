@@ -1077,6 +1077,10 @@
       color: var(--sand);
       margin-left: 1px;
     }
+    .surprise-line {
+      display: block;
+      line-height: 1.85;
+    }
     .surprise-tagline {
       font-family: var(--font-zh-body);
       font-style: italic;
@@ -1108,6 +1112,163 @@
       .surprise-subtitle { letter-spacing: 0.4em; margin: 12px 0 44px; }
       .surprise-statement { font-size: clamp(1.05rem, 4vw, 1.4rem); margin-bottom: 24px; }
       .surprise-tagline { margin-bottom: 40px; }
+    }
+
+    /* ───────── Opening epigraph — single quiet sentence ───────── */
+    .intro-epigraph {
+      padding: 96px 24px 80px;
+      background: var(--deep);
+      position: relative;
+    }
+    .epigraph-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+    .epigraph-rule {
+      width: 1px;
+      height: 56px;
+      background: linear-gradient(to bottom, transparent, var(--sand) 60%, transparent);
+      margin: 0 auto 32px;
+      opacity: 0.55;
+    }
+    .epigraph-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-en);
+      font-size: 0.66rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.78;
+      margin-bottom: 26px;
+    }
+    .epigraph-meta::before,
+    .epigraph-meta::after {
+      content: "";
+      display: block;
+      width: 26px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.5;
+    }
+    .epigraph-line {
+      font-family: var(--font-zh-title);
+      font-size: clamp(1.4rem, 3.4vw, 2.4rem);
+      font-weight: 500;
+      line-height: 1.85;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      margin: 0;
+      text-wrap: balance;
+    }
+    .epigraph-line .epigraph-emph {
+      color: var(--sand);
+      font-style: italic;
+    }
+    .epigraph-foot {
+      margin-top: 36px;
+      font-family: var(--font-en-title);
+      font-style: italic;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      color: rgba(245, 240, 232, 0.5);
+    }
+    @media (max-width: 640px) {
+      .intro-epigraph { padding: 72px 20px 60px; }
+      .epigraph-rule { height: 40px; margin-bottom: 24px; }
+      .epigraph-meta::before, .epigraph-meta::after { width: 16px; }
+      .epigraph-line { letter-spacing: 0.04em; }
+    }
+
+    /* ───────── Chapter head — cinematic title card replacing section-index / surprise-bracket ───────── */
+    .chapter-head {
+      max-width: 920px;
+      margin: 0 auto 56px;
+      padding: 24px 16px 8px;
+      text-align: center;
+    }
+    .chapter-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-en);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .chapter-num {
+      font-feature-settings: "tnum";
+      color: var(--sand);
+      opacity: 0.9;
+    }
+    .chapter-meta-dash {
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.45;
+    }
+    .chapter-label {
+      letter-spacing: 0.4em;
+    }
+    .chapter-title {
+      font-family: var(--font-zh-title);
+      font-size: clamp(2.6rem, 7vw, 5.2rem);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: 0.48em;
+      color: var(--cream);
+      margin: 0 0 18px;
+      padding-left: 0.48em; /* visually center letter-spaced text */
+    }
+    .chapter-sub {
+      font-family: var(--font-en-title);
+      font-style: italic;
+      font-size: clamp(0.98rem, 1.8vw, 1.25rem);
+      color: rgba(245, 240, 232, 0.6);
+      letter-spacing: 0.04em;
+      margin: 0;
+    }
+    .section-light .chapter-title { color: var(--deep); }
+    .section-light .chapter-meta { color: var(--rust); }
+    .section-light .chapter-num { color: var(--accent); opacity: 1; }
+    .section-light .chapter-sub { color: rgba(15, 14, 13, 0.55); }
+    @media (max-width: 640px) {
+      .chapter-head { padding: 12px 12px 6px; margin-bottom: 40px; }
+      .chapter-meta { gap: 10px; letter-spacing: 0.28em; margin-bottom: 18px; }
+      .chapter-meta-dash { width: 18px; }
+      .chapter-title { letter-spacing: 0.32em; padding-left: 0.32em; }
+    }
+
+    /* Per-character stagger reveal for hero brand (secretcinema-inspired title card) */
+    .hero-brand-zh[data-stagger] {
+      display: inline-flex;
+      gap: 0;
+      perspective: 800px;
+    }
+    .hero-brand-zh[data-stagger] .stagger-char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(28px) rotateX(-22deg);
+      animation: heroCharIn 0.9s cubic-bezier(.2,.65,.3,1) forwards;
+      animation-delay: calc(var(--enter-delay, 0.25s) + var(--i, 0) * 0.09s);
+    }
+    @keyframes heroCharIn {
+      from { opacity: 0; transform: translateY(28px) rotateX(-22deg); }
+      to   { opacity: 1; transform: translateY(0) rotateX(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-brand-zh[data-stagger] .stagger-char {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+      }
     }
 
     .essay-kicker {
@@ -1279,10 +1440,100 @@
     .events-empty p {
       font-size: 0.95rem;
       line-height: 1.85;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
       color: var(--muted);
     }
 
+    /* Prominent IG follow card — used in events fallback */
+    .ig-prominent {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 28px 16px 22px;
+      background: linear-gradient(135deg, #f5b042 0%, #d6276b 50%, #6a3aa8 100%);
+      color: #fdfaf4;
+      border-radius: 999px;
+      font-family: var(--font-zh-body);
+      box-shadow: 0 10px 30px rgba(214, 39, 107, 0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .ig-prominent:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 36px rgba(214, 39, 107, 0.34);
+      color: #fdfaf4;
+    }
+    .ig-prominent-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+    .ig-prominent-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.2;
+      text-align: left;
+    }
+    .ig-prominent-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      opacity: 0.9;
+    }
+    .ig-prominent-handle {
+      font-family: var(--font-en);
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-top: 2px;
+    }
+    .ig-prominent-arrow {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      transition: transform 0.2s ease;
+    }
+    .ig-prominent:hover .ig-prominent-arrow {
+      transform: translateX(2px);
+    }
+    @media (max-width: 480px) {
+      .ig-prominent { padding: 14px 22px 14px 18px; gap: 12px; }
+      .ig-prominent-icon { width: 24px; height: 24px; }
+      .ig-prominent-label { font-size: 0.72rem; }
+      .ig-prominent-handle { font-size: 0.88rem; }
+    }
+
+    /* Voices stats — IG variant becomes a clickable card */
+    .stat-item--ig { padding: 0; }
+    .stat-ig-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: inherit;
+      padding: 18px 14px;
+      border-radius: 14px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .stat-ig-link:hover {
+      background: rgba(193, 127, 74, 0.08);
+      transform: translateY(-2px);
+    }
+    .stat-ig-icon {
+      width: 26px;
+      height: 26px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .stat-item--ig .stat-num {
+      font-family: var(--font-en);
+      font-size: clamp(1.2rem, 2.6vw, 1.6rem) !important;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--deep);
+    }
+    .stat-item--ig .stat-label {
+      color: var(--accent);
+      font-weight: 500;
+    }
 
     /* MOMENTS */
     .moments-grid {
@@ -4066,7 +4317,7 @@
           <a href="#events">開放中的聚會</a>
           <a href="#moments">時刻</a>
           <a href="#voices">參加者語錄</a>
-          <a href="#collab">合作資訊</a>
+          <a href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">追蹤 IG ↗</a>
         </div>
 
         <div class="mobile-menu-group">
@@ -4108,25 +4359,17 @@
               Invitation Open · Room 01
             </div>
 
-            <div class="hero-brand-zh">陌生連結所</div>
+            <div class="hero-brand-zh" data-stagger>陌生連結所</div>
             <div class="hero-brand-en">STRANGERS CONNECTING</div>
             <div class="hero-main-tagline">MEET • EXPERIENCE • CONNECT</div>
 
             <h1 class="hero-title">
-              把生活圈，重新打開。
+              <span class="hero-title-line">把生活圈，重新打開。</span>
             </h1>
-
-            <p class="hero-desc">
-              一場被好好安排的相遇。
-            </p>
 
             <div class="hero-actions">
               <a class="btn btn-light" href="https://app.strangersconnecting.com/events">
                 重新打開你的生活圈 →
-              </a>
-
-              <a class="btn btn-ghost" href="#what">
-                先了解這是什麼
               </a>
             </div>
           </div>
@@ -4137,28 +4380,45 @@
           </a>
         </section>
 
+        <!-- Opening epigraph — single quiet line setting the tone -->
+        <section class="intro-epigraph" aria-label="Opening">
+          <div class="epigraph-wrap reveal">
+            <div class="epigraph-rule" aria-hidden="true"></div>
+            <div class="epigraph-meta">Opening</div>
+            <p class="epigraph-line">
+              在城市裡，<span class="epigraph-emph">真正坐下來認識一個人</span>的機會，越來越少。
+            </p>
+          </div>
+        </section>
+
         <!-- 01 What — 這是什麼 + 適合誰來 -->
         <section class="section-dark" id="what">
+          <div class="chapter-head reveal">
+            <div class="chapter-meta">
+              <span class="chapter-num">01/06</span>
+              <span class="chapter-meta-dash" aria-hidden="true"></span>
+              <span class="chapter-label">About</span>
+            </div>
+            <h2 class="chapter-title">關 於 我 們</h2>
+            <p class="chapter-sub">A quiet introduction.</p>
+          </div>
+
           <div class="surprise-block reveal">
-            <h2 class="surprise-title">
-              <span class="surprise-bracket">(</span>
-              <span class="surprise-word">ABOUT</span>
-              <span class="surprise-bracket">)</span>
-            </h2>
-            <p class="surprise-subtitle">關 於 我 們</p>
 
             <p class="surprise-statement">
               <span class="surprise-quote">&ldquo;</span>
-              我們把
-              <span class="surprise-key serif" data-cycle="陌生|偶然|過客|旁人|未知|過往|對方|路人">陌生</span>
-              放進
-              <span class="surprise-key serif" data-cycle="對話|飯局|散步|時間|共處|同桌|場景|片刻">對話</span>，
-              變成
-              <span class="surprise-key mono" data-cycle="連結|相遇|默契|朋友|故事|信任|故人|溫度">連結</span><span class="surprise-dot">.</span>
-              <span class="surprise-quote">&rdquo;</span>
+              <span class="surprise-line">
+                我們把
+                <span class="surprise-key serif" data-cycle="陌生|偶然|過客|旁人|未知|過往|對方|路人">過客</span>
+                放進
+                <span class="surprise-key serif" data-cycle="對話|飯局|散步|時間|共處|同桌|場景|片刻">同桌</span>
+              </span>
+              <span class="surprise-line">
+                變成
+                <span class="surprise-key mono" data-cycle="連結|相遇|默契|朋友|故事|信任|故人|溫度">朋友</span><span class="surprise-dot">.</span>
+                <span class="surprise-quote">&rdquo;</span>
+              </span>
             </p>
-
-            <p class="surprise-tagline">一場被好好安排的相遇。</p>
 
             <a class="surprise-cta" href="about.html">
               認識陌生連結所
@@ -4233,13 +4493,14 @@
 
         <!-- 02 How — 怎麼參加摘要 -->
         <section class="section-dark" id="how">
-          <div class="surprise-block reveal surprise-block--header">
-            <h2 class="surprise-title">
-              <span class="surprise-bracket">(</span>
-              <span class="surprise-word">JOIN</span>
-              <span class="surprise-bracket">)</span>
-            </h2>
-            <p class="surprise-subtitle">怎 麼 參 加</p>
+          <div class="chapter-head reveal">
+            <div class="chapter-meta">
+              <span class="chapter-num">02/06</span>
+              <span class="chapter-meta-dash" aria-hidden="true"></span>
+              <span class="chapter-label">How to Join</span>
+            </div>
+            <h2 class="chapter-title">怎 麼 參 加</h2>
+            <p class="chapter-sub">From signup to sitting down.</p>
           </div>
           <div class="essay-wrap reveal">
             <h2 class="essay-title">
@@ -4294,13 +4555,14 @@
 
         <!-- 03 Open Events — 開放中的聚會 -->
         <section class="section-light" id="events">
-          <div class="surprise-block reveal surprise-block--header surprise-block--light">
-            <h2 class="surprise-title">
-              <span class="surprise-bracket">(</span>
-              <span class="surprise-word">EVENTS</span>
-              <span class="surprise-bracket">)</span>
-            </h2>
-            <p class="surprise-subtitle">開 放 場 次</p>
+          <div class="chapter-head reveal">
+            <div class="chapter-meta">
+              <span class="chapter-num">03/06</span>
+              <span class="chapter-meta-dash" aria-hidden="true"></span>
+              <span class="chapter-label">Open Events</span>
+            </div>
+            <h2 class="chapter-title">開 放 場 次</h2>
+            <p class="chapter-sub">Currently inviting.</p>
           </div>
           <div class="wrap">
             <div class="section-head reveal">
@@ -4326,7 +4588,18 @@
 
             <div id="upcomingEventsEmpty" class="events-empty reveal">
               <p>目前沒有開放中的場次。<br>追蹤 IG 粉專可以第一時間收到下一場開放消息。</p>
-              <a class="btn btn-ghost" href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">追蹤 IG @strangers_connecting →</a>
+              <a class="ig-prominent" href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">
+                <svg class="ig-prominent-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+                  <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+                </svg>
+                <span class="ig-prominent-text">
+                  <span class="ig-prominent-label">追蹤 IG 第一時間收到場次</span>
+                  <span class="ig-prominent-handle">@strangers_connecting</span>
+                </span>
+                <span class="ig-prominent-arrow" aria-hidden="true">→</span>
+              </a>
             </div>
 
             <div class="section-cta reveal">
@@ -4339,13 +4612,14 @@
 
         <!-- 04 House Rules — 規範預覽 -->
         <section class="section-dark" id="rules">
-          <div class="surprise-block reveal surprise-block--header">
-            <h2 class="surprise-title">
-              <span class="surprise-bracket">(</span>
-              <span class="surprise-word">RULES</span>
-              <span class="surprise-bracket">)</span>
-            </h2>
-            <p class="surprise-subtitle">聚 會 規 範</p>
+          <div class="chapter-head reveal">
+            <div class="chapter-meta">
+              <span class="chapter-num">04/06</span>
+              <span class="chapter-meta-dash" aria-hidden="true"></span>
+              <span class="chapter-label">House Rules</span>
+            </div>
+            <h2 class="chapter-title">聚 會 規 範</h2>
+            <p class="chapter-sub">Three lines we hold.</p>
           </div>
           <div class="essay-wrap reveal">
             <h2 class="essay-title">
@@ -4406,22 +4680,19 @@
 
         <section class="section-dark" id="moments">
           <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                05<br>
-                Past Moments
+            <div class="chapter-head reveal">
+              <div class="chapter-meta">
+                <span class="chapter-num">05/06</span>
+                <span class="chapter-meta-dash" aria-hidden="true"></span>
+                <span class="chapter-label">Past Moments</span>
               </div>
-
-              <div>
-                <h2 class="section-title">
-                  Stories bring us closer.
-                </h2>
-
-                <p class="section-copy">
-                  每一場相遇不一定會變成朋友，但總會留下某個片刻。
-                </p>
-              </div>
+              <h2 class="chapter-title">時 刻</h2>
+              <p class="chapter-sub">Stories bring us closer.</p>
             </div>
+
+            <p class="section-copy" style="text-align:center;max-width:640px;margin:0 auto 36px;">
+              每一場相遇不一定會變成朋友，但總會留下某個片刻。
+            </p>
 
             <div class="moments-grid reveal">
               <article class="moment-card">
@@ -4449,22 +4720,19 @@
 
         <section class="section-light trust-section" id="voices">
           <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                06<br>
-                Voices &amp; Stats
+            <div class="chapter-head reveal">
+              <div class="chapter-meta">
+                <span class="chapter-num">06/06</span>
+                <span class="chapter-meta-dash" aria-hidden="true"></span>
+                <span class="chapter-label">Voices &amp; Stats</span>
               </div>
-
-              <div>
-                <h2 class="section-title">
-                  剩下的不只是合照。
-                </h2>
-                <p class="section-lede">
-                  目前累積的軌跡，<br>
-                  與走進房間的人留下的句子。
-                </p>
-              </div>
+              <h2 class="chapter-title">語 錄 與 軌 跡</h2>
+              <p class="chapter-sub">What's been said, where we are.</p>
             </div>
+
+            <p class="section-copy" style="text-align:center;max-width:640px;margin:0 auto 36px;color:rgba(15,14,13,0.6);">
+              剩下的不只是合照——目前累積的軌跡，與走進房間的人留下的句子。
+            </p>
 
             <ul class="stats-row reveal" role="list" id="liveStatsRow">
               <li class="stat-item">
@@ -4475,9 +4743,16 @@
                 <span class="stat-num" id="statTotalApplicants">—</span>
                 <span class="stat-label">人累積報名</span>
               </li>
-              <li class="stat-item">
-                <span class="stat-num">@strangers_connecting</span>
-                <span class="stat-label">追蹤最新活動動態</span>
+              <li class="stat-item stat-item--ig">
+                <a class="stat-ig-link" href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">
+                  <svg class="stat-ig-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
+                    <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+                  </svg>
+                  <span class="stat-num">@strangers_connecting</span>
+                  <span class="stat-label">追蹤最新活動動態 →</span>
+                </a>
               </li>
             </ul>
 
@@ -4491,56 +4766,6 @@
           </div>
         </section>
 
-        <section class="section-dark" id="collab">
-          <div class="wrap">
-            <div class="section-head reveal">
-              <div class="section-index">
-                07<br>
-                Collaborate
-              </div>
-
-              <div>
-                <h2 class="section-title">
-                  想跟我們<br>
-                  一起做點什麼？
-                </h2>
-                <p class="section-lede">
-                  陌生連結所一直在尋找願意一起把這件事做好的夥伴。餐廳、品牌、團體、個人都歡迎——只要你對「讓陌生人因為故事靠近彼此」這件事有共鳴。
-                </p>
-              </div>
-            </div>
-
-            <div class="collab-card reveal">
-              <ul class="collab-list">
-                <li>
-                  <span class="collab-tag">場地</span>
-                  有空間、有故事、適合小型晚餐或聚會的地方。
-                </li>
-                <li>
-                  <span class="collab-tag">品牌</span>
-                  想用更慢、更真實的方式跟受眾相處的品牌。
-                </li>
-                <li>
-                  <span class="collab-tag">內容／影像</span>
-                  願意把一場聚會拍成有溫度的紀錄，而不是廣告。
-                </li>
-                <li>
-                  <span class="collab-tag">社群／個人</span>
-                  有正在做的事，想跟陌生連結所做一點不一樣的串聯。
-                </li>
-              </ul>
-
-              <p class="collab-note">
-                留下方向跟聯絡方式，我會看完每一封。覺得適合的會主動回信，不會把你丟進廣告漏斗。
-              </p>
-
-              <a class="btn btn-light collab-cta" href="https://app.strangersconnecting.com/collab" target="_blank" rel="noopener">
-                填合作意願
-                <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-        </section>
       </main>
     </div>
 
@@ -4576,7 +4801,6 @@
             <li>
               <a href="mailto:hello@strangersconnecting.com">hello@strangersconnecting.com</a>
             </li>
-            <li><a href="#collab">合作資訊</a></li>
           </ul>
         </div>
 
@@ -4611,6 +4835,25 @@
   </div>
 
   <script>
+    /* ──────────────────────────────────────────────────────────────
+       Hero brand per-character stagger — splits 陌生連結所 into spans
+       with --i index so each character can animate in sequence.
+       ────────────────────────────────────────────────────────────── */
+    (function () {
+      var brand = document.querySelector('.hero-brand-zh[data-stagger]');
+      if (!brand) return;
+      var text = brand.textContent;
+      brand.textContent = '';
+      var chars = Array.from(text);
+      chars.forEach(function (ch, i) {
+        var span = document.createElement('span');
+        span.className = 'stagger-char';
+        span.style.setProperty('--i', i);
+        span.textContent = ch;
+        brand.appendChild(span);
+      });
+    })();
+
     /* ──────────────────────────────────────────────────────────────
        Surprise-key cycling — randomly swaps text in [data-cycle] elements
        at ~120ms so the words feel like they're flickering between options.
