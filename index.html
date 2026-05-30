@@ -568,6 +568,55 @@
       backdrop-filter: blur(8px);
     }
 
+    /* Announcement bar — thin status strip pinned to very top of page */
+    .announcement-bar {
+      position: relative;
+      z-index: 30;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      background: var(--deep);
+      color: var(--cream);
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(245, 240, 232, 0.08);
+    }
+    .announcement-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--sand);
+      animation: pulse 2.2s ease-in-out infinite;
+      box-shadow: 0 0 12px rgba(200, 173, 141, 0.6);
+    }
+    .announcement-text {
+      color: var(--cream);
+    }
+    .announcement-sep {
+      color: rgba(245, 240, 232, 0.35);
+      letter-spacing: 0;
+    }
+    .announcement-link {
+      color: var(--sand);
+      transition: color 0.2s ease;
+    }
+    .announcement-link:hover {
+      color: var(--warm-white);
+    }
+    @media (max-width: 560px) {
+      .announcement-bar {
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        gap: 8px;
+        padding: 7px 12px;
+      }
+    }
+
     .hero-kicker i {
       width: 7px;
       height: 7px;
@@ -1183,67 +1232,27 @@
       .epigraph-line { letter-spacing: 0.04em; }
     }
 
-    /* ───────── Chapter head — cinematic title card replacing section-index / surprise-bracket ───────── */
+    /* ───────── Chapter head — single big serif-italic English title ───────── */
     .chapter-head {
       max-width: 920px;
       margin: 0 auto 56px;
-      padding: 24px 16px 8px;
+      padding: 32px 16px 8px;
       text-align: center;
     }
-    .chapter-meta {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      font-family: var(--font-en);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.36em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-    .chapter-num {
-      font-feature-settings: "tnum";
-      color: var(--sand);
-      opacity: 0.9;
-    }
-    .chapter-meta-dash {
-      display: inline-block;
-      width: 28px;
-      height: 1px;
-      background: currentColor;
-      opacity: 0.45;
-    }
-    .chapter-label {
-      letter-spacing: 0.4em;
-    }
     .chapter-title {
-      font-family: var(--font-zh-title);
-      font-size: clamp(2.6rem, 7vw, 5.2rem);
-      font-weight: 500;
-      line-height: 1.05;
-      letter-spacing: 0.48em;
-      color: var(--cream);
-      margin: 0 0 18px;
-      padding-left: 0.48em; /* visually center letter-spaced text */
-    }
-    .chapter-sub {
       font-family: var(--font-en-title);
+      font-size: clamp(3rem, 8.5vw, 6.4rem);
+      font-weight: 500;
       font-style: italic;
-      font-size: clamp(0.98rem, 1.8vw, 1.25rem);
-      color: rgba(245, 240, 232, 0.6);
-      letter-spacing: 0.04em;
+      line-height: 1;
+      letter-spacing: -0.015em;
+      color: var(--cream);
       margin: 0;
     }
     .section-light .chapter-title { color: var(--deep); }
-    .section-light .chapter-meta { color: var(--rust); }
-    .section-light .chapter-num { color: var(--accent); opacity: 1; }
-    .section-light .chapter-sub { color: rgba(15, 14, 13, 0.55); }
     @media (max-width: 640px) {
-      .chapter-head { padding: 12px 12px 6px; margin-bottom: 40px; }
-      .chapter-meta { gap: 10px; letter-spacing: 0.28em; margin-bottom: 18px; }
-      .chapter-meta-dash { width: 18px; }
-      .chapter-title { letter-spacing: 0.32em; padding-left: 0.32em; }
+      .chapter-head { padding: 16px 12px 4px; margin-bottom: 40px; }
+      .chapter-title { font-size: clamp(2.6rem, 11vw, 4.2rem); }
     }
 
     /* Per-character stagger reveal for hero brand (secretcinema-inspired title card) */
@@ -4256,6 +4265,12 @@
 
 <body>
   <div class="page">
+    <div class="announcement-bar" role="status" aria-label="目前狀態">
+      <span class="announcement-dot" aria-hidden="true"></span>
+      <span class="announcement-text">Invitation Open</span>
+      <span class="announcement-sep" aria-hidden="true">·</span>
+      <a class="announcement-link" href="https://app.strangersconnecting.com/events">查看開放場次 →</a>
+    </div>
     <div id="mainContent">
       <header class="topbar" id="topbar">
         <div class="wrap topbar-inner">
@@ -4354,11 +4369,6 @@
 <div class="hero-overlay" aria-hidden="true"></div>
 
 <div class="wrap hero-content">
-            <div class="hero-kicker">
-              <i></i>
-              Invitation Open · Room 01
-            </div>
-
             <div class="hero-brand-zh" data-stagger>陌生連結所</div>
             <div class="hero-brand-en">STRANGERS CONNECTING</div>
             <div class="hero-main-tagline">MEET • EXPERIENCE • CONNECT</div>
@@ -4394,13 +4404,7 @@
         <!-- 01 What — 這是什麼 + 適合誰來 -->
         <section class="section-dark" id="what">
           <div class="chapter-head reveal">
-            <div class="chapter-meta">
-              <span class="chapter-num">01/06</span>
-              <span class="chapter-meta-dash" aria-hidden="true"></span>
-              <span class="chapter-label">About</span>
-            </div>
-            <h2 class="chapter-title">關 於 我 們</h2>
-            <p class="chapter-sub">A quiet introduction.</p>
+            <h2 class="chapter-title">About</h2>
           </div>
 
           <div class="surprise-block reveal">
@@ -4491,16 +4495,86 @@
           </div>
         </section>
 
+        <!-- Past Moments — 緊接 About，先讓你看到「真的有發生」 -->
+        <section class="section-dark" id="moments">
+          <div class="wrap">
+            <div class="chapter-head reveal">
+              <h2 class="chapter-title">Past Moments</h2>
+            </div>
+
+            <p class="section-copy" style="text-align:center;max-width:640px;margin:0 auto 36px;">
+              每一場相遇不一定會變成朋友，但總會留下某個片刻。
+            </p>
+
+            <div class="moments-grid reveal">
+              <article class="moment-card">
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="assets/images/moment-01.jpg" alt="陌生連結所活動照片 01" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>Shared table</span>
+                  <strong>陌生人一起吃飯，也一起慢慢熟起來</strong>
+                </div>
+              </article>
+
+              <article class="moment-card">
+                <div class="moment-placeholder" aria-hidden="true"></div>
+                <img src="assets/images/moment-02.jpg" alt="陌生連結所活動照片 02" onerror="this.remove()" />
+                <div class="moment-label">
+                  <span>First conversations</span>
+                  <strong>陌生人假情侶攝影，詳情可以看IG</strong>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- Voices & Stats — 看完照片再看數字／句子 -->
+        <section class="section-light trust-section" id="voices">
+          <div class="wrap">
+            <div class="chapter-head reveal">
+              <h2 class="chapter-title">Voices &amp; Stats</h2>
+            </div>
+
+            <p class="section-copy" style="text-align:center;max-width:640px;margin:0 auto 36px;color:rgba(15,14,13,0.6);">
+              剩下的不只是合照——目前累積的軌跡，與走進房間的人留下的句子。
+            </p>
+
+            <ul class="stats-row reveal" role="list" id="liveStatsRow">
+              <li class="stat-item">
+                <span class="stat-num" id="statSessionsHeld">—</span>
+                <span class="stat-label">場已舉辦</span>
+              </li>
+              <li class="stat-item">
+                <span class="stat-num" id="statTotalApplicants">—</span>
+                <span class="stat-label">人累積報名</span>
+              </li>
+              <li class="stat-item stat-item--ig">
+                <a class="stat-ig-link" href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">
+                  <svg class="stat-ig-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
+                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
+                    <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
+                  </svg>
+                  <span class="stat-num">@strangers_connecting</span>
+                  <span class="stat-label">追蹤最新活動動態 →</span>
+                </a>
+              </li>
+            </ul>
+
+            <div class="quotes-grid reveal" id="liveVoicesGrid">
+              <!-- 由 JS 從 /api/public/voices 動態填入 -->
+            </div>
+
+            <p class="quotes-note" id="voicesNote" hidden>
+              <em>更多回饋會陸續整理進這裡。</em>
+            </p>
+          </div>
+        </section>
+
         <!-- 02 How — 怎麼參加摘要 -->
         <section class="section-dark" id="how">
           <div class="chapter-head reveal">
-            <div class="chapter-meta">
-              <span class="chapter-num">02/06</span>
-              <span class="chapter-meta-dash" aria-hidden="true"></span>
-              <span class="chapter-label">How to Join</span>
-            </div>
-            <h2 class="chapter-title">怎 麼 參 加</h2>
-            <p class="chapter-sub">From signup to sitting down.</p>
+            <h2 class="chapter-title">How to Join</h2>
           </div>
           <div class="essay-wrap reveal">
             <h2 class="essay-title">
@@ -4556,13 +4630,7 @@
         <!-- 03 Open Events — 開放中的聚會 -->
         <section class="section-light" id="events">
           <div class="chapter-head reveal">
-            <div class="chapter-meta">
-              <span class="chapter-num">03/06</span>
-              <span class="chapter-meta-dash" aria-hidden="true"></span>
-              <span class="chapter-label">Open Events</span>
-            </div>
-            <h2 class="chapter-title">開 放 場 次</h2>
-            <p class="chapter-sub">Currently inviting.</p>
+            <h2 class="chapter-title">Open Events</h2>
           </div>
           <div class="wrap">
             <div class="section-head reveal">
@@ -4613,13 +4681,7 @@
         <!-- 04 House Rules — 規範預覽 -->
         <section class="section-dark" id="rules">
           <div class="chapter-head reveal">
-            <div class="chapter-meta">
-              <span class="chapter-num">04/06</span>
-              <span class="chapter-meta-dash" aria-hidden="true"></span>
-              <span class="chapter-label">House Rules</span>
-            </div>
-            <h2 class="chapter-title">聚 會 規 範</h2>
-            <p class="chapter-sub">Three lines we hold.</p>
+            <h2 class="chapter-title">House Rules</h2>
           </div>
           <div class="essay-wrap reveal">
             <h2 class="essay-title">
@@ -4675,94 +4737,6 @@
             <div class="essay-cta">
               <a class="btn btn-ghost" href="rules.html">看完整聚會規範 →</a>
             </div>
-          </div>
-        </section>
-
-        <section class="section-dark" id="moments">
-          <div class="wrap">
-            <div class="chapter-head reveal">
-              <div class="chapter-meta">
-                <span class="chapter-num">05/06</span>
-                <span class="chapter-meta-dash" aria-hidden="true"></span>
-                <span class="chapter-label">Past Moments</span>
-              </div>
-              <h2 class="chapter-title">時 刻</h2>
-              <p class="chapter-sub">Stories bring us closer.</p>
-            </div>
-
-            <p class="section-copy" style="text-align:center;max-width:640px;margin:0 auto 36px;">
-              每一場相遇不一定會變成朋友，但總會留下某個片刻。
-            </p>
-
-            <div class="moments-grid reveal">
-              <article class="moment-card">
-                <div class="moment-placeholder" aria-hidden="true"></div>
-                <img src="assets/images/moment-01.jpg" alt="陌生連結所活動照片 01" onerror="this.remove()" />
-                <div class="moment-label">
-                  <span>Shared table</span>
-                  <strong>陌生人一起吃飯，也一起慢慢熟起來</strong>
-                </div>
-              </article>
-
-              <article class="moment-card">
-                <div class="moment-placeholder" aria-hidden="true"></div>
-                <img src="assets/images/moment-02.jpg" alt="陌生連結所活動照片 02" onerror="this.remove()" />
-                <div class="moment-label">
-                  <span>First conversations</span>
-                  <strong>陌生人假情侶攝影，詳情可以看IG</strong>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        
-
-        <section class="section-light trust-section" id="voices">
-          <div class="wrap">
-            <div class="chapter-head reveal">
-              <div class="chapter-meta">
-                <span class="chapter-num">06/06</span>
-                <span class="chapter-meta-dash" aria-hidden="true"></span>
-                <span class="chapter-label">Voices &amp; Stats</span>
-              </div>
-              <h2 class="chapter-title">語 錄 與 軌 跡</h2>
-              <p class="chapter-sub">What's been said, where we are.</p>
-            </div>
-
-            <p class="section-copy" style="text-align:center;max-width:640px;margin:0 auto 36px;color:rgba(15,14,13,0.6);">
-              剩下的不只是合照——目前累積的軌跡，與走進房間的人留下的句子。
-            </p>
-
-            <ul class="stats-row reveal" role="list" id="liveStatsRow">
-              <li class="stat-item">
-                <span class="stat-num" id="statSessionsHeld">—</span>
-                <span class="stat-label">場已舉辦</span>
-              </li>
-              <li class="stat-item">
-                <span class="stat-num" id="statTotalApplicants">—</span>
-                <span class="stat-label">人累積報名</span>
-              </li>
-              <li class="stat-item stat-item--ig">
-                <a class="stat-ig-link" href="https://www.instagram.com/strangers_connecting/" target="_blank" rel="noopener">
-                  <svg class="stat-ig-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/>
-                    <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/>
-                    <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>
-                  </svg>
-                  <span class="stat-num">@strangers_connecting</span>
-                  <span class="stat-label">追蹤最新活動動態 →</span>
-                </a>
-              </li>
-            </ul>
-
-            <div class="quotes-grid reveal" id="liveVoicesGrid">
-              <!-- 由 JS 從 /api/public/voices 動態填入 -->
-            </div>
-
-            <p class="quotes-note" id="voicesNote" hidden>
-              <em>更多回饋會陸續整理進這裡。</em>
-            </p>
           </div>
         </section>
 
