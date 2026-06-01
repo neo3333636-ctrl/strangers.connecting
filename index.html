@@ -4471,6 +4471,7 @@
             <a href="about.html">ABOUT</a>
             <a href="how-to-join.html">JOIN</a>
             <a href="rules.html">RULES</a>
+            <a href="faq.html">FAQ</a>
             <a href="https://app.strangersconnecting.com/events">EVENTS</a>
             <a href="https://app.strangersconnecting.com/login">LOG IN</a>
           </nav>
@@ -4507,6 +4508,7 @@
           <a href="about.html">關於陌生連結所</a>
           <a href="how-to-join.html">怎麼參加</a>
           <a href="rules.html">聚會規範</a>
+          <a href="faq.html">常見問題</a>
         </div>
 
         <div class="mobile-menu-group">
@@ -4973,6 +4975,7 @@
             <li><a href="about.html">關於陌生連結所</a></li>
             <li><a href="how-to-join.html">怎麼參加</a></li>
             <li><a href="rules.html">聚會規範</a></li>
+            <li><a href="faq.html">常見問題</a></li>
             <li><a href="https://app.strangersconnecting.com/events">查看場次</a></li>
           </ul>
         </div>
@@ -5297,7 +5300,7 @@
             const badgeFg = isOpenCall ? '#fdfaf4' : ((stateColors[e.state] || stateColors.open).fg);
             const badgeLabel = isOpenCall ? '報名意願收集中' : (stateLabels[e.state] || stateLabels.open);
             const cardMeta = '<div class="upcoming-card-meta">'
-              + (e.activity_type ? '<span>' + escapeHtml(e.activity_type) + '</span> · ' : '')
+              + (e.category_label ? '<span>' + escapeHtml(e.category_label) + '</span> · ' : '')
               + '<span class="upcoming-card-badge" style="background:' + badgeBg + ';color:' + badgeFg + '">' + escapeHtml(badgeLabel) + '</span>'
               + '</div>';
             const subtitle = e.subtitle
