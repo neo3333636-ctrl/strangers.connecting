@@ -4380,8 +4380,12 @@
       color: #8a7f72;
       display: flex;
       align-items: center;
-      gap: 6px;
+      flex-wrap: wrap;
+      gap: 4px 6px;
       margin-bottom: 6px;
+    }
+    .upcoming-card-meta > span {
+      white-space: nowrap;
     }
     .upcoming-card-badge {
       padding: 2px 8px;
@@ -5257,10 +5261,20 @@
         try {
           const d = new Date(iso);
           return d.toLocaleString('zh-TW', {
+            timeZone: 'Asia/Taipei',
             month: 'long', day: 'numeric', weekday: 'short',
             hour: '2-digit', minute: '2-digit',
           });
         } catch (e) { return ''; }
+      }
+
+      // Open-call events keep a far-future sentinel (year >= 2099) or no
+      // starts_at until a time is committed; only then is the time pending.
+      function isTimePending(iso) {
+        if (!iso) return true;
+        const t = new Date(iso).getTime();
+        if (Number.isNaN(t)) return true;
+        return t >= Date.UTC(2099, 0, 1);
       }
 
       const stateLabels = {
@@ -5292,10 +5306,10 @@
               ? '<div class="upcoming-card-price">NT$' + Number(e.price_amount).toLocaleString() +
                 (e.price_note ? ' · ' + escapeHtml(e.price_note) : '') + '</div>'
               : '';
-            const dateMeta = isOpenCall
-              ? '時間待定' + (e.location ? ' · ' + escapeHtml(e.location) : '')
-              : escapeHtml(formatDate(e.starts_at)) +
-                (e.location ? ' · ' + escapeHtml(e.location) : '');
+            const locationSuffix = e.location ? ' · ' + escapeHtml(e.location) : '';
+            const dateMeta = (isOpenCall && isTimePending(e.starts_at))
+              ? '時間待定' + locationSuffix
+              : escapeHtml(formatDate(e.starts_at)) + locationSuffix;
             const badgeBg = isOpenCall ? '#c17f4a' : ((stateColors[e.state] || stateColors.open).bg);
             const badgeFg = isOpenCall ? '#fdfaf4' : ((stateColors[e.state] || stateColors.open).fg);
             const badgeLabel = isOpenCall ? '報名意願收集中' : (stateLabels[e.state] || stateLabels.open);
