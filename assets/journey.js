@@ -94,7 +94,9 @@
       if (!head) return;
       gsap.fromTo(head, { y: 40 }, {
         y: -20, ease: 'none',
-        scrollTrigger: { trigger: zone, start: 'top bottom', end: 'top center', scrub: 1 },
+        // 'top 80%' 而非 'top bottom':等既有 .reveal 進場 transition 先落定,
+        // 才開始視差 scrub,避免父層 .chapter-head 與子層標題的位移短暫疊加
+        scrollTrigger: { trigger: zone, start: 'top 80%', end: 'top center', scrub: 1 },
       });
     });
   }
