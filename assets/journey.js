@@ -45,7 +45,42 @@
     else target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
   }, true);
 
-  // === 模組掛載點(後續 Task 在此之前 append 函式呼叫) ===
+  // === 模組 ===
+
+  // Hero:穿門推進 + 標題遮罩揭示
+  function initHero() {
+    const hero = document.querySelector('[data-journey-hero]');
+    if (!hero || !window.gsap) return;
+
+    // 標題遮罩(SplitType 切字),載入即播
+    const title = hero.querySelector('.hero-title');
+    if (title && window.SplitType && !reduceMotion) {
+      const split = new SplitType(title, { types: 'chars', tagName: 'span' });
+      gsap.from(split.chars, {
+        yPercent: 120, opacity: 0, duration: 0.85, ease: 'power3.out',
+        stagger: 0.03, delay: 0.25,
+      });
+    }
+
+    if (reduceMotion) return; // 不做穿門,維持靜態
+
+    const photo = hero.querySelector('.hero-photo');
+    const frame = hero.querySelector('.hero-frame');
+    const content = hero.querySelector('.hero-content');
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: hero, start: 'top top', end: '+=120%',
+        scrub: 1, pin: true, anticipatePin: 1,
+      },
+    });
+    // 照片放大=往房間裡走;門框放更快並淡出=穿過門;內容淡出上移
+    tl.to(photo,   { scale: 1.6, ease: 'none' }, 0)
+      .to(frame,   { scale: 2.8, opacity: 0, ease: 'none' }, 0)
+      .to(content, { opacity: 0, y: -40, ease: 'none' }, 0);
+  }
+  initHero();
+
   // INIT_HOOK
 
   // 對外暴露(供後續模組使用)

@@ -28,3 +28,7 @@ html.reduced-motion [data-reveal] { opacity: 1 !important; transform: none !impo
     rgba(15,14,13,0) 28%, rgba(15,14,13,0.15) 46%,
     rgba(15,14,13,0.6) 74%, rgba(15,14,13,0.92) 100%);
 }
+
+/* 標題逐字遮罩:單行裁切,字從線下被抬出來 */
+[data-journey-hero] .hero-title-line { display: inline-block; overflow: hidden; }
+[data-journey-hero] .hero-title .char { display: inline-block; will-change: transform; }
