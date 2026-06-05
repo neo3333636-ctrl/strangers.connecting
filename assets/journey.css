@@ -9,3 +9,19 @@ html.lenis, html.lenis body { height: auto; }
    無 JS 時 .no-js 後備:全部顯示 */
 html.js-journey [data-reveal] { opacity: 0; }
 html.reduced-motion [data-reveal] { opacity: 1 !important; transform: none !important; }
+
+/* ---- Hero 深度層(穿門推進) ---- */
+[data-journey-hero] .hero-media { position: absolute; inset: 0; overflow: hidden; }
+[data-journey-hero] .hero-photo {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 58% 42%;
+  transform-origin: 58% 42%; will-change: transform;
+}
+/* 門框暈影:把暖光房間「框」在中央,捲動時這層放更快+淡出=穿過門 */
+[data-journey-hero] .hero-frame {
+  position: absolute; inset: 0; pointer-events: none;
+  transform-origin: 58% 42%; will-change: transform, opacity;
+  background: radial-gradient(120% 120% at 58% 42%,
+    rgba(15,14,13,0) 28%, rgba(15,14,13,0.15) 46%,
+    rgba(15,14,13,0.6) 74%, rgba(15,14,13,0.92) 100%);
+}
