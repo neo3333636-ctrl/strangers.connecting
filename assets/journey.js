@@ -55,6 +55,11 @@
     // 標題遮罩(SplitType 切字),載入即播
     const title = hero.querySelector('.hero-title');
     if (title && window.SplitType && !reduceMotion) {
+      // GSAP 接管標題進場:關掉既有 heroEnter/softFloat/softGlow CSS 動畫
+      // (它們會延遲到 0.7s 並持續干擾逐字遮罩),改由 GSAP 自己揭示。
+      // 只在這條 GSAP 路徑關;reduced-motion / 無 SplitType 的後備仍走原本 CSS 進場。
+      title.style.animation = 'none';
+      title.style.opacity = '1';
       const split = new SplitType(title, { types: 'chars', tagName: 'span' });
       gsap.from(split.chars, {
         yPercent: 120, opacity: 0, duration: 0.85, ease: 'power3.out',
