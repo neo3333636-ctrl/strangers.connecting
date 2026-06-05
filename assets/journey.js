@@ -154,6 +154,47 @@
   }
   initReveal();
 
+  // 磁吸按鈕:游標靠近時被吸引,離開彈性回位(桌機 hover 才啟用)
+  function initMagnetic() {
+    if (isTouch || reduceMotion || !window.gsap) return;
+    document.querySelectorAll('[data-magnetic]').forEach((el) => {
+      const strength = parseFloat(el.getAttribute('data-magnetic')) || 0.35;
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        gsap.to(el, {
+          x: (e.clientX - (r.left + r.width / 2)) * strength,
+          y: (e.clientY - (r.top + r.height / 2)) * strength,
+          duration: 0.4, ease: 'power3.out',
+        });
+      });
+      el.addEventListener('pointerleave', () => {
+        gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.3)' });
+      });
+    });
+  }
+  initMagnetic();
+
+  // 游標暖光:互動元素附近浮一個燭光小點
+  function initCursor() {
+    if (isTouch || reduceMotion) return;
+    const dot = document.createElement('div');
+    dot.className = 'journey-cursor';
+    document.body.appendChild(dot);
+    let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y;
+    addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; });
+    const loop = () => { x += (tx - x) * 0.18; y += (ty - y) * 0.18;
+      dot.style.transform = `translate(${x}px, ${y}px)`; requestAnimationFrame(loop); };
+    loop();
+    const hot = 'a, button, [data-magnetic], .reveal a';
+    document.addEventListener('pointerover', (e) => {
+      if (e.target.closest(hot)) dot.classList.add('is-hot');
+    });
+    document.addEventListener('pointerout', (e) => {
+      if (e.target.closest(hot)) dot.classList.remove('is-hot');
+    });
+  }
+  initCursor();
+
   // INIT_HOOK
 
   // 對外暴露(供後續模組使用)

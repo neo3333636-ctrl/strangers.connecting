@@ -50,3 +50,19 @@ html.door-closing .door-transition__panel { transform: scale(1); }   /* 蓋上 *
 html.door-entering .door-transition__panel { transform: scale(1); transition: none; } /* 載入瞬間已蓋住 */
 html.door-open .door-transition__panel { transform: scale(0); }      /* 收回露出新頁 */
 html.reduced-motion .door-transition { display: none; }
+
+/* ---- 游標暖光(桌機) ---- */
+@media (hover: hover) {
+  .journey-cursor {
+    position: fixed; top: 0; left: 0; z-index: 9998; pointer-events: none;
+    width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%;
+    background: var(--accent-light, #e8c99a); mix-blend-mode: screen;
+    box-shadow: 0 0 14px 4px rgba(232, 201, 154, 0.5);
+    transition: width .25s, height .25s, margin .25s, background .25s;
+  }
+  .journey-cursor.is-hot {
+    width: 34px; height: 34px; margin: -17px 0 0 -17px;
+    background: var(--accent, #c17f4a);
+  }
+}
+html.reduced-motion .journey-cursor { display: none; }
