@@ -16,6 +16,9 @@ html.reduced-motion [data-reveal] { opacity: 1 !important; transform: none !impo
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: 58% 42%;
   transform-origin: 58% 42%; will-change: transform;
+  /* 刻意不沿用舊 .hero-video 的 opacity:.58。門口照本身已暗、暖廳是主角,
+     全不透明才有「真的看進店裡」的存在感;文字可讀性由 .hero-overlay + .hero-frame 負責。
+     若覺得太亮,在此加 opacity(如 .8)即可調。 */
 }
 /* 門框暈影:把暖光房間「框」在中央,捲動時這層放更快+淡出=穿過門 */
 [data-journey-hero] .hero-frame {
