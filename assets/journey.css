@@ -32,3 +32,17 @@ html.reduced-motion [data-reveal] { opacity: 1 !important; transform: none !impo
 /* 標題逐字遮罩:單行裁切,字從線下被抬出來 */
 [data-journey-hero] .hero-title-line { display: inline-block; overflow: hidden; }
 [data-journey-hero] .hero-title .char { display: inline-block; will-change: transform; }
+
+/* ---- 跨頁穿門轉場(iris 光圈) ---- */
+.door-transition { position: fixed; inset: 0; z-index: 9999; pointer-events: none; overflow: hidden; }
+.door-transition__panel {
+  position: absolute; left: 50%; top: 50%;
+  width: 300vmax; height: 300vmax; margin: -150vmax 0 0 -150vmax;
+  border-radius: 50%; transform: scale(0); transform-origin: center;
+  background: radial-gradient(circle at 50% 50%, #2a2118 0%, #0f0e0d 70%);
+  transition: transform .6s cubic-bezier(.76, 0, .24, 1);
+}
+html.door-closing .door-transition__panel { transform: scale(1); }   /* 蓋上 */
+html.door-entering .door-transition__panel { transform: scale(1); transition: none; } /* 載入瞬間已蓋住 */
+html.door-open .door-transition__panel { transform: scale(0); }      /* 收回露出新頁 */
+html.reduced-motion .door-transition { display: none; }

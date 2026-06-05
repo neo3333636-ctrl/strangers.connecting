@@ -102,6 +102,39 @@
   }
   initParallax();
 
+  // 跨頁穿門轉場
+  function initDoor() {
+    if (reduceMotion) return;
+    const overlay = document.createElement('div');
+    overlay.className = 'door-transition';
+    overlay.innerHTML = '<div class="door-transition__panel"></div>';
+    document.body.appendChild(overlay);
+
+    // 進場:若是從站內 door 連結過來,先蓋住再收回
+    if (sessionStorage.getItem('door') === '1') {
+      sessionStorage.removeItem('door');
+      root.classList.add('door-entering');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        root.classList.remove('door-entering');
+        root.classList.add('door-open');
+      }));
+    }
+
+    // 離場:點 data-door 連結 → 蓋住 → 導航
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a[data-door]');
+      if (!a) return;
+      const url = a.href;
+      if (!url || a.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      sessionStorage.setItem('door', '1');
+      root.classList.remove('door-open');
+      root.classList.add('door-closing');
+      setTimeout(() => { window.location.href = url; }, 620);
+    });
+  }
+  initDoor();
+
   // INIT_HOOK
 
   // 對外暴露(供後續模組使用)
