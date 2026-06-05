@@ -66,3 +66,9 @@ html.reduced-motion .door-transition { display: none; }
   }
 }
 html.reduced-motion .journey-cursor { display: none; }
+
+/* 手機:關掉重的捲動驅動變形,改成單純呈現(避免效能/暈眩問題) */
+@media (max-width: 640px) {
+  [data-journey-hero] .hero-photo { transform: none !important; }
+  [data-journey-hero] .hero-frame { opacity: 1 !important; transform: none !important; }
+}

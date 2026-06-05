@@ -68,6 +68,8 @@
     }
 
     if (reduceMotion) return; // 不做穿門,維持靜態
+    // 手機:略過 pin/縮放穿門(效能/暈眩),標題遮罩仍保留
+    if (window.matchMedia('(max-width: 640px)').matches) return;
 
     const photo = hero.querySelector('.hero-photo');
     const frame = hero.querySelector('.hero-frame');
@@ -89,6 +91,7 @@
   // 輕量視差:zone 進場時,標題群緩緩上浮一點,製造「往裡走一階」的層次
   function initParallax() {
     if (reduceMotion || !window.gsap) return;
+    if (window.matchMedia('(max-width: 640px)').matches) return; // 手機不跑視差
     document.querySelectorAll('[data-parallax-zone]').forEach((zone) => {
       const head = zone.querySelector('.chapter-title');
       if (!head) return;
