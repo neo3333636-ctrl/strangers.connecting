@@ -107,7 +107,8 @@
 
   // 跨頁穿門轉場
   function initDoor() {
-    if (reduceMotion) return;
+    // 手機/觸控裝置不跑全螢幕穿門:bfcache 還原時會卡在蓋幕(返回首頁變全黑)
+    if (reduceMotion || isTouch) return;
     const overlay = document.createElement('div');
     overlay.className = 'door-transition';
     overlay.innerHTML = '<div class="door-transition__panel"></div>';
@@ -137,6 +138,11 @@
     });
   }
   initDoor();
+
+  // bfcache 還原(手機/桌機按返回)時清掉殘留的轉場狀態,避免卡在全螢幕蓋幕
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) root.classList.remove('door-closing', 'door-entering', 'door-open');
+  });
 
   // 區塊揭示:[data-reveal] 進視窗才淡入上移(子頁用;首頁沿用既有 .reveal,互不干擾)
   function initReveal() {
