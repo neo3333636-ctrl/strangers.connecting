@@ -86,6 +86,20 @@
   }
   initHero();
 
+  // 輕量視差:zone 進場時,標題群緩緩上浮一點,製造「往裡走一階」的層次
+  function initParallax() {
+    if (reduceMotion || !window.gsap) return;
+    document.querySelectorAll('[data-parallax-zone]').forEach((zone) => {
+      const head = zone.querySelector('.chapter-title');
+      if (!head) return;
+      gsap.fromTo(head, { y: 40 }, {
+        y: -20, ease: 'none',
+        scrollTrigger: { trigger: zone, start: 'top bottom', end: 'top center', scrub: 1 },
+      });
+    });
+  }
+  initParallax();
+
   // INIT_HOOK
 
   // 對外暴露(供後續模組使用)
