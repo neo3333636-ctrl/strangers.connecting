@@ -135,6 +135,25 @@
   }
   initDoor();
 
+  // 區塊揭示:[data-reveal] 進視窗才淡入上移(子頁用;首頁沿用既有 .reveal,互不干擾)
+  function initReveal() {
+    const els = document.querySelectorAll('[data-reveal]');
+    if (!els.length) return;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-revealed'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-revealed');
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach((el) => io.observe(el));
+  }
+  initReveal();
+
   // INIT_HOOK
 
   // 對外暴露(供後續模組使用)
