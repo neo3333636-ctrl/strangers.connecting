@@ -30,7 +30,8 @@
   }
 
   // ---- 頁內 anchor 接管(用 Lenis 平滑捲動,蓋過既有 window.scrollTo) ----
-  // capture phase + stopImmediatePropagation 以搶在既有 inline handler 之前
+  // capture phase 以搶在既有 inline handler 之前;用 stopPropagation(非 immediate)
+  // 才不會擋掉日後其他 capture-phase 監聽器(如分析追蹤)
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
     if (!a) return;
@@ -39,7 +40,7 @@
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-    e.stopImmediatePropagation();
+    e.stopPropagation();
     if (lenis) lenis.scrollTo(target, { offset: -80, duration: 1.1 });
     else target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
   }, true);
