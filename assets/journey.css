@@ -8,8 +8,8 @@ html.lenis, html.lenis body { height: auto; }
 /* 進場前先隱藏要揭示的元素(避免閃現),JS 接管後再顯示。
    無 JS 時 .no-js 後備:全部顯示 */
 html.js-journey [data-reveal] {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1);
+  opacity: 0; transform: translateY(16px);
+  transition: opacity .95s cubic-bezier(.22,.61,.36,1), transform .95s cubic-bezier(.22,.61,.36,1);
 }
 html.js-journey [data-reveal].is-revealed { opacity: 1; transform: none; }
 html.reduced-motion [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
@@ -67,8 +67,48 @@ html.reduced-motion .door-transition { display: none; }
 }
 html.reduced-motion .journey-cursor { display: none; }
 
-/* 手機:關掉重的捲動驅動變形,改成單純呈現(避免效能/暈眩問題) */
+/* 手機:不跑捲動穿門,改成緩慢 Ken Burns 推近(對著門內暖廳,有氛圍、不暈) */
 @media (max-width: 640px) {
-  [data-journey-hero] .hero-photo { transform: none !important; }
+  [data-journey-hero] .hero-photo {
+    animation: heroKenBurns 22s ease-in-out infinite alternate;
+  }
   [data-journey-hero] .hero-frame { opacity: 1 !important; transform: none !important; }
+}
+@keyframes heroKenBurns {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.16); }
+}
+html.reduced-motion [data-journey-hero] .hero-photo { animation: none !important; transform: none !important; }
+
+/* ============ 順暢化 / 手機加料(iteration 2) ============ */
+
+/* 更柔順、一致的區塊揭示(蓋過 inline .reveal 較硬的設定) */
+html.js-journey .reveal {
+  transform: translateY(16px);
+  transition: opacity .95s cubic-bezier(.22,.61,.36,1), transform .95s cubic-bezier(.22,.61,.36,1);
+}
+
+/* 軟化明暗區塊接縫:在每個區塊頂端疊一道淡淡反向漸層(純背景層,不蓋內容、不動定位) */
+html.js-journey .section-dark {
+  background:
+    linear-gradient(180deg, rgba(245,240,232,0.06), transparent 140px),
+    var(--deep);
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+html.js-journey .section-light {
+  background:
+    linear-gradient(180deg, rgba(15,14,13,0.10), transparent 140px),
+    radial-gradient(circle at 15% 0%, rgba(200,173,141,0.2), transparent 30%),
+    linear-gradient(180deg, var(--cream), var(--paper));
+}
+
+/* 子頁:hero 內容載入時輕量淡入上浮(手機沒了穿門也有「走進去」感;純 CSS、不閃) */
+.subpage-hero-inner { animation: subpageEnterUp .85s cubic-bezier(.22,.61,.36,1) both; }
+@keyframes subpageEnterUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .subpage-hero-inner { animation: none !important; }
 }
