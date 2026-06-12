@@ -30,6 +30,46 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.css" />
   <link rel="stylesheet" href="assets/journey.css" />
   <link rel="stylesheet" href="assets/subpage.css" />
+  <!-- Structured Data: WebPage + Breadcrumb -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://strangersconnecting.com/about.html#webpage",
+      "url": "https://strangersconnecting.com/about.html",
+      "name": "關於陌生連結所｜把原本不認識的人，放進一場被好好設計過的相遇",
+      "description": "陌生連結所想做的，是把原本不會遇見的人，放進一個比較舒服、比較自然的相遇裡。不是要你變得外向，而是讓人覺得自己和這個城市多了一點連結。",
+      "inLanguage": "zh-Hant",
+      "isPartOf": {
+        "@id": "https://strangersconnecting.com/#website"
+      },
+      "publisher": {
+        "@id": "https://strangersconnecting.com/#org"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://strangersconnecting.com/about.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "首頁",
+          "item": "https://strangersconnecting.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "關於",
+          "item": "https://strangersconnecting.com/about.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <div class="page">
