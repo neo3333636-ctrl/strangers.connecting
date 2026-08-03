@@ -1389,20 +1389,31 @@
       padding: 32px 16px 8px;
       text-align: center;
     }
-    .chapter-title {
-      font-family: var(--font-en-title);
-      font-size: clamp(3rem, 8.5vw, 6.4rem);
+    .chapter-en {
+      font-family: var(--font-en);
+      font-size: 11px;
       font-weight: 500;
-      font-style: italic;
-      line-height: 1;
-      letter-spacing: -0.015em;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--cream);
+      opacity: 0.48;
+      margin-bottom: 18px;
+    }
+    .chapter-title {
+      font-family: var(--font-zh-title);
+      font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: 0.1em;
       color: var(--cream);
       margin: 0;
     }
     .section-light .chapter-title { color: var(--deep); }
+    .section-light .chapter-en { color: var(--deep); opacity: 0.42; }
     @media (max-width: 640px) {
       .chapter-head { padding: 16px 12px 4px; margin-bottom: 40px; }
-      .chapter-title { font-size: clamp(2.6rem, 11vw, 4.2rem); }
+      .chapter-en { font-size: 10px; margin-bottom: 14px; }
+      .chapter-title { font-size: clamp(1.7rem, 7.5vw, 2.4rem); }
     }
 
     /* Per-character stagger reveal for hero brand (secretcinema-inspired title card) */
@@ -1572,6 +1583,108 @@
       justify-content: center;
     }
 
+    /* House rules — 門口告示風：純文字、置中、無卡片無 icon */
+    .rules-lines {
+      list-style: none;
+      margin: 0 0 44px;
+      padding: 0;
+      display: grid;
+      gap: 34px;
+      text-align: center;
+    }
+    .rules-lines strong {
+      display: block;
+      font-family: var(--font-zh-title);
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+    }
+    .rules-lines p {
+      margin: 8px 0 0;
+      font-family: var(--font-zh-body);
+      font-size: 0.93rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(245, 240, 232, 0.6);
+    }
+    .rules-lines li + li::before {
+      content: "·";
+      display: block;
+      margin: 0 auto 34px;
+      color: rgba(200, 173, 141, 0.55);
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    /* 主辦人的話 — founder note */
+    .founder-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+      gap: 48px;
+      align-items: center;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+    .founder-photo {
+      border-radius: 20px;
+      border: 1px solid rgba(245, 240, 232, 0.14);
+      overflow: hidden;
+      aspect-ratio: 2 / 3;
+      background: linear-gradient(160deg, #2a2620, #171511);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    }
+    .founder-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .founder-note p {
+      font-family: var(--font-zh-body);
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 2.05;
+      color: rgba(245, 240, 232, 0.82);
+      margin: 0 0 1.3em;
+    }
+    .founder-sign {
+      margin-top: 30px;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+    .founder-sign-name {
+      font-family: var(--font-en-title);
+      font-style: italic;
+      font-size: 2rem;
+      color: var(--accent-light);
+      line-height: 1;
+    }
+    .founder-sign-role {
+      font-family: var(--font-zh-body);
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      color: rgba(245, 240, 232, 0.5);
+    }
+    /* 照片檔還沒放上時（onerror 移除 figure），文字置中滿版 */
+    .founder-grid > .founder-note:only-child {
+      grid-column: 1 / -1;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    @media (max-width: 860px) {
+      .founder-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 32px;
+      }
+      .founder-photo {
+        max-width: 320px;
+        margin: 0 auto;
+      }
+    }
+
     @media (max-width: 480px) {
       .essay-item {
         grid-template-columns: 40px 1fr;
@@ -1609,18 +1722,22 @@
       align-items: center;
       gap: 16px;
       padding: 16px 28px 16px 22px;
-      background: linear-gradient(135deg, #f5b042 0%, #d6276b 50%, #6a3aa8 100%);
-      color: #fdfaf4;
+      background: var(--deep);
+      color: var(--cream);
+      border: 1px solid rgba(200, 173, 141, 0.35);
       border-radius: 999px;
       font-family: var(--font-zh-body);
-      box-shadow: 0 10px 30px rgba(214, 39, 107, 0.28);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 30px rgba(31, 24, 16, 0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
     .ig-prominent:hover {
       transform: translateY(-1px);
-      box-shadow: 0 14px 36px rgba(214, 39, 107, 0.34);
-      color: #fdfaf4;
+      border-color: rgba(232, 201, 154, 0.65);
+      box-shadow: 0 14px 36px rgba(31, 24, 16, 0.3);
+      color: var(--cream);
     }
+    .ig-prominent-icon { color: var(--accent-light); }
+    .ig-prominent-handle { color: var(--accent-light); }
     .ig-prominent-icon {
       width: 28px;
       height: 28px;
@@ -1697,7 +1814,7 @@
     /* MOMENTS */
     .moments-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
@@ -4565,7 +4682,6 @@
 <div class="wrap hero-content">
             <div class="hero-brand-zh" data-stagger>陌生連結所</div>
             <div class="hero-brand-en">STRANGERS CONNECTING</div>
-            <div class="hero-main-tagline">MEET • EXPERIENCE • CONNECT</div>
 
             <h1 class="hero-title">
               <span class="hero-title-line">把生活圈，重新打開。</span>
@@ -4599,7 +4715,8 @@
         <!-- 01 What — 這是什麼 + 適合誰來 -->
         <section class="section-dark" id="what">
           <div class="chapter-head reveal">
-            <h2 class="chapter-title">About</h2>
+            <div class="chapter-en" aria-hidden="true">About</div>
+            <h2 class="chapter-title">這是什麼</h2>
           </div>
 
           <div class="surprise-block reveal">
@@ -4608,13 +4725,13 @@
               <span class="surprise-quote">&ldquo;</span>
               <span class="surprise-line">
                 我們把
-                <span class="surprise-key serif" data-cycle="陌生|偶然|過客|旁人|未知|過往|對方|路人">過客</span>
+                <span class="surprise-key serif" data-cycle="陌生人|路過的人|隔壁桌的人|不同圈子的人">陌生人</span>
                 放進
-                <span class="surprise-key serif" data-cycle="對話|飯局|散步|時間|共處|同桌|場景|片刻">同桌</span>
+                <span class="surprise-key serif" data-cycle="同一張桌|同一頓飯|同一個晚上|同一段對話">同一張桌</span>
               </span>
               <span class="surprise-line">
                 變成
-                <span class="surprise-key mono" data-cycle="連結|相遇|默契|朋友|故事|信任|故人|溫度">朋友</span><span class="surprise-dot">.</span>
+                <span class="surprise-key mono" data-cycle="朋友|故事|默契|熟面孔">朋友</span><span class="surprise-dot">.</span>
                 <span class="surprise-quote">&rdquo;</span>
               </span>
             </p>
@@ -4702,7 +4819,8 @@
         <section class="section-dark" id="moments">
           <div class="wrap">
             <div class="chapter-head reveal">
-              <h2 class="chapter-title">Past Moments</h2>
+              <div class="chapter-en" aria-hidden="true">Past Moments</div>
+              <h2 class="chapter-title">留下的片刻</h2>
             </div>
 
             <p class="section-copy" style="text-align:center;max-width:640px;margin:0 auto 36px;">
@@ -4714,7 +4832,6 @@
                 <div class="moment-placeholder" aria-hidden="true"></div>
                 <img src="assets/images/moment-01.jpg" alt="台北陌生人晚餐聚會現場，一桌陌生人圍著餐桌聊天" loading="lazy" onerror="this.remove()" />
                 <div class="moment-label">
-                  <span>Shared table</span>
                   <strong>陌生人一起吃飯，也一起慢慢熟起來</strong>
                 </div>
               </article>
@@ -4723,8 +4840,7 @@
                 <div class="moment-placeholder" aria-hidden="true"></div>
                 <img src="assets/images/moment-02.jpg" alt="在台北交朋友的陌生人聚餐，餐桌上的笑容" loading="lazy" onerror="this.remove()" />
                 <div class="moment-label">
-                  <span>First conversations</span>
-                  <strong>陌生人假情侶攝影，詳情可以看IG</strong>
+                  <strong>假情侶攝影企劃，完整故事在 IG</strong>
                 </div>
               </article>
 
@@ -4732,7 +4848,6 @@
                 <div class="moment-placeholder" aria-hidden="true"></div>
                 <img src="images/moment-03.jpg" alt="陌生人晚餐活動，原本不認識的人一起吃飯" loading="lazy" onerror="this.remove()" />
                 <div class="moment-label">
-                  <span>Around the table</span>
                   <strong>食物變成第一個共同話題</strong>
                 </div>
               </article>
@@ -4741,7 +4856,6 @@
                 <div class="moment-placeholder" aria-hidden="true"></div>
                 <img src="images/moment-04.jpg" alt="台北聚餐認識新朋友，餐桌上的對話" loading="lazy" onerror="this.remove()" />
                 <div class="moment-label">
-                  <span>Cheers, strangers</span>
                   <strong>第一次舉杯，不必特別熟也成立</strong>
                 </div>
               </article>
@@ -4750,7 +4864,6 @@
                 <div class="moment-placeholder" aria-hidden="true"></div>
                 <img src="images/moment-05.jpg" alt="結識新朋友的小型聚會，陌生人圍桌共餐" loading="lazy" onerror="this.remove()" />
                 <div class="moment-label">
-                  <span>Listening</span>
                   <strong>願意聽，就是這場聚會最大的禮物</strong>
                 </div>
               </article>
@@ -4759,7 +4872,6 @@
                 <div class="moment-placeholder" aria-hidden="true"></div>
                 <img src="images/moment-06.jpg" alt="台北陌生人聚餐，一桌一個故事的晚餐" loading="lazy" onerror="this.remove()" />
                 <div class="moment-label">
-                  <span>Still here</span>
                   <strong>聊到最後還想再坐一下，就值得了</strong>
                 </div>
               </article>
@@ -4771,7 +4883,8 @@
         <section class="section-light trust-section" id="voices">
           <div class="wrap">
             <div class="chapter-head reveal">
-              <h2 class="chapter-title">Voices &amp; Stats</h2>
+              <div class="chapter-en" aria-hidden="true">Voices</div>
+              <h2 class="chapter-title">來過的人說</h2>
             </div>
 
             <p class="section-copy" style="text-align:center;max-width:640px;margin:0 auto 36px;color:rgba(15,14,13,0.6);">
@@ -4799,15 +4912,50 @@
           </div>
         </section>
 
+        <!-- 主辦人的話 — founder note -->
+        <section class="section-dark" id="founder">
+          <div class="chapter-head reveal">
+            <div class="chapter-en" aria-hidden="true">From the Host</div>
+            <h2 class="chapter-title">主辦人的話</h2>
+          </div>
+
+          <div class="founder-grid reveal">
+            <figure class="founder-photo">
+              <img
+                src="images/founder.jpg"
+                alt="陌生連結所主辦人 Neo"
+                loading="lazy"
+                onerror="this.parentElement.remove()"
+              />
+            </figure>
+
+            <div class="founder-note">
+              <p>
+                長大成人後，常常想認識新的朋友，卻不知道從哪裡開始。想認識一個完全不同世界的陌生人朋友——於是，我辦了陌生人聚會。
+              </p>
+              <p>
+                第一場聚餐很成功，也讓我發現：大家其實都很期待沒有目的的交友。跟著陌生人一起活在那個當下，可以無所顧忌地聊生活裡的瑣事，也可以聽到完全不一樣的故事。
+              </p>
+              <p>
+                所以我決定，除了聚餐以外，還要辦更多陌生人聚會，讓更多人參加——跟不同的人，體驗各種不同的活動。如果你也想認識更多不一樣的人，或是聽到更多不同的故事，歡迎你來報名。
+              </p>
+              <div class="founder-sign">
+                <span class="founder-sign-name">Neo</span>
+                <span class="founder-sign-role">陌生連結所主辦人</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- 03 Open Events — 開放中的聚會 -->
         <section class="section-light" id="events" data-parallax-zone>
           <div class="chapter-head reveal">
-            <h2 class="chapter-title">Open Events</h2>
+            <div class="chapter-en" aria-hidden="true">Open Events</div>
+            <h2 class="chapter-title">開放中的聚會</h2>
           </div>
 
           <div class="wrap">
             <div class="events-intro reveal">
-              <h3 class="events-intro-title">目前開放中的聚會</h3>
               <p class="events-intro-copy">
                 先看每一場的內容、時間、費用與報名規則，再決定要不要送出。還不是會員的話，系統會先帶你建立基本資料。
               </p>
@@ -4844,7 +4992,8 @@
         <!-- 02 How — 怎麼參加摘要 -->
         <section class="section-dark" id="how">
           <div class="chapter-head reveal">
-            <h2 class="chapter-title">How to Join</h2>
+            <div class="chapter-en" aria-hidden="true">How to Join</div>
+            <h2 class="chapter-title">怎麼參加</h2>
           </div>
 
           <figure class="how-banner reveal" aria-hidden="true">
@@ -4858,7 +5007,7 @@
               會經過這幾步。
             </h2>
             <p class="essay-lede">
-              名額有限，主辦會看內容再寄邀請。
+              還有位子就直接報名；額滿會自動排候補。
             </p>
 
             <hr class="essay-divider" />
@@ -4883,8 +5032,8 @@
               <li class="essay-item">
                 <div class="essay-item-mark is-number" aria-hidden="true">03</div>
                 <div class="essay-item-body">
-                  <strong>等通知與付款</strong>
-                  <p>入選後完成付款，名額才正式保留。</p>
+                  <strong>付款，確認座位</strong>
+                  <p>報名成立就會收到付款說明，期限內付完，位子就是你的。</p>
                 </div>
               </li>
 
@@ -4906,7 +5055,8 @@
         <!-- 04 House Rules — 規範預覽 -->
         <section class="section-dark" id="rules">
           <div class="chapter-head reveal">
-            <h2 class="chapter-title">House Rules</h2>
+            <div class="chapter-en" aria-hidden="true">House Rules</div>
+            <h2 class="chapter-title">聚會規範</h2>
           </div>
           <div class="essay-wrap reveal">
             <h2 class="essay-title">
@@ -4919,43 +5069,18 @@
 
             <hr class="essay-divider" />
 
-            <ul class="essay-items">
-              <li class="essay-item">
-                <div class="essay-item-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M12 21s7-3.7 7-10V5l-7-3-7 3v6c0 6.3 7 10 7 10Z" stroke="currentColor" stroke-width="1.6"/>
-                    <path d="m8.5 12 2.2 2.2 4.8-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <div class="essay-item-body">
-                  <strong>尊重每個人的界線</strong>
-                  <p>願意出現，不代表願意被追問。</p>
-                </div>
+            <ul class="rules-lines">
+              <li>
+                <strong>尊重每個人的界線</strong>
+                <p>願意出現，不代表願意被追問。</p>
               </li>
-
-              <li class="essay-item">
-                <div class="essay-item-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 8h16M6 8V6.5A2.5 2.5 0 0 1 8.5 4h7A2.5 2.5 0 0 1 18 6.5V8M7 8l1 12h8l1-12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div class="essay-item-body">
-                  <strong>不把聚會當成獵豔或推銷</strong>
-                  <p>把現場留給對話本身。</p>
-                </div>
+              <li>
+                <strong>不把聚會當成獵豔或推銷</strong>
+                <p>把現場留給對話本身。</p>
               </li>
-
-              <li class="essay-item">
-                <div class="essay-item-mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none">
-                    <path d="M4 7h4l2-2h4l2 2h4v12H4V7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-                    <path d="M12 16a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="1.6"/>
-                  </svg>
-                </div>
-                <div class="essay-item-body">
-                  <strong>不未經同意拍他人</strong>
-                  <p>想拍對方，請先取得同意。</p>
-                </div>
+              <li>
+                <strong>不未經同意拍他人</strong>
+                <p>想拍對方，請先取得同意。</p>
               </li>
             </ul>
 
@@ -4972,9 +5097,7 @@
       <div class="wrap footer-grid">
         <div class="footer-col footer-brand">
           <div class="footer-logo">陌生連結所</div>
-          <div class="footer-tagline">Stories bring us closer.</div>
           <p class="footer-mission">
-            MEET • EXPERIENCE • CONNECT<br>
             讓原本不會相遇的人，在這裡開始。
           </p>
         </div>
