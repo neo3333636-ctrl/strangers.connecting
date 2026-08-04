@@ -85,6 +85,33 @@
     tl.to(photo,   { scale: 1.6, ease: 'none' }, 0)
       .to(frame,   { scale: 2.8, opacity: 0, ease: 'none' }, 0)
       .to(content, { opacity: 0, y: -40, ease: 'none' }, 0);
+
+    // 防呆自癒:scrub/pin 偶爾在快速滾回頂部、resize 或 refresh 競態後卡在中途,
+    // 讓回到頂部時 hero 整段停在「已穿門」狀態(內容透明、照片位移)看起來全黑。
+    // 只要人已經在最頂而動畫進度不是 0,就把進度歸零;卡得很深(>0.15,不是
+    // scrub 慣性的正常尾巴)代表 pin 位置也算錯了,連 ScrollTrigger 一起重算。
+    const heroST = tl.scrollTrigger;
+    let lastHeal = 0;
+    const healHero = () => {
+      const scrollTop = lenis ? lenis.scroll : (window.scrollY || 0);
+      if (scrollTop > 2 || !heroST) return;
+      const p = heroST.progress;
+      if (p <= 0.001) return;
+      const now = Date.now();
+      if (p > 0.15 && now - lastHeal > 1000) {
+        lastHeal = now;
+        ScrollTrigger.refresh();
+      }
+      tl.progress(0);
+    };
+    if (lenis) lenis.on('scroll', healHero);
+    window.addEventListener('scroll', healHero, { passive: true });
+    window.addEventListener('pageshow', healHero);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) healHero();
+    });
+    // 圖片/字型晚載入造成的版面位移也會讓 pin 起訖點算錯 → 全部載完重算一次
+    window.addEventListener('load', () => ScrollTrigger.refresh());
   }
   initHero();
 
