@@ -4435,6 +4435,10 @@
     }
     .upcoming-card-visual {
       aspect-ratio: 5 / 3;
+      /* iOS Safari：flex column 內的 aspect-ratio 元素在卡片等高拉伸時
+         偶爾被分到多餘高度而變形，鎖住不參與伸縮，多餘高度給 body（flex:1）。 */
+      flex: 0 0 auto;
+      width: 100%;
       background-color: var(--paper);
       background-size: cover;
       background-position: center;
