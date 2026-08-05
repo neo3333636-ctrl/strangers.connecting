@@ -4417,6 +4417,71 @@
       max-width: 880px;
       margin: 0 auto;
     }
+    .upcoming-filters {
+      max-width: 880px;
+      margin: 0 auto 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .upcoming-filter-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .upcoming-filter-label {
+      flex: none;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .upcoming-filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .upcoming-filter-chip {
+      appearance: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(253, 250, 244, 0.92);
+      color: var(--charcoal);
+      font-size: 13px;
+      line-height: 1;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+    .upcoming-filter-chip:hover {
+      border-color: #485244;
+    }
+    .upcoming-filter-chip.is-active {
+      background: #485244;
+      border-color: #485244;
+      color: #f5f0e8;
+    }
+    .upcoming-filter-empty {
+      text-align: center;
+      padding: 28px 0 8px;
+    }
+    .upcoming-filter-empty p {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+    .upcoming-filter-empty button {
+      appearance: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--charcoal);
+      font-size: 13px;
+      padding: 8px 18px;
+      cursor: pointer;
+    }
+    .upcoming-filter-empty button:hover {
+      border-color: #485244;
+    }
     .upcoming-card {
       display: flex;
       flex-direction: column;
@@ -4966,7 +5031,21 @@
             </div>
 
             <div id="upcomingEventsContainer" class="upcoming-events" hidden>
+              <div id="upcomingEventsFilters" class="upcoming-filters" hidden>
+                <div id="upcomingFilterRegion" class="upcoming-filter-row" hidden>
+                  <span class="upcoming-filter-label">地區</span>
+                  <div class="upcoming-filter-chips" data-dimension="region"></div>
+                </div>
+                <div id="upcomingFilterCategory" class="upcoming-filter-row" hidden>
+                  <span class="upcoming-filter-label">活動</span>
+                  <div class="upcoming-filter-chips" data-dimension="category"></div>
+                </div>
+              </div>
               <div id="upcomingEventsGrid" class="upcoming-events-grid"></div>
+              <div id="upcomingEventsNoMatch" class="upcoming-filter-empty" hidden>
+                <p>這個條件目前沒有場次</p>
+                <button id="upcomingFiltersClear" type="button">清除篩選</button>
+              </div>
             </div>
 
             <div id="upcomingEventsEmpty" class="events-empty reveal">
@@ -5429,12 +5508,86 @@
         cancelled:   { bg: '#8a7f72', fg: '#f5f0e8' },
       };
 
+      /* 篩選（地區 × 活動類型）：選項從撈回的活動動態產生；
+         一個維度不足兩種選項就整排隱藏（含舊 API 沒回 region 的情況）。 */
+      const filtersBox = document.getElementById('upcomingEventsFilters');
+      const noMatch = document.getElementById('upcomingEventsNoMatch');
+      const clearBtn = document.getElementById('upcomingFiltersClear');
+      const dimensions = {
+        region: {
+          row: document.getElementById('upcomingFilterRegion'),
+          valueOf: (e) => e.region || '其他',
+        },
+        category: {
+          row: document.getElementById('upcomingFilterCategory'),
+          valueOf: (e) => e.category_label || '其他',
+        },
+      };
+      const active = { region: 'all', category: 'all' };
+      let allEvents = [];
+
+      function buildChips() {
+        let anyRow = false;
+        Object.keys(dimensions).forEach((dim) => {
+          const { row, valueOf } = dimensions[dim];
+          if (!row) return;
+          const counts = new Map();
+          allEvents.forEach((e) => {
+            const v = valueOf(e);
+            counts.set(v, (counts.get(v) || 0) + 1);
+          });
+          const options = [...counts.entries()].sort((a, b) => b[1] - a[1]).map((x) => x[0]);
+          if (options.length < 2) { row.hidden = true; return; }
+          anyRow = true;
+          row.hidden = false;
+          const box = row.querySelector('.upcoming-filter-chips');
+          box.innerHTML = ['all'].concat(options).map((v) =>
+            '<button type="button" class="upcoming-filter-chip' + (active[dim] === v ? ' is-active' : '')
+            + '" data-value="' + escapeHtml(v) + '">' + (v === 'all' ? '全部' : escapeHtml(v)) + '</button>'
+          ).join('');
+          box.querySelectorAll('button').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              active[dim] = btn.getAttribute('data-value');
+              buildChips();
+              applyFilters();
+            });
+          });
+        });
+        if (filtersBox) filtersBox.hidden = !anyRow;
+      }
+
+      function applyFilters() {
+        const visible = allEvents.filter((e) =>
+          (active.region === 'all' || dimensions.region.valueOf(e) === active.region) &&
+          (active.category === 'all' || dimensions.category.valueOf(e) === active.category)
+        );
+        grid.innerHTML = visible.map(cardHtml).join('');
+        if (noMatch) noMatch.hidden = visible.length > 0;
+      }
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          active.region = 'all';
+          active.category = 'all';
+          buildChips();
+          applyFilters();
+        });
+      }
+
       fetch(API, { method: 'GET' })
         .then((r) => (r.ok ? r.json() : null))
         .then((data) => {
           const events = (data && data.events) || [];
           if (!events.length) return;
-          grid.innerHTML = events.map((e) => {
+          allEvents = events;
+          buildChips();
+          applyFilters();
+          container.hidden = false;
+          if (emptyState) emptyState.hidden = true;
+        })
+        .catch(() => { /* 靜默：保留 empty state 顯示 */ });
+
+      function cardHtml(e) {
             const isOpenCall = !!e.is_open_call;
             const visualStyle = e.cover_image_url
               ? ' style="background-image: url(\'' + escapeHtml(e.cover_image_url).replace(/'/g, "%27") + '\')"'
@@ -5470,11 +5623,7 @@
               +     '<div class="upcoming-card-cta">' + ctaText + ' <span aria-hidden="true">&rarr;</span></div>'
               +   '</div>'
               + '</a>';
-          }).join('');
-          container.hidden = false;
-          if (emptyState) emptyState.hidden = true;
-        })
-        .catch(() => { /* 靜默：保留 empty state 顯示 */ });
+      }
     })();
 
     /* Public stats — sessions held & total applicants */
