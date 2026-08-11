@@ -699,3 +699,172 @@ button { -webkit-tap-highlight-color: transparent; }
   .steps li { grid-template-columns: 44px 1fr; gap: 14px; padding: 18px 18px; }
   .steps .step-num { width: 38px; height: 38px; font-size: 1rem; }
 }
+
+/* ── Flow diagrams (how-to-join) ─────────────────────── */
+.flow {
+  margin: 40px 0;
+  display: grid;
+  gap: 10px;
+}
+
+.flow-step {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 18px 20px;
+  background: rgba(245, 240, 232, 0.04);
+  border: 1px solid rgba(245, 240, 232, 0.1);
+  border-radius: 14px;
+  position: relative;
+}
+
+.flow-step .n {
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent-light);
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: rgba(193, 127, 74, 0.14);
+  display: grid;
+  place-items: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.flow-step h3 {
+  font-family: var(--font-zh-title);
+  font-size: 1.05rem;
+  color: var(--cream);
+  margin: 6px 0 4px;
+  line-height: 1.5;
+}
+
+.flow-step p {
+  margin: 0 0 6px;
+  font-size: 0.94rem;
+  line-height: 1.85;
+  color: rgba(245, 240, 232, 0.72);
+}
+
+.flow-step p:last-child { margin-bottom: 0; }
+
+/* connector between steps */
+.flow-arrow {
+  justify-self: center;
+  width: 1px;
+  height: 16px;
+  background: linear-gradient(
+    to bottom,
+    rgba(193, 127, 74, 0.45),
+    rgba(193, 127, 74, 0.12)
+  );
+  margin: -4px 0;
+}
+
+/* the "what you get / when" pill */
+.flow-when {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--font-en);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  background: rgba(193, 127, 74, 0.12);
+  border: 1px solid rgba(193, 127, 74, 0.25);
+  border-radius: 999px;
+  padding: 3px 11px;
+}
+
+.flow-warn {
+  margin-top: 10px;
+  padding: 11px 14px;
+  border-left: 2px solid var(--accent);
+  background: rgba(193, 127, 74, 0.08);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.89rem;
+  line-height: 1.8;
+  color: rgba(245, 240, 232, 0.82);
+}
+
+.flow-warn strong { color: var(--cream); }
+
+/* ── Gate diagram: paid vs unpaid ────────────────────── */
+.gate {
+  margin: 32px 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.gate-col {
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid rgba(245, 240, 232, 0.1);
+  background: rgba(245, 240, 232, 0.04);
+}
+
+.gate-col.is-yes { border-color: rgba(72, 82, 68, 0.55); background: rgba(72, 82, 68, 0.16); }
+
+.gate-col h4 {
+  font-family: var(--font-zh-title);
+  font-size: 0.98rem;
+  color: var(--cream);
+  margin: 0 0 12px;
+}
+
+.gate-col ul { margin: 0; padding-left: 1.1rem; }
+
+.gate-col li {
+  font-size: 0.9rem;
+  line-height: 1.9;
+  color: rgba(245, 240, 232, 0.75);
+  margin-bottom: 3px;
+}
+
+.gate-col li::marker { color: var(--muted); }
+
+@media (max-width: 640px) {
+  .gate { grid-template-columns: 1fr; }
+  .flow-step { grid-template-columns: 34px 1fr; gap: 12px; padding: 16px 16px; }
+  .flow-step .n { width: 30px; height: 30px; font-size: 0.85rem; }
+}
+
+/* ── Refund ladder ───────────────────────────────────── */
+.ladder {
+  margin: 26px 0 34px;
+  display: grid;
+  gap: 6px;
+}
+
+.ladder-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(245, 240, 232, 0.04);
+  border: 1px solid rgba(245, 240, 232, 0.08);
+}
+
+.ladder-row .when {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: rgba(245, 240, 232, 0.82);
+}
+
+.ladder-row .pct {
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-light);
+  white-space: nowrap;
+}
+
+.ladder-row.is-none .pct { color: var(--muted); }
+.ladder-row.is-full { border-color: rgba(72, 82, 68, 0.5); background: rgba(72, 82, 68, 0.14); }
+.ladder-row.is-full .pct { color: #b6c7ac; }
