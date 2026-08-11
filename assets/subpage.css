@@ -881,3 +881,119 @@ button { -webkit-tap-highlight-color: transparent; }
 .ladder-row.is-none .pct { color: var(--muted); }
 .ladder-row.is-full { border-color: rgba(72, 82, 68, 0.5); background: rgba(72, 82, 68, 0.14); }
 .ladder-row.is-full .pct { color: #b6c7ac; }
+
+/* ── Walkthrough：截圖＋標示 ─────────────────────────── */
+.gstep { margin: 46px 0 0; }
+
+.gstep-hd {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.gstep-n {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.prose .gstep-hd h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  border: 0;
+  padding: 0;
+}
+
+.gstep-where {
+  margin: 0 0 16px 46px;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.gshot {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(245, 240, 232, 0.14);
+  line-height: 0;
+  background: var(--warm-white);
+  max-width: 390px;
+}
+
+.gshot img { width: 100%; height: auto; display: block; }
+
+.gmk {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 3px solid var(--accent);
+  border-radius: 11px;
+  box-shadow: 0 0 0 3px rgba(193, 127, 74, 0.2);
+  pointer-events: none;
+}
+
+.gmk i {
+  position: absolute;
+  top: -11px;
+  left: -11px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-style: normal;
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: 0.76rem;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+  border: 2px solid var(--warm-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.prose .gnotes {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 11px;
+}
+
+.prose .gnotes li {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+
+.prose .gnotes li::before { content: none; }
+
+.gtag {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-en);
+  font-weight: 600;
+  font-size: 0.72rem;
+  display: grid;
+  place-items: center;
+  margin-top: 5px;
+}
+
+.gtag-i { background: var(--muted); }
