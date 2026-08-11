@@ -806,7 +806,20 @@ button { -webkit-tap-highlight-color: transparent; }
   background: rgba(245, 240, 232, 0.04);
 }
 
-.gate-col.is-yes { border-color: rgba(72, 82, 68, 0.55); background: rgba(72, 82, 68, 0.16); }
+.gate-col.is-yes {
+  border-color: rgba(126, 148, 116, 0.5);
+  background: rgba(72, 82, 68, 0.28);
+}
+
+/* 狀態標記：手機上兩欄會堆疊,只靠底色分不出來,用文字標記補 */
+.gate-col h4::before {
+  content: "○";
+  margin-right: 8px;
+  color: var(--muted);
+  font-size: 0.85em;
+}
+
+.gate-col.is-yes h4::before { content: "●"; color: #9db38f; }
 
 .gate-col h4 {
   font-family: var(--font-zh-title);
