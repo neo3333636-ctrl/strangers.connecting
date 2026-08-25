@@ -5649,8 +5649,10 @@
         // 用單引號包 url()：JSON.stringify 產生的是雙引號,會跟外層
         // style="..." 的雙引號打架,整個 style 屬性被截斷 → 圖不見。
         // 跟下方一般卡片的 visualStyle 用同一種寫法。
+        // 有封面圖就直接用原圖,不疊深色漸層——那層漸層是「沒有圖」時的
+        // 預設底色,疊在照片上會讓顏色整個變淡。與下方一般卡片一致。
         const img = e.cover_image_url
-          ? ' style="background-image:linear-gradient(135deg,rgba(17,16,14,0.55),rgba(17,16,14,0.08)),url(\'' +
+          ? ' style="background-image:url(\'' +
             escapeHtml(e.cover_image_url).replace(/'/g, '%27') + '\')"'
           : '';
         const locationSuffix = e.location ? ' · ' + escapeHtml(e.location) : '';
