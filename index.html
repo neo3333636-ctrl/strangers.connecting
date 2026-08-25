@@ -5588,7 +5588,10 @@
         .catch(() => { /* 靜默：保留 empty state 顯示 */ });
 
       function cardHtml(e) {
-            const isOpenCall = !!e.is_open_call;
+            // 意願調查：後端明講,不要從 is_open_call 推論——
+            // 一般聚餐也可能是 open call,那種是有日期、要付款的正式場次,
+            // 之前就是這樣把「報名意願收集中」貼到晚餐場上。
+            const isPoll = !!e.is_interest_poll;
             const visualStyle = e.cover_image_url
               ? ' style="background-image: url(\'' + escapeHtml(e.cover_image_url).replace(/'/g, "%27") + '\')"'
               : '';
@@ -5597,12 +5600,12 @@
                 (e.price_note ? ' · ' + escapeHtml(e.price_note) : '') + '</div>'
               : '';
             const locationSuffix = e.location ? ' · ' + escapeHtml(e.location) : '';
-            const dateMeta = (isOpenCall && isTimePending(e.starts_at))
+            const dateMeta = (e.time_undecided || isTimePending(e.starts_at))
               ? '時間待定' + locationSuffix
               : escapeHtml(formatDate(e.starts_at)) + locationSuffix;
-            const badgeBg = isOpenCall ? '#c17f4a' : ((stateColors[e.state] || stateColors.open).bg);
-            const badgeFg = isOpenCall ? '#fdfaf4' : ((stateColors[e.state] || stateColors.open).fg);
-            const badgeLabel = isOpenCall ? '報名意願收集中' : (stateLabels[e.state] || stateLabels.open);
+            const badgeBg = isPoll ? '#c17f4a' : ((stateColors[e.state] || stateColors.open).bg);
+            const badgeFg = isPoll ? '#fdfaf4' : ((stateColors[e.state] || stateColors.open).fg);
+            const badgeLabel = isPoll ? '報名意願收集中' : (stateLabels[e.state] || stateLabels.open);
             const cardMeta = '<div class="upcoming-card-meta">'
               + (e.category_label ? '<span>' + escapeHtml(e.category_label) + '</span> · ' : '')
               + '<span class="upcoming-card-badge" style="background:' + badgeBg + ';color:' + badgeFg + '">' + escapeHtml(badgeLabel) + '</span>'
@@ -5610,9 +5613,9 @@
             const subtitle = e.subtitle
               ? '<p class="upcoming-card-subtitle">' + escapeHtml(e.subtitle) + '</p>'
               : '';
-            const ctaText = isOpenCall ? '送出報名意願' : '查看與報名';
+            const ctaText = isPoll ? '送出報名意願' : '查看與報名';
             return ''
-              + '<a class="upcoming-card' + (isOpenCall ? ' upcoming-card--open-call' : '') + '" href="https://app.strangersconnecting.com/events/' + Number(e.id) + '">'
+              + '<a class="upcoming-card' + (isPoll ? ' upcoming-card--open-call' : '') + '" href="https://app.strangersconnecting.com/events/' + Number(e.id) + '">'
               +   '<div class="upcoming-card-visual"' + visualStyle + '></div>'
               +   '<div class="upcoming-card-body">'
               +     '<div class="upcoming-card-date">' + dateMeta + '</div>'
