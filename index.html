@@ -5646,8 +5646,12 @@
       function renderFeatured(e) {
         if (!featuredEl) return;
         if (!e) { featuredEl.hidden = true; return; }
+        // 用單引號包 url()：JSON.stringify 產生的是雙引號,會跟外層
+        // style="..." 的雙引號打架,整個 style 屬性被截斷 → 圖不見。
+        // 跟下方一般卡片的 visualStyle 用同一種寫法。
         const img = e.cover_image_url
-          ? ' style="background-image:linear-gradient(135deg,rgba(17,16,14,0.55),rgba(17,16,14,0.08)),url(' + JSON.stringify(e.cover_image_url) + ')"'
+          ? ' style="background-image:linear-gradient(135deg,rgba(17,16,14,0.55),rgba(17,16,14,0.08)),url(\'' +
+            escapeHtml(e.cover_image_url).replace(/'/g, '%27') + '\')"'
           : '';
         const locationSuffix = e.location ? ' · ' + escapeHtml(e.location) : '';
         const when = (e.time_undecided || isTimePending(e.starts_at))
