@@ -4410,6 +4410,82 @@
       margin-top: 10px;
       line-height: 1.7;
     }
+    /* 主推活動：滿版大卡,放在一般卡片網格上方 */
+    .featured-event {
+      display: block;
+      max-width: 880px;
+      margin: 0 auto 22px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      background: rgba(253, 250, 244, 0.94);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--charcoal);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .featured-event:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 30px 64px rgba(31, 24, 16, 0.24);
+    }
+    .featured-event-visual {
+      aspect-ratio: 21 / 9;
+      width: 100%;
+      background-color: var(--paper);
+      background-size: cover;
+      background-position: center;
+      background-image:
+        linear-gradient(135deg, rgba(17, 16, 14, 0.55), rgba(17, 16, 14, 0.08)),
+        var(--green);
+    }
+    .featured-event-body { padding: 22px 24px 24px; }
+    .featured-event-eyebrow {
+      display: inline-block;
+      font-family: var(--font-en);
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .featured-event-title {
+      font-family: var(--font-zh-title);
+      font-size: clamp(1.4rem, 3.4vw, 2rem);
+      line-height: 1.35;
+      margin: 0 0 8px;
+      color: var(--deep);
+    }
+    .featured-event-subtitle {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+    .featured-event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .featured-event-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: var(--warm-white);
+      border-radius: 999px;
+      padding: 11px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    @media (max-width: 640px) {
+      .featured-event-visual { aspect-ratio: 16 / 10; }
+      .featured-event-body { padding: 18px 18px 20px; }
+    }
+
     .upcoming-events-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -5041,6 +5117,7 @@
                   <div class="upcoming-filter-chips" data-dimension="category"></div>
                 </div>
               </div>
+              <a id="featuredEvent" class="featured-event" hidden></a>
               <div id="upcomingEventsGrid" class="upcoming-events-grid"></div>
               <div id="upcomingEventsNoMatch" class="upcoming-filter-empty" hidden>
                 <p>這個條件目前沒有場次</p>
@@ -5556,12 +5633,48 @@
         if (filtersBox) filtersBox.hidden = !anyRow;
       }
 
+      // 主推活動：優先挑意願調查（那是需要被看見才收得到名單的),
+      // 沒有的話就不顯示——寧可不放,也不要隨便挑一場冒充主推。
+      const featuredEl = document.getElementById('featuredEvent');
+      function pickFeatured(list) {
+        return list.find((e) => e.is_interest_poll) || null;
+      }
+      function renderFeatured(e) {
+        if (!featuredEl) return;
+        if (!e) { featuredEl.hidden = true; return; }
+        const img = e.cover_image_url
+          ? ' style="background-image:linear-gradient(135deg,rgba(17,16,14,0.55),rgba(17,16,14,0.08)),url(' + JSON.stringify(e.cover_image_url) + ')"'
+          : '';
+        const locationSuffix = e.location ? ' · ' + escapeHtml(e.location) : '';
+        const when = (e.time_undecided || isTimePending(e.starts_at))
+          ? '時間待定' + locationSuffix
+          : escapeHtml(formatDate(e.starts_at)) + locationSuffix;
+        featuredEl.href = 'https://app.strangersconnecting.com/events/' + Number(e.id);
+        featuredEl.innerHTML = ''
+          + '<div class="featured-event-visual"' + img + '></div>'
+          + '<div class="featured-event-body">'
+          +   '<span class="featured-event-eyebrow">Now collecting</span>'
+          +   '<h3 class="featured-event-title">' + escapeHtml(e.title) + '</h3>'
+          +   (e.subtitle ? '<p class="featured-event-subtitle">' + escapeHtml(e.subtitle) + '</p>' : '')
+          +   '<div class="featured-event-meta">'
+          +     '<span class="upcoming-card-badge" style="background:#c17f4a;color:#fdfaf4">報名意願收集中</span>'
+          +     '<span>' + when + '</span>'
+          +   '</div>'
+          +   '<span class="featured-event-cta">我有興趣 <span aria-hidden="true">&rarr;</span></span>'
+          + '</div>';
+        featuredEl.hidden = false;
+      }
+
       function applyFilters() {
         const visible = allEvents.filter((e) =>
           (active.region === 'all' || dimensions.region.valueOf(e) === active.region) &&
           (active.category === 'all' || dimensions.category.valueOf(e) === active.category)
         );
-        grid.innerHTML = visible.map(cardHtml).join('');
+        const featured = pickFeatured(visible);
+        renderFeatured(featured);
+        // 已經放進主推的那場不要在下面又出現一次
+        const rest = featured ? visible.filter((e) => e.id !== featured.id) : visible;
+        grid.innerHTML = rest.map(cardHtml).join('');
         if (noMatch) noMatch.hidden = visible.length > 0;
       }
 
