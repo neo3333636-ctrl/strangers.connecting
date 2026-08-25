@@ -5637,7 +5637,11 @@
       // 沒有的話就不顯示——寧可不放,也不要隨便挑一場冒充主推。
       const featuredEl = document.getElementById('featuredEvent');
       function pickFeatured(list) {
-        return list.find((e) => e.is_interest_poll) || null;
+        // 後台勾選的優先（跟精選留言同一套：主辦說了算）,
+        // 沒有勾任何一場時退而主推意願調查（那種最需要被看見才收得到名單）。
+        return list.find((e) => e.is_homepage_featured)
+          || list.find((e) => e.is_interest_poll)
+          || null;
       }
       function renderFeatured(e) {
         if (!featuredEl) return;
@@ -5653,14 +5657,16 @@
         featuredEl.innerHTML = ''
           + '<div class="featured-event-visual"' + img + '></div>'
           + '<div class="featured-event-body">'
-          +   '<span class="featured-event-eyebrow">Now collecting</span>'
+          +   '<span class="featured-event-eyebrow">' + (e.is_interest_poll ? 'Now collecting' : 'Featured') + '</span>'
           +   '<h3 class="featured-event-title">' + escapeHtml(e.title) + '</h3>'
           +   (e.subtitle ? '<p class="featured-event-subtitle">' + escapeHtml(e.subtitle) + '</p>' : '')
           +   '<div class="featured-event-meta">'
-          +     '<span class="upcoming-card-badge" style="background:#c17f4a;color:#fdfaf4">報名意願收集中</span>'
+          +     '<span class="upcoming-card-badge" style="background:#c17f4a;color:#fdfaf4">'
+          +       escapeHtml(e.is_interest_poll ? '報名意願收集中' : (stateLabels[e.state] || stateLabels.open))
+          +     '</span>'
           +     '<span>' + when + '</span>'
           +   '</div>'
-          +   '<span class="featured-event-cta">我有興趣 <span aria-hidden="true">&rarr;</span></span>'
+          +   '<span class="featured-event-cta">' + (e.is_interest_poll ? '我有興趣' : '查看與報名') + ' <span aria-hidden="true">&rarr;</span></span>'
           + '</div>';
         featuredEl.hidden = false;
       }
